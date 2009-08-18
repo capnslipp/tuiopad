@@ -47,7 +47,7 @@
 			break;
 			
 		case 1:
-			[settings setInt:UIDeviceOrientationLandscapeLeft forKey:kSetting_Orientation];
+			[settings setInt:UIDeviceOrientationLandscapeRight forKey:kSetting_Orientation];
 			[[NSNotificationCenter defaultCenter] removeObserver:self];
 			break;
 			
@@ -86,13 +86,13 @@
 
 -(IBAction) detectHostPressed:(id)sender {
 	hostTextField.text = [settings getDefaultFor:kSetting_HostIP];
-	[self connectPressed:nil];
+//	[self connect];
 }
 
 
 -(IBAction) defaultPortPressed:(id)sender {
 	portTextField.text = [NSString stringWithFormat:@"%i", [[settings getDefaultFor:kSetting_Port] intValue]];
-	[self connectPressed:nil];
+//	[self connect];
 }
 
 

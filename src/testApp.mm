@@ -54,10 +54,8 @@ void testApp::update() {
 
 
 void testApp::draw() {
-	
 	glPushMatrix();
 	glTranslatef(ofGetWidth()/2, ofGetHeight()/2, 0);
-	glScalef(1, -1, 1);
 	static float currentUpRot = -90;
 	float targetUpRot;
 	switch([[viewController settings] getInt:kSetting_Orientation]) {
@@ -71,11 +69,11 @@ void testApp::draw() {
 			
 		default:
 		case UIDeviceOrientationLandscapeLeft:
-			targetUpRot = -90;
+			targetUpRot = 90;
 			break;
 			
 		case UIDeviceOrientationLandscapeRight:
-			targetUpRot = 90;
+			targetUpRot = -90;
 			break;
 			
 	}

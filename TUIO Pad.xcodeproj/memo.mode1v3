@@ -287,7 +287,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>14</integer>
+									<integer>9</integer>
+									<integer>7</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -330,7 +331,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.mm</string>
+								<string>MSAViewController.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -338,11 +339,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.mm</string>
+										<string>MSAViewController.mm</string>
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>BBDCCA3E103B4A2E0020FAF0</string>
+										<string>BBDCCA48103B4BE80020FAF0</string>
 										<key>history</key>
 										<array>
 											<string>BB44957D0FB44567007341A6</string>
@@ -371,9 +372,9 @@
 											<string>BBDCCA05103B30490020FAF0</string>
 											<string>BBDCCA07103B30490020FAF0</string>
 											<string>BBDCCA2A103B31AF0020FAF0</string>
-											<string>BBDCCA3A103B4A2E0020FAF0</string>
 											<string>BBDCCA3B103B4A2E0020FAF0</string>
-											<string>BBDCCA34103B49E20020FAF0</string>
+											<string>BBDCCA45103B4BE80020FAF0</string>
+											<string>BBDCCA46103B4BE80020FAF0</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -437,6 +438,7 @@
 											<string>BBDCCA36103B49E20020FAF0</string>
 											<string>BBDCCA3C103B4A2E0020FAF0</string>
 											<string>BBDCCA3D103B4A2E0020FAF0</string>
+											<string>BBDCCA47103B4BE80020FAF0</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -630,13 +632,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>BBDCCA3F103B4A2E0020FAF0</string>
 		<string>BBDCCA30103B31AF0020FAF0</string>
 		<string>BBDCCA21103B30490020FAF0</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>BB16E9DD0F2B1E9200518274</string>
-		<string>/Users/memo/Lab/openFrameworks/latest-iphone/apps/Memo/Tuio Pad/TUIO Pad.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>/Users/memo/Lab/openFrameworks/latest-iphone/apps/Memo/Tuio Pad/TUIO Pad.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>-1 127 1920 1051 0 0 1920 1178 </string>

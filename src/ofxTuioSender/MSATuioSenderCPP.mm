@@ -49,8 +49,8 @@ void MSATuioSenderCPP::setup(std::string host, int port) {
 	if(verbose) printf("MSATuioSenderCPP::setup(host: %s, port: %i\n", host.c_str(), port);
 	this->host = host;
 	this->port = port;
-	if(oscSender) delete oscSender;
 	if(tuioServer) delete tuioServer;
+	if(oscSender) delete oscSender;
 	oscSender = new UdpSender((char*)host.c_str(), port);
 	tuioServer = new TuioServer(oscSender);
 	tuioServer->enableObjectProfile(false);

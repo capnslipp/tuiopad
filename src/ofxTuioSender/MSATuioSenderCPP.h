@@ -60,8 +60,8 @@ public:
 	}
 	
 	~MSATuioSenderCPP() {
-		delete oscSender;
 		delete tuioServer;
+		delete oscSender;
 	};
 	
 	void setup(std::string host, int port);

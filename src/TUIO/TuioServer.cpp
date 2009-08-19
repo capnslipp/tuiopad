@@ -112,6 +112,12 @@ void TuioServer::setSourceName(const char *src) {
 		
 		gethostname(hostname, 64);
 		hp = gethostbyname(hostname);
+		
+		if (hp==NULL) {
+			sprintf(hostname, "%s.local", hostname);
+			hp = gethostbyname(hostname);
+		}
+		
 		if (hp!=NULL) {
 			for (int i = 0; hp->h_addr_list[i] != 0; ++i) {
 				addr = (struct in_addr *)(hp->h_addr_list[i]);

@@ -105,18 +105,20 @@ void TuioServer::setSourceName(const char *src) {
 	if (sender->isLocal()) {
 		sprintf(source_name,src);
 	} else { 
-		char hostname[32];
+		char hostname[64];
 		char *source_addr = NULL;
-		struct hostent *hp;
-		struct in_addr *addr;
+		struct hostent *hp = NULL;
+		struct in_addr *addr = NULL;
 		
-		gethostname(hostname, 32);
-		hp = gethostbyname(hostname);		
-		for (int i = 0; hp->h_addr_list[i] != 0; ++i) {
-			addr = (struct in_addr *)(hp->h_addr_list[i]);
-			//std::cout << inet_ntoa(*addr) << std::endl;
-			source_addr = inet_ntoa(*addr);
-		}
+		gethostname(hostname, 64);
+		hp = gethostbyname(hostname);
+		if (hp!=NULL) {
+			for (int i = 0; hp->h_addr_list[i] != 0; ++i) {
+				addr = (struct in_addr *)(hp->h_addr_list[i]);
+				//std::cout << inet_ntoa(*addr) << std::endl;
+				source_addr = inet_ntoa(*addr);
+			}
+		} else source_addr = (char*)"unknown";
 
 		sprintf(source_name,"%s@%s",src,source_addr);
 	} 

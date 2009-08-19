@@ -124,15 +124,17 @@ void TuioServer::setSourceName(const char *src) {
 				//std::cout << inet_ntoa(*addr) << std::endl;
 				source_addr = inet_ntoa(*addr);
 			}
-			sprintf(source_name,"%s@%s",src,source_addr);
 		} else {
+			//generate a random internet address
 			srand ( time(NULL) );
-			sprintf(source_name,"%s@%i",src,rand());
+			int32 r = rand();
+			addr = (struct in_addr*)&r;
+			source_addr = inet_ntoa(*addr);
 		}
-
+		sprintf(source_name,"%s@%s",src,source_addr);
 	} 
 	
-	std::cout << "source: " << source_name << std::endl;
+	//std::cout << "source: " << source_name << std::endl;
 }
 
 void TuioServer::commitFrame() {

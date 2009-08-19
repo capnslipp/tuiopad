@@ -120,7 +120,8 @@ NSString* detectHost() {
 				detectHost(), kSetting_HostIP,
 				[NSNumber numberWithInt:3333], kSetting_Port,
 				[NSNumber numberWithInt:0], kSetting_Orientation, 
-				[NSNumber numberWithInt:0], kSetting_Verbosity, 
+				[NSNumber numberWithInt:1], kSetting_PeriodicUpdates, 
+				[NSNumber numberWithInt:1], kSetting_FullUpdates, 
 				nil];
 	
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObject:defaults forKey:kSettings_Key]];

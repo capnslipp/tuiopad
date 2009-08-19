@@ -18,20 +18,23 @@ class MSATuioSenderCPP;
 	IBOutlet UITextField		*hostTextField;
 	IBOutlet UITextField		*portTextField;
 	IBOutlet UISegmentedControl	*orientControl;
-	IBOutlet UISegmentedControl *verbosityControl;
+	IBOutlet UISwitch			*periodicUpdatesSwitch;
+	IBOutlet UISwitch			*fullUpdatesSwitch;
 	
 	IBOutlet MSASettings		*settings;
 	
 	MSATuioSenderCPP			*tuioSender;
 
-	bool						_isOn;
+	bool						isOn;
+	int							deviceOrientation;
 }
 
 @property (readonly, nonatomic)		MSATuioSenderCPP	*tuioSender;
 @property (readonly, nonatomic)		MSASettings			*settings;
+@property (readonly, nonatomic)		bool				isOn;
+@property (readonly, nonatomic)		int					deviceOrientation;
 
 
--(bool) isOn;
 -(void) open:(bool)animate;
 -(IBAction) close;
 
@@ -39,7 +42,6 @@ class MSATuioSenderCPP;
 -(IBAction) detectHostPressed:(id)sender;
 -(IBAction) defaultPortPressed:(id)sender;
 -(IBAction) orientControlChanged:(id)sender;
--(IBAction) verbosityControlChanged:(id)sender;
 -(IBAction) backgroundPressed:(id)sender;
 -(IBAction) connectPressed:(id)sender;
 

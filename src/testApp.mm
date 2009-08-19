@@ -8,7 +8,6 @@
 #include "MSAViewController.h"
 #include "MSAFingerDrawerCPP.h"
 #include "MSATuioSenderCPP.h"
-#include "MSASettings.h"
 
 #pragma mark Variables
 
@@ -58,7 +57,7 @@ void testApp::draw() {
 	glTranslatef(ofGetWidth()/2, ofGetHeight()/2, 0);
 	static float currentUpRot = -90;
 	float targetUpRot;
-	switch([[viewController settings] getInt:kSetting_Orientation]) {
+	switch([viewController deviceOrientation]) {
 		case UIDeviceOrientationPortrait:
 			targetUpRot = 0;
 			break;
@@ -99,7 +98,7 @@ void testApp::exit() {
 #pragma mark Touch Callbacks
 
 void rotXY(float x, float y) {
-	switch([[viewController settings] getInt:kSetting_Orientation]) {
+	switch([viewController deviceOrientation]) {
 		case UIDeviceOrientationPortrait:
 			rotatedTouchPosition.x = x/ofGetWidth();
 			rotatedTouchPosition.y = y/ofGetHeight();

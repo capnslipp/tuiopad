@@ -18,7 +18,8 @@
 
 @synthesize settings;
 @synthesize tuioSender;
-
+@synthesize isOn;
+@synthesize deviceOrientation;
 
 
 #pragma mark ----- Utility -----
@@ -26,42 +27,38 @@
 -(void)connect {
 	NSLog(@"MSAViewController::connect %@ %@", hostTextField.text, portTextField.text);
 	tuioSender->setup([hostTextField.text UTF8String], [portTextField.text intValue]);
-}
+	
+	if(periodicUpdatesSwitch.on) tuioSender->tuioServer->enablePeriodicMessages();
+	else tuioSender->tuioServer->disablePeriodicMessages();
+	
+	if(fullUpdatesSwitch.on) tuioSender->tuioServer->enableFullUpdate();
+	else tuioSender->tuioServer->disableFullUpdate();
 
--(bool) isOn {
-	return _isOn;
-}
 
+}
 
 
 #pragma mark ----- Control events -----
 
 -(IBAction) orientControlChanged:(id)sender {
-	[settings setInt:orientControl.selectedSegmentIndex forKey:kSetting_Orientation];
-	
 	switch(orientControl.selectedSegmentIndex) {
 		case 0:	
-			[settings setInt:[[UIDevice currentDevice] orientation] forKey:kSetting_Orientation];
+			deviceOrientation = [[UIDevice currentDevice] orientation];
 			[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
 			break;
 			
 		case 1:
-			[settings setInt:UIDeviceOrientationLandscapeRight forKey:kSetting_Orientation];
+			deviceOrientation = UIDeviceOrientationLandscapeRight;
 			[[NSNotificationCenter defaultCenter] removeObserver:self];
 			break;
 			
 		case 2:
-			[settings setInt:UIDeviceOrientationPortrait forKey:kSetting_Orientation];
+			deviceOrientation = UIDeviceOrientationPortrait;
 			[[NSNotificationCenter defaultCenter] removeObserver:self];
 			break;
 	}
 }
-
-
--(IBAction) verbosityControlChanged:(id)sender {
-}
-
 
 
 -(IBAction) textFieldDoneEditing:(id)sender {
@@ -78,6 +75,12 @@
 -(IBAction) connectPressed:(id)sender {
 	[settings setString:hostTextField.text forKey:kSetting_HostIP];
 	[settings setInt:[portTextField.text intValue] forKey:kSetting_Port];
+	[settings setInt:orientControl.selectedSegmentIndex forKey:kSetting_Orientation];
+	[settings setInt:periodicUpdatesSwitch.on forKey:kSetting_PeriodicUpdates];
+	[settings setInt:fullUpdatesSwitch.on forKey:kSetting_FullUpdates];
+	
+	[settings saveSettings];
+
 	[self connect];
 	[self close];
 }
@@ -86,13 +89,11 @@
 
 -(IBAction) detectHostPressed:(id)sender {
 	hostTextField.text = [settings getDefaultFor:kSetting_HostIP];
-//	[self connect];
 }
 
 
 -(IBAction) defaultPortPressed:(id)sender {
 	portTextField.text = [NSString stringWithFormat:@"%i", [[settings getDefaultFor:kSetting_Port] intValue]];
-//	[self connect];
 }
 
 
@@ -122,7 +123,7 @@
 		ofSetFrameRate(0);		// suspend update loop while UI is visible
 	}
 	
-	_isOn = true;
+	isOn = true;
 }
 
 
@@ -140,7 +141,7 @@
 	
 	ofSetFrameRate(60);			// restore update loop
 	
-	_isOn = false;
+	isOn = false;
 }
 
 
@@ -157,21 +158,22 @@
 	hostTextField.text						= [settings getString:kSetting_HostIP];
 	portTextField.text						= [NSString stringWithFormat:@"%i", [settings getInt:kSetting_Port]];
 	orientControl.selectedSegmentIndex		= [settings getInt:kSetting_Orientation];
-	verbosityControl.selectedSegmentIndex	= [settings getInt:kSetting_Verbosity];
+	periodicUpdatesSwitch.on				= [settings getInt:kSetting_PeriodicUpdates];
+	fullUpdatesSwitch.on					= [settings getInt:kSetting_FullUpdates];
 	
 	[self orientControlChanged:nil];
-	[self verbosityControlChanged:nil];
 	
 	[self connect];
 }
 
+
+
 - (void) didRotate:(NSNotification *)notification {	
 	int o = [[UIDevice currentDevice] orientation];
 	if(o != UIDeviceOrientationUnknown && o != UIDeviceOrientationFaceUp && o != UIDeviceOrientationFaceDown) {
-		[settings setInt:o forKey:kSetting_Orientation];
-//		printf("orientation: %i\n", o);
+		deviceOrientation = o;
 	} else if([settings getInt:kSetting_Orientation] == 0) {
-		[settings setInt:UIDeviceOrientationLandscapeLeft forKey:kSetting_Orientation];
+		deviceOrientation = UIDeviceOrientationLandscapeRight;
 	}
 }
 

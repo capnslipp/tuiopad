@@ -11,10 +11,11 @@
 
 #import <UIKit/UIKit.h>
 
-#define kSetting_HostIP			@"HostIP"
-#define kSetting_Port			@"Port"
-#define kSetting_Orientation	@"Orientation"
-#define kSetting_Verbosity		@"Verbosity"
+#define kSetting_HostIP				@"HostIP"
+#define kSetting_Port				@"Port"
+#define kSetting_Orientation		@"Orientation"
+#define kSetting_PeriodicUpdates	@"PeriodicUpdates"
+#define kSetting_FullUpdates		@"FullUpdates"
 
 #define kSettings_Key			@"MSASettings"
 

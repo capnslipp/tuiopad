@@ -24,7 +24,7 @@ ofPoint				restAccel;
 #pragma mark App Loop Callbacks
 
 void testApp::setup() {
-	ofSetFrameRate(60);
+	ofSetFrameRate(120);
 	ofBackground(255, 255, 255);
 	ofSetBackgroundAuto(true);
 	

@@ -166,7 +166,7 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">TUIO Pad</string>
+						<string key="IBUIText">TuioPad</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">GillSans-Bold</string>
 							<double key="NSSize">2.400000e+01</double>
@@ -725,7 +725,7 @@ bWV3b3JrcyAwMDYgKyBvZnhpUGhvbmUKYW5kIG9zY3BhY2sgYnkgUm9zcyBCZW5jaW5hCg</string>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MSAViewController</string>
 					<string>UIResponder</string>
-					<string>{{2420, 516}, {480, 320}}</string>
+					<string>{{364, 384}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -834,7 +834,7 @@ bWV3b3JrcyAwMDYgKyBvZnhpUGhvbmUKYW5kIG9zY3BhY2sgYnkgUm9zcyBCZW5jaW5hCg</string>
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../TUIO Pad.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../TuioPad.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">3.0</string>
 	</data>

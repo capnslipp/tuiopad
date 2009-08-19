@@ -49,9 +49,14 @@ void MSATuioSenderCPP::setup(std::string host, int port) {
 	if(verbose) printf("MSATuioSenderCPP::setup(host: %s, port: %i\n", host.c_str(), port);
 	this->host = host;
 	this->port = port;
+	if(oscSender) delete oscSender;
 	if(tuioServer) delete tuioServer;
-	tuioServer = new TuioServer((char*)host.c_str(), port);
+	oscSender = new UdpSender((char*)host.c_str(), port);
+	tuioServer = new TuioServer(oscSender);
+	tuioServer->enableObjectProfile(false);
+	tuioServer->enableBlobProfile(false);
 	tuioServer->enableFullUpdate();
+	tuioServer->setSourceName("TuioPad");
 	currentTime = TuioTime::getSessionTime();	
 }
 

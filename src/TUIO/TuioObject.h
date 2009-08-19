@@ -2,7 +2,7 @@
  TUIO C++ Library - part of the reacTIVision project
  http://reactivision.sourceforge.net/
  
- Copyright (c) 2005-2009 Martin Kaltenbrunner <mkalten@iua.upf.edu>
+ Copyright (c) 2005-2009 Martin Kaltenbrunner <martin@tuio.org>
  
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -22,10 +22,7 @@
 #ifndef INCLUDED_TUIOOBJECT_H
 #define INCLUDED_TUIOOBJECT_H
 
-#include <math.h>
 #include "TuioContainer.h"
-
-#define TUIO_ROTATING 5
 
 namespace TUIO {
 	
@@ -35,7 +32,7 @@ namespace TUIO {
 	 * @author Martin Kaltenbrunner
 	 * @version 1.4
 	 */ 
-	class TuioObject: public TuioContainer {
+	class LIBDECL TuioObject: public TuioContainer {
 		
 	protected:
 		/**
@@ -56,6 +53,8 @@ namespace TUIO {
 		float rotation_accel;
 		
 	public:
+		using TuioContainer::update;
+		
 		/**
 		 * This constructor takes a TuioTime argument and assigns it along with the provided 
 		 * Session ID, Symbol ID, X and Y coordinate and angle to the newly created TuioObject.
@@ -166,8 +165,8 @@ namespace TUIO {
 		 */
 		void update (TuioTime ttime, float xp, float yp, float a) {
 			TuioPoint lastPoint = path.back();
-			TuioContainer::update(ttime,xpos,ypos);
-			
+			TuioContainer::update(ttime,xp,yp);
+
 			TuioTime diffTime = currentTime - lastPoint.getTuioTime();
 			float dt = diffTime.getTotalMilliseconds()/1000.0f;
 			float last_angle = angle;
@@ -175,12 +174,12 @@ namespace TUIO {
 			angle = a;
 			
 			double da = (angle-last_angle)/(2*M_PI);
-			if (da>M_PI*1.5) da-=(2*M_PI);
-			else if (da<M_PI*1.5) da+=(2*M_PI);
-			
+			if (da > 0.75f) da-=1.0f;
+			else if (da < -0.75f) da+=1.0f;
+						
 			rotation_speed = (float)da/dt;
 			rotation_accel =  (rotation_speed - last_rotation_speed)/dt;
-			
+		
 			if ((rotation_accel!=0) && (state==TUIO_STOPPED)) state = TUIO_ROTATING;
 		};
 
@@ -211,7 +210,7 @@ namespace TUIO {
 		 * Returns the symbol ID of this TuioObject.
 		 * @return	the symbol ID of this TuioObject
 		 */
-		int getSymbolID() { 
+		int getSymbolID() const{ 
 			return symbol_id;
 		};
 		
@@ -219,7 +218,7 @@ namespace TUIO {
 		 * Returns the rotation angle of this TuioObject.
 		 * @return	the rotation angle of this TuioObject
 		 */
-		float getAngle() {
+		float getAngle() const{
 			return angle;
 		};
 		
@@ -227,7 +226,7 @@ namespace TUIO {
 		 * Returns the rotation angle in degrees of this TuioObject.
 		 * @return	the rotation angle in degrees of this TuioObject
 		 */
-		float getAngleDegrees() { 
+		float getAngleDegrees() const{ 
 			return (float)(angle/M_PI*180);
 		};
 		
@@ -235,7 +234,7 @@ namespace TUIO {
 		 * Returns the rotation speed of this TuioObject.
 		 * @return	the rotation speed of this TuioObject
 		 */
-		float getRotationSpeed() { 
+		float getRotationSpeed() const{ 
 			return rotation_speed;
 		};
 		
@@ -243,7 +242,7 @@ namespace TUIO {
 		 * Returns the rotation acceleration of this TuioObject.
 		 * @return	the rotation acceleration of this TuioObject
 		 */
-		float getRotationAccel() {
+		float getRotationAccel() const{
 			return rotation_accel;
 		};
 
@@ -251,7 +250,7 @@ namespace TUIO {
 		 * Returns true of this TuioObject is moving.
 		 * @return	true of this TuioObject is moving
 		 */
-		virtual bool isMoving() { 
+		virtual bool isMoving() const{ 
 			if ((state==TUIO_ACCELERATING) || (state==TUIO_DECELERATING) || (state==TUIO_ROTATING)) return true;
 			else return false;
 		};

@@ -21,6 +21,7 @@
 #pragma once
 
 #include "TuioServer.h"
+#include "UdpSender.h"
 #include "TuioCursor.h"
 #include "ofxiPhone.h"
 
@@ -47,9 +48,11 @@ public:
 class MSATuioSenderCPP { 
 public:
 	bool verbose;
+	OscSender		*oscSender;
 	TuioServer		*tuioServer;
 	
 	MSATuioSenderCPP() {
+		oscSender	= NULL;
 		tuioServer	= NULL;
 		host		= "";
 		port		= 0;
@@ -57,6 +60,7 @@ public:
 	}
 	
 	~MSATuioSenderCPP() {
+		delete oscSender;
 		delete tuioServer;
 	};
 	

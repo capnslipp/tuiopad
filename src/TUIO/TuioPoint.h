@@ -2,7 +2,7 @@
  TUIO C++ Library - part of the reacTIVision project
  http://reactivision.sourceforge.net/
  
- Copyright (c) 2005-2009 Martin Kaltenbrunner <mkalten@iua.upf.edu>
+ Copyright (c) 2005-2009 Martin Kaltenbrunner <martin@tuio.org>
  
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -21,12 +21,12 @@
 
 #ifndef INCLUDED_TUIOPOINT_H
 #define INCLUDED_TUIOPOINT_H
+
 #include "TuioTime.h"
-#include <iostream>
+#include <cmath>
 
 #ifndef M_PI
 #define M_PI	3.14159265358979323846
-
 #endif
 
 namespace TUIO {
@@ -38,7 +38,7 @@ namespace TUIO {
 	 * @author Martin Kaltenbrunner
 	 * @version 1.4
 	 */ 
-	class TuioPoint {
+	class LIBDECL TuioPoint {
 		
 	protected:
 		/**
@@ -53,6 +53,10 @@ namespace TUIO {
 		 * The time stamp of the last update represented as TuioTime (time since session start)
 		 */
 		TuioTime currentTime;
+		/**
+		 * The creation time of this TuioPoint represented as TuioTime (time since session start)
+		 */
+		TuioTime startTime;
 		
 	public:
 		/**
@@ -63,6 +67,7 @@ namespace TUIO {
 			xpos = xp;
 			ypos = yp;
 			currentTime = TuioTime::getSessionTime();
+			startTime = currentTime;
 		};
 	
 		/**
@@ -77,6 +82,7 @@ namespace TUIO {
 			xpos = xp;
 			ypos = yp;
 			currentTime = ttime;
+			startTime = currentTime;
 		};
 		
 		/**
@@ -89,6 +95,7 @@ namespace TUIO {
 			xpos = tpoint->getX();
 			ypos = tpoint->getY();
 			currentTime = TuioTime::getSessionTime();
+			startTime = currentTime;
 		};
 		
 		/**
@@ -138,7 +145,7 @@ namespace TUIO {
 		 * Returns the X coordinate of this TuioPoint. 
 		 * @return	the X coordinate of this TuioPoint
 		 */
-		float getX() { 
+		float getX() const{ 
 			return xpos;
 		};
 		
@@ -146,7 +153,7 @@ namespace TUIO {
 		 * Returns the Y coordinate of this TuioPoint. 
 		 * @return	the Y coordinate of this TuioPoint
 		 */
-		float getY() {
+		float getY() const{
 			return ypos;
 		};
 		
@@ -157,9 +164,22 @@ namespace TUIO {
 		 * @param	yp	the Y coordinate of the distant point
 		 * @return	the distance to the provided coordinates
 		 */
-		float getDistance(float xp, float yp) {
+		float getDistance(float xp, float yp) const{
 			float dx = xpos-xp;
 			float dy = ypos-yp;
+			return sqrtf(dx*dx+dy*dy);
+		}
+
+		/**
+		 * Returns the distance to the provided coordinates 
+		 *
+		 * @param	xp	the X coordinate of the distant point
+		 * @param	yp	the Y coordinate of the distant point
+		 * @return	the distance to the provided coordinates
+		 */
+		float getScreenDistance(float xp, float yp, int w, int h) const{
+			float dx = w*xpos-w*xp;
+			float dy = h*ypos-h*yp;
 			return sqrtf(dx*dx+dy*dy);
 		}
 		
@@ -169,7 +189,7 @@ namespace TUIO {
 		 * @param	tpoint	the distant TuioPoint
 		 * @return	the distance to the provided TuioPoint
 		 */
-		float getDistance(TuioPoint *tpoint) {
+		float getDistance(TuioPoint *tpoint) const{
 			return getDistance(tpoint->getX(),tpoint->getY());
 		}
 		
@@ -180,7 +200,7 @@ namespace TUIO {
 		 * @param	yp	the Y coordinate of the distant point
 		 * @return	the angle to the provided coordinates
 		 */
-		 float getAngle(float xp, float yp) {
+		 float getAngle(float xp, float yp) const{
 			float side = xpos-xp;
 			float height = ypos-yp;
 			float distance = getDistance(xp,yp);
@@ -197,7 +217,7 @@ namespace TUIO {
 		 * @param	tpoint	the distant TuioPoint
 		 * @return	the angle to the provided TuioPoint
 		 */
-		float getAngle(TuioPoint *tpoint) {
+		float getAngle(TuioPoint *tpoint) const{
 			return getAngle(tpoint->getX(),tpoint->getY());
 		}
 
@@ -208,7 +228,7 @@ namespace TUIO {
 		 * @param	yp	the Y coordinate of the distant point
 		 * @return	the angle in degrees to the provided TuioPoint
 		 */
-		float getAngleDegrees(float xp, float yp) {
+		float getAngleDegrees(float xp, float yp) const{
 			return ((getAngle(xp,yp)/(float)M_PI)*180.0f);
 		}
 
@@ -218,7 +238,7 @@ namespace TUIO {
 		 * @param	tpoint	the distant TuioPoint
 		 * @return	the angle in degrees to the provided TuioPoint
 		 */
-		float getAngleDegrees(TuioPoint *tpoint) {
+		float getAngleDegrees(TuioPoint *tpoint) const{
 			return ((getAngle(tpoint)/(float)M_PI)*180.0f);
 		}
 		
@@ -228,7 +248,7 @@ namespace TUIO {
 		 * @param	width	the screen width
 		 * @return	the X coordinate of this TuioPoint in pixels relative to the provided screen width
 		 */
-		int getScreenX(int width) { 
+		int getScreenX(int width) const{ 
 			return (int)floor(xpos*width+0.5f);
 		};
 		
@@ -238,7 +258,7 @@ namespace TUIO {
 		 * @param	height	the screen height
 		 * @return	the Y coordinate of this TuioPoint in pixels relative to the provided screen height
 		 */
-		int getScreenY(int height) {
+		int getScreenY(int height) const{
 			return (int)floor(ypos*height+0.5f);
 		};
 		
@@ -247,9 +267,18 @@ namespace TUIO {
 		 *
 		 * @return	the  time stamp of this TuioPoint as TuioTime
 		 */
-		TuioTime getTuioTime() { 
+		TuioTime getTuioTime() const{ 
 			return currentTime;
-		};		
+		};
+		
+		/**
+		 * Returns the start time of this TuioPoint as TuioTime. 
+		 *
+		 * @return	the start time of this TuioPoint as TuioTime
+		 */
+		TuioTime getStartTime() const{
+			return startTime;
+		};
 	};
 };
 #endif

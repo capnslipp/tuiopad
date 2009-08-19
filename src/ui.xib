@@ -400,8 +400,8 @@
 						<bool key="IBUICanCancelContentTouches">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">YnkgTWVobWV0IEFrdGVuICYgTWFydGluIEthbHRlbmJydW5uZXIKd3JpdHRlbiB1c2luZyBvcGVuRnJh
-bWV3b3JrcyAwMDYgKyBvZnhpUGhvbmUKYW5kIG9zY3BhY2sgYnkgUm9zcyBCZW5jaW5hCg</string>
+						<string type="base64-UTF8" key="IBUIText">YnkgTWVobWV0IEFrdGVuICYgTWFydGluIEthbHRlbmJydW5uZXIKbWFkZSB3aXRoIG9wZW5GcmFtZXdv
+cmtzICsgb2Z4aVBob25lCnVzaW5nIG9zY3BhY2sgYnkgUm9zcyBCZW5jaW5hCg</string>
 						<reference key="IBUITextColor" ref="297077013"/>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">GillSans</string>

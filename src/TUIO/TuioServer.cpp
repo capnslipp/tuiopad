@@ -124,9 +124,9 @@ void TuioServer::setSourceName(const char *src) {
 				//std::cout << inet_ntoa(*addr) << std::endl;
 				source_addr = inet_ntoa(*addr);
 			}
-		} else source_addr = (char*)"unknown";
+			sprintf(source_name,"%s@%s",src,source_addr);
+		} else sprintf(source_name,"%s@%i",src,rand());
 
-		sprintf(source_name,"%s@%s",src,source_addr);
 	} 
 	
 	//std::cout << "source: " << source_name << std::endl;

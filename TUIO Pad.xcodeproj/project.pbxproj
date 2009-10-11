@@ -40,8 +40,6 @@
 		BB387E930F550FCA005473E6 /* ThisWayUp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB387E920F550FCA005473E6 /* ThisWayUp.jpg */; };
 		BB55633E103B10C7009CE4D4 /* MSAViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB55633D103B10C7009CE4D4 /* MSAViewController.mm */; };
 		BB6D9FDF0F6F935C00FDC984 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6D9FDE0F6F935C00FDC984 /* Entitlements.plist */; };
-		BB7750B00F55052C00A6267D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7750AC0F55052C00A6267D /* Icon.png */; };
-		BB7750B10F55052C00A6267D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7750AD0F55052C00A6267D /* Default.png */; };
 		BB91E5520F4085C900AD1FB1 /* ofTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB16E9AD0F2B1E6900518274 /* ofTexture.cpp */; };
 		BBCB6AD70FC6D99600EAB512 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE5EAB70F49AD8400F28951 /* AudioToolbox.framework */; };
 		BBCCF9680F7F6E1B0034512A /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBCCF9420F7F6E1A0034512A /* IpEndpointName.cpp */; };
@@ -52,6 +50,9 @@
 		BBCCF9700F7F6E1B0034512A /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBCCF9570F7F6E1A0034512A /* OscReceivedElements.cpp */; };
 		BBCCF9710F7F6E1B0034512A /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBCCF9590F7F6E1A0034512A /* OscTypes.cpp */; };
 		BBE124F70FA50D45001DDC21 /* ui.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBE124F60FA50D45001DDC21 /* ui.xib */; };
+		BBE2A3251081E5200090D0B1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BBE2A3221081E5200090D0B1 /* Icon.png */; };
+		BBE2A3261081E5200090D0B1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BBE2A3231081E5200090D0B1 /* Default.png */; };
+		BBE2A3271081E5200090D0B1 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BBE2A3241081E5200090D0B1 /* Logo.png */; };
 		BBE5E9B10F497C3100F28951 /* libFreeType_iphone_universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE5E9AB0F497C3100F28951 /* libFreeType_iphone_universal.a */; };
 		BBE5E9B20F497C3100F28951 /* libFreeImage_iphone_universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE5E9B00F497C3100F28951 /* libFreeImage_iphone_universal.a */; };
 		BBE5E9F50F497D5F00F28951 /* libGLU.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE5E9F30F497D5F00F28951 /* libGLU.a */; };
@@ -177,8 +178,6 @@
 		BB62EA8A0F4C298000CC36B5 /* changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = changelog.txt; sourceTree = "<group>"; };
 		BB6D9FDE0F6F935C00FDC984 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = SOURCE_ROOT; };
 		BB7750820F5503FC00A6267D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BB7750AC0F55052C00A6267D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = data/Icon.png; sourceTree = "<group>"; };
-		BB7750AD0F55052C00A6267D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = data/Default.png; sourceTree = "<group>"; };
 		BBCCF93C0F7F6E1A0034512A /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = "<group>"; };
 		BBCCF9420F7F6E1A0034512A /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		BBCCF9430F7F6E1A0034512A /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -206,6 +205,9 @@
 		BBCCF95B0F7F6E1B0034512A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		BBCCF9630F7F6E1B0034512A /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		BBE124F60FA50D45001DDC21 /* ui.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ui.xib; sourceTree = "<group>"; };
+		BBE2A3221081E5200090D0B1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = assets/Icon.png; sourceTree = "<group>"; };
+		BBE2A3231081E5200090D0B1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = assets/Default.png; sourceTree = "<group>"; };
+		BBE2A3241081E5200090D0B1 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Logo.png; path = assets/Logo.png; sourceTree = "<group>"; };
 		BBE5E9560F497C3100F28951 /* ftconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftconfig.h; sourceTree = "<group>"; };
 		BBE5E9570F497C3100F28951 /* ftheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftheader.h; sourceTree = "<group>"; };
 		BBE5E9580F497C3100F28951 /* ftmodule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftmodule.h; sourceTree = "<group>"; };
@@ -640,8 +642,9 @@
 			children = (
 				BB387E920F550FCA005473E6 /* ThisWayUp.jpg */,
 				BB7750820F5503FC00A6267D /* Info.plist */,
-				BB7750AC0F55052C00A6267D /* Icon.png */,
-				BB7750AD0F55052C00A6267D /* Default.png */,
+				BBE2A3221081E5200090D0B1 /* Icon.png */,
+				BBE2A3231081E5200090D0B1 /* Default.png */,
+				BBE2A3241081E5200090D0B1 /* Logo.png */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -959,11 +962,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB7750B00F55052C00A6267D /* Icon.png in Resources */,
-				BB7750B10F55052C00A6267D /* Default.png in Resources */,
 				BB387E930F550FCA005473E6 /* ThisWayUp.jpg in Resources */,
 				BB6D9FDF0F6F935C00FDC984 /* Entitlements.plist in Resources */,
 				BBE124F70FA50D45001DDC21 /* ui.xib in Resources */,
+				BBE2A3251081E5200090D0B1 /* Icon.png in Resources */,
+				BBE2A3261081E5200090D0B1 /* Default.png in Resources */,
+				BBE2A3271081E5200090D0B1 /* Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

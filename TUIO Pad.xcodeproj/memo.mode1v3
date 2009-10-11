@@ -284,7 +284,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>10</integer>
+									<integer>9</integer>
 									<integer>7</integer>
 									<integer>1</integer>
 									<integer>0</integer>
@@ -328,7 +328,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.mm</string>
+								<string>MSAViewController.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -336,11 +336,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.mm</string>
+										<string>MSAViewController.mm</string>
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>BBE2A3341081E9E10090D0B1</string>
+										<string>BBE2A3461081EA8C0090D0B1</string>
 										<key>history</key>
 										<array>
 											<string>BBF1620B0FBE09450065F25C</string>
@@ -363,15 +363,15 @@
 											<string>BB132CE7103C2BDA00B770D9</string>
 											<string>BB132CE9103C2BDA00B770D9</string>
 											<string>BB132CFD103C2F4300B770D9</string>
-											<string>BB132CFE103C2F4300B770D9</string>
 											<string>BB85747D103DBCE200A6CB0A</string>
 											<string>BB85747E103DBCE200A6CB0A</string>
 											<string>BBE2A31B1081E1D30090D0B1</string>
 											<string>BBE2A31C1081E1D30090D0B1</string>
 											<string>BBE2A32E1081E9E10090D0B1</string>
 											<string>BBE2A32F1081E9E10090D0B1</string>
-											<string>BBE2A3301081E9E10090D0B1</string>
-											<string>BB132CEA103C2BDA00B770D9</string>
+											<string>BBE2A3411081EA8C0090D0B1</string>
+											<string>BBE2A3421081EA8C0090D0B1</string>
+											<string>BBE2A3431081EA8C0090D0B1</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -407,6 +407,8 @@
 											<string>BBE2A3311081E9E10090D0B1</string>
 											<string>BBE2A3321081E9E10090D0B1</string>
 											<string>BBE2A3331081E9E10090D0B1</string>
+											<string>BBE2A3441081EA8C0090D0B1</string>
+											<string>BBE2A3451081EA8C0090D0B1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

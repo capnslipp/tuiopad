@@ -9,7 +9,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Release;
 		activeExecutable = BB16E9840F2B1E4B00518274 /* TuioPad */;
-		activeSDKPreference = iphonesimulator3.0;
+		activeSDKPreference = iphoneos3.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* TuioPad */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* TuioPad */,
@@ -182,6 +182,12 @@
 			BBE2A3321081E9E10090D0B1 /* PBXBookmark */ = BBE2A3321081E9E10090D0B1 /* PBXBookmark */;
 			BBE2A3331081E9E10090D0B1 /* PlistBookmark */ = BBE2A3331081E9E10090D0B1 /* PlistBookmark */;
 			BBE2A3341081E9E10090D0B1 /* PBXTextBookmark */ = BBE2A3341081E9E10090D0B1 /* PBXTextBookmark */;
+			BBE2A3411081EA8C0090D0B1 /* PBXTextBookmark */ = BBE2A3411081EA8C0090D0B1 /* PBXTextBookmark */;
+			BBE2A3421081EA8C0090D0B1 /* PlistBookmark */ = BBE2A3421081EA8C0090D0B1 /* PlistBookmark */;
+			BBE2A3431081EA8C0090D0B1 /* PBXTextBookmark */ = BBE2A3431081EA8C0090D0B1 /* PBXTextBookmark */;
+			BBE2A3441081EA8C0090D0B1 /* PBXTextBookmark */ = BBE2A3441081EA8C0090D0B1 /* PBXTextBookmark */;
+			BBE2A3451081EA8C0090D0B1 /* PlistBookmark */ = BBE2A3451081EA8C0090D0B1 /* PlistBookmark */;
+			BBE2A3461081EA8C0090D0B1 /* PBXTextBookmark */ = BBE2A3461081EA8C0090D0B1 /* PBXTextBookmark */;
 			BBF1620B0FBE09450065F25C = BBF1620B0FBE09450065F25C /* PBXTextBookmark */;
 			BBF1620F0FBE09450065F25C = BBF1620F0FBE09450065F25C /* PBXTextBookmark */;
 			BBF162100FBE09450065F25C = BBF162100FBE09450065F25C /* PBXTextBookmark */;
@@ -974,9 +980,9 @@
 	};
 	BB55633D103B10C7009CE4D4 /* MSAViewController.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1245, 2828}}";
-			sepNavSelRange = "{4597, 0}";
-			sepNavVisRange = "{405, 2171}";
+			sepNavIntBoundsRect = "{{0, 0}, {1494, 2702}}";
+			sepNavSelRange = "{3957, 0}";
+			sepNavVisRange = "{3444, 1843}";
 		};
 	};
 	BB556378103B1805009CE4D4 /* PlistBookmark */ = {
@@ -1412,6 +1418,68 @@
 		rType = 0;
 		vrLen = 1533;
 		vrLoc = 1255;
+	};
+	BBE2A3411081EA8C0090D0B1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB0EBC370F4AC7DA00698C75 /* testApp.mm */;
+		name = "testApp.mm: 88";
+		rLen = 0;
+		rLoc = 1827;
+		rType = 0;
+		vrLen = 1533;
+		vrLoc = 1255;
+	};
+	BBE2A3421081EA8C0090D0B1 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = BB7750820F5503FC00A6267D /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/Memo/Lab/openFrameworks/latest-iphone/apps/Memo/Tuio Pad/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	BBE2A3431081EA8C0090D0B1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB55633D103B10C7009CE4D4 /* MSAViewController.mm */;
+		name = "MSAViewController.mm: 31";
+		rLen = 0;
+		rLoc = 649;
+		rType = 0;
+		vrLen = 2061;
+		vrLoc = 182;
+	};
+	BBE2A3441081EA8C0090D0B1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB0EBC370F4AC7DA00698C75 /* testApp.mm */;
+		name = "testApp.mm: 88";
+		rLen = 0;
+		rLoc = 1827;
+		rType = 0;
+		vrLen = 1533;
+		vrLoc = 1255;
+	};
+	BBE2A3451081EA8C0090D0B1 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = BB7750820F5503FC00A6267D /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/Memo/Lab/openFrameworks/latest-iphone/apps/Memo/Tuio Pad/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	BBE2A3461081EA8C0090D0B1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB55633D103B10C7009CE4D4 /* MSAViewController.mm */;
+		name = "MSAViewController.mm: 147";
+		rLen = 0;
+		rLoc = 3957;
+		rType = 0;
+		vrLen = 1843;
+		vrLoc = 3444;
 	};
 	BBF1620B0FBE09450065F25C /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

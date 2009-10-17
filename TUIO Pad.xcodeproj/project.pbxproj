@@ -10,17 +10,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		BB00941C103B09D200B8782E /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093D4103B09D200B8782E /* GLView.mm */; };
-		BB00941D103B09D200B8782E /* iPhoneAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093D6103B09D200B8782E /* iPhoneAppDelegate.mm */; };
-		BB00941E103B09D200B8782E /* iPhoneGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093D8103B09D200B8782E /* iPhoneGlobals.mm */; };
-		BB00941F103B09D200B8782E /* iPhoneSoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093D9103B09D200B8782E /* iPhoneSoundPlayer.mm */; };
-		BB009420103B09D200B8782E /* iPhoneSoundStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093DA103B09D200B8782E /* iPhoneSoundStream.mm */; };
-		BB009421103B09D200B8782E /* ofAppiPhoneWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093DC103B09D200B8782E /* ofAppiPhoneWindow.mm */; };
-		BB009422103B09D200B8782E /* AppDelegateBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093DF103B09D200B8782E /* AppDelegateBase.mm */; };
-		BB009423103B09D200B8782E /* CocoaWindowBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093E2103B09D200B8782E /* CocoaWindowBase.mm */; };
-		BB009424103B09D200B8782E /* ofxiPhoneAccelerometer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093E5103B09D200B8782E /* ofxiPhoneAccelerometer.mm */; };
-		BB009425103B09D200B8782E /* ofxiPhoneAlerts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB0093E6103B09D200B8782E /* ofxiPhoneAlerts.cpp */; };
-		BB009426103B09D200B8782E /* ofxiPhoneUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0093EA103B09D200B8782E /* ofxiPhoneUtils.mm */; };
 		BB009429103B09D200B8782E /* ofxAccelerometer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB0093EF103B09D200B8782E /* ofxAccelerometer.cpp */; };
 		BB00942C103B09D200B8782E /* ofxMultiTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB0093F5103B09D200B8782E /* ofxMultiTouch.cpp */; };
 		BB0EBC3A0F4AC7DA00698C75 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0EBC330F4AC7DA00698C75 /* main.mm */; };
@@ -38,6 +27,15 @@
 		BB16EDCB0F2B368400518274 /* ofGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB16E9A90F2B1E6900518274 /* ofGraphics.cpp */; };
 		BB2EB69B0F4EFB5E0078DD0A /* MSASettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB2EB69A0F4EFB5E0078DD0A /* MSASettings.mm */; };
 		BB387E930F550FCA005473E6 /* ThisWayUp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB387E920F550FCA005473E6 /* ThisWayUp.jpg */; };
+		BB4EB88F108A2F6C009A3FC1 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB85C108A2F6C009A3FC1 /* EAGLView.mm */; };
+		BB4EB890108A2F6C009A3FC1 /* iPhoneAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB85E108A2F6C009A3FC1 /* iPhoneAppDelegate.mm */; };
+		BB4EB891108A2F6C009A3FC1 /* iPhoneGlobals.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB860108A2F6C009A3FC1 /* iPhoneGlobals.mm */; };
+		BB4EB892108A2F6C009A3FC1 /* iPhoneSoundPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB861108A2F6C009A3FC1 /* iPhoneSoundPlayer.mm */; };
+		BB4EB893108A2F6C009A3FC1 /* iPhoneSoundStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB862108A2F6C009A3FC1 /* iPhoneSoundStream.mm */; };
+		BB4EB895108A2F6C009A3FC1 /* ofAppiPhoneWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB866108A2F6C009A3FC1 /* ofAppiPhoneWindow.mm */; };
+		BB4EB896108A2F6C009A3FC1 /* ofxiPhoneAccelerometer.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB867108A2F6C009A3FC1 /* ofxiPhoneAccelerometer.mm */; };
+		BB4EB897108A2F6C009A3FC1 /* ofxiPhoneAlerts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB868108A2F6C009A3FC1 /* ofxiPhoneAlerts.cpp */; };
+		BB4EB898108A2F6C009A3FC1 /* ofxiPhoneUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4EB86C108A2F6C009A3FC1 /* ofxiPhoneUtils.mm */; };
 		BB55633E103B10C7009CE4D4 /* MSAViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB55633D103B10C7009CE4D4 /* MSAViewController.mm */; };
 		BB6D9FDF0F6F935C00FDC984 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6D9FDE0F6F935C00FDC984 /* Entitlements.plist */; };
 		BB91E5520F4085C900AD1FB1 /* ofTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB16E9AD0F2B1E6900518274 /* ofTexture.cpp */; };
@@ -68,32 +66,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* iPhone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhone_Prefix.pch; sourceTree = "<group>"; };
-		BB009381103B09D200B8782E /* changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = changelog.txt; sourceTree = "<group>"; };
-		BB0093CC103B09D200B8782E /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		BB0093D0103B09D200B8782E /* ofxiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhone.h; sourceTree = "<group>"; };
-		BB0093D3103B09D200B8782E /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
-		BB0093D4103B09D200B8782E /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
-		BB0093D5103B09D200B8782E /* iPhoneAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneAppDelegate.h; sourceTree = "<group>"; };
-		BB0093D6103B09D200B8782E /* iPhoneAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneAppDelegate.mm; sourceTree = "<group>"; };
-		BB0093D7103B09D200B8782E /* iPhoneGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneGlobals.h; sourceTree = "<group>"; };
-		BB0093D8103B09D200B8782E /* iPhoneGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneGlobals.mm; sourceTree = "<group>"; };
-		BB0093D9103B09D200B8782E /* iPhoneSoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneSoundPlayer.mm; sourceTree = "<group>"; };
-		BB0093DA103B09D200B8782E /* iPhoneSoundStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneSoundStream.mm; sourceTree = "<group>"; };
-		BB0093DB103B09D200B8782E /* ofAppiPhoneWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofAppiPhoneWindow.h; sourceTree = "<group>"; };
-		BB0093DC103B09D200B8782E /* ofAppiPhoneWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofAppiPhoneWindow.mm; sourceTree = "<group>"; };
-		BB0093DE103B09D200B8782E /* AppDelegateBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateBase.h; sourceTree = "<group>"; };
-		BB0093DF103B09D200B8782E /* AppDelegateBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateBase.mm; sourceTree = "<group>"; };
-		BB0093E0103B09D200B8782E /* CocoaDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaDefines.h; sourceTree = "<group>"; };
-		BB0093E1103B09D200B8782E /* CocoaWindowBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaWindowBase.h; sourceTree = "<group>"; };
-		BB0093E2103B09D200B8782E /* CocoaWindowBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoaWindowBase.mm; sourceTree = "<group>"; };
-		BB0093E3103B09D200B8782E /* GLViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLViewProtocol.h; sourceTree = "<group>"; };
-		BB0093E4103B09D200B8782E /* ofxCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCocoa.h; sourceTree = "<group>"; };
-		BB0093E5103B09D200B8782E /* ofxiPhoneAccelerometer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneAccelerometer.mm; sourceTree = "<group>"; };
-		BB0093E6103B09D200B8782E /* ofxiPhoneAlerts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxiPhoneAlerts.cpp; sourceTree = "<group>"; };
-		BB0093E7103B09D200B8782E /* ofxiPhoneAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneAlerts.h; sourceTree = "<group>"; };
-		BB0093E8103B09D200B8782E /* ofxiPhoneAlertsListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneAlertsListener.h; sourceTree = "<group>"; };
-		BB0093E9103B09D200B8782E /* ofxiPhoneApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneApp.h; sourceTree = "<group>"; };
-		BB0093EA103B09D200B8782E /* ofxiPhoneUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneUtils.mm; sourceTree = "<group>"; };
 		BB0093EC103B09D200B8782E /* changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = changelog.txt; sourceTree = "<group>"; };
 		BB0093ED103B09D200B8782E /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		BB0093EF103B09D200B8782E /* ofxAccelerometer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAccelerometer.cpp; sourceTree = "<group>"; };
@@ -173,6 +145,25 @@
 		BB2EB6990F4EFB5E0078DD0A /* MSASettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSASettings.h; sourceTree = "<group>"; };
 		BB2EB69A0F4EFB5E0078DD0A /* MSASettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MSASettings.mm; sourceTree = "<group>"; };
 		BB387E920F550FCA005473E6 /* ThisWayUp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ThisWayUp.jpg; path = data/ThisWayUp.jpg; sourceTree = "<group>"; };
+		BB4EB80D108A2F6C009A3FC1 /* changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = changelog.txt; sourceTree = "<group>"; };
+		BB4EB858108A2F6C009A3FC1 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		BB4EB859108A2F6C009A3FC1 /* ofxiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhone.h; sourceTree = "<group>"; };
+		BB4EB85B108A2F6C009A3FC1 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		BB4EB85C108A2F6C009A3FC1 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
+		BB4EB85D108A2F6C009A3FC1 /* iPhoneAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneAppDelegate.h; sourceTree = "<group>"; };
+		BB4EB85E108A2F6C009A3FC1 /* iPhoneAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneAppDelegate.mm; sourceTree = "<group>"; };
+		BB4EB85F108A2F6C009A3FC1 /* iPhoneGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneGlobals.h; sourceTree = "<group>"; };
+		BB4EB860108A2F6C009A3FC1 /* iPhoneGlobals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneGlobals.mm; sourceTree = "<group>"; };
+		BB4EB861108A2F6C009A3FC1 /* iPhoneSoundPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneSoundPlayer.mm; sourceTree = "<group>"; };
+		BB4EB862108A2F6C009A3FC1 /* iPhoneSoundStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iPhoneSoundStream.mm; sourceTree = "<group>"; };
+		BB4EB865108A2F6C009A3FC1 /* ofAppiPhoneWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofAppiPhoneWindow.h; sourceTree = "<group>"; };
+		BB4EB866108A2F6C009A3FC1 /* ofAppiPhoneWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofAppiPhoneWindow.mm; sourceTree = "<group>"; };
+		BB4EB867108A2F6C009A3FC1 /* ofxiPhoneAccelerometer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneAccelerometer.mm; sourceTree = "<group>"; };
+		BB4EB868108A2F6C009A3FC1 /* ofxiPhoneAlerts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxiPhoneAlerts.cpp; sourceTree = "<group>"; };
+		BB4EB869108A2F6C009A3FC1 /* ofxiPhoneAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneAlerts.h; sourceTree = "<group>"; };
+		BB4EB86A108A2F6C009A3FC1 /* ofxiPhoneAlertsListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneAlertsListener.h; sourceTree = "<group>"; };
+		BB4EB86B108A2F6C009A3FC1 /* ofxiPhoneApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneApp.h; sourceTree = "<group>"; };
+		BB4EB86C108A2F6C009A3FC1 /* ofxiPhoneUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneUtils.mm; sourceTree = "<group>"; };
 		BB55633C103B10C7009CE4D4 /* MSAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAViewController.h; sourceTree = "<group>"; };
 		BB55633D103B10C7009CE4D4 /* MSAViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MSAViewController.mm; sourceTree = "<group>"; };
 		BB62EA8A0F4C298000CC36B5 /* changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = changelog.txt; sourceTree = "<group>"; };
@@ -364,56 +355,6 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = "core frameworks";
-			sourceTree = "<group>";
-		};
-		BB009380103B09D200B8782E /* ofxiPhone */ = {
-			isa = PBXGroup;
-			children = (
-				BB009381103B09D200B8782E /* changelog.txt */,
-				BB0093CC103B09D200B8782E /* LICENSE.txt */,
-				BB0093D0103B09D200B8782E /* ofxiPhone.h */,
-				BB0093D2103B09D200B8782E /* src */,
-			);
-			name = ofxiPhone;
-			path = ../../../addons/ofxiPhone;
-			sourceTree = SOURCE_ROOT;
-		};
-		BB0093D2103B09D200B8782E /* src */ = {
-			isa = PBXGroup;
-			children = (
-				BB0093D3103B09D200B8782E /* GLView.h */,
-				BB0093D4103B09D200B8782E /* GLView.mm */,
-				BB0093D5103B09D200B8782E /* iPhoneAppDelegate.h */,
-				BB0093D6103B09D200B8782E /* iPhoneAppDelegate.mm */,
-				BB0093D7103B09D200B8782E /* iPhoneGlobals.h */,
-				BB0093D8103B09D200B8782E /* iPhoneGlobals.mm */,
-				BB0093D9103B09D200B8782E /* iPhoneSoundPlayer.mm */,
-				BB0093DA103B09D200B8782E /* iPhoneSoundStream.mm */,
-				BB0093DB103B09D200B8782E /* ofAppiPhoneWindow.h */,
-				BB0093DC103B09D200B8782E /* ofAppiPhoneWindow.mm */,
-				BB0093DD103B09D200B8782E /* ofxCocoaShared */,
-				BB0093E5103B09D200B8782E /* ofxiPhoneAccelerometer.mm */,
-				BB0093E6103B09D200B8782E /* ofxiPhoneAlerts.cpp */,
-				BB0093E7103B09D200B8782E /* ofxiPhoneAlerts.h */,
-				BB0093E8103B09D200B8782E /* ofxiPhoneAlertsListener.h */,
-				BB0093E9103B09D200B8782E /* ofxiPhoneApp.h */,
-				BB0093EA103B09D200B8782E /* ofxiPhoneUtils.mm */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		BB0093DD103B09D200B8782E /* ofxCocoaShared */ = {
-			isa = PBXGroup;
-			children = (
-				BB0093DE103B09D200B8782E /* AppDelegateBase.h */,
-				BB0093DF103B09D200B8782E /* AppDelegateBase.mm */,
-				BB0093E0103B09D200B8782E /* CocoaDefines.h */,
-				BB0093E1103B09D200B8782E /* CocoaWindowBase.h */,
-				BB0093E2103B09D200B8782E /* CocoaWindowBase.mm */,
-				BB0093E3103B09D200B8782E /* GLViewProtocol.h */,
-				BB0093E4103B09D200B8782E /* ofxCocoa.h */,
-			);
-			path = ofxCocoaShared;
 			sourceTree = "<group>";
 		};
 		BB0093EB103B09D200B8782E /* ofxAccelerometer */ = {
@@ -630,11 +571,46 @@
 		BB16F26B0F2B646B00518274 /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				BB009380103B09D200B8782E /* ofxiPhone */,
+				BB4EB80C108A2F6C009A3FC1 /* ofxiPhone */,
 				BB0093EB103B09D200B8782E /* ofxAccelerometer */,
 				BB0093F1103B09D200B8782E /* ofxMultiTouch */,
 			);
 			name = addons;
+			sourceTree = "<group>";
+		};
+		BB4EB80C108A2F6C009A3FC1 /* ofxiPhone */ = {
+			isa = PBXGroup;
+			children = (
+				BB4EB80D108A2F6C009A3FC1 /* changelog.txt */,
+				BB4EB858108A2F6C009A3FC1 /* LICENSE.txt */,
+				BB4EB859108A2F6C009A3FC1 /* ofxiPhone.h */,
+				BB4EB85A108A2F6C009A3FC1 /* src */,
+			);
+			name = ofxiPhone;
+			path = ../../../addons/ofxiPhone;
+			sourceTree = SOURCE_ROOT;
+		};
+		BB4EB85A108A2F6C009A3FC1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BB4EB85B108A2F6C009A3FC1 /* EAGLView.h */,
+				BB4EB85C108A2F6C009A3FC1 /* EAGLView.mm */,
+				BB4EB85D108A2F6C009A3FC1 /* iPhoneAppDelegate.h */,
+				BB4EB85E108A2F6C009A3FC1 /* iPhoneAppDelegate.mm */,
+				BB4EB85F108A2F6C009A3FC1 /* iPhoneGlobals.h */,
+				BB4EB860108A2F6C009A3FC1 /* iPhoneGlobals.mm */,
+				BB4EB861108A2F6C009A3FC1 /* iPhoneSoundPlayer.mm */,
+				BB4EB862108A2F6C009A3FC1 /* iPhoneSoundStream.mm */,
+				BB4EB865108A2F6C009A3FC1 /* ofAppiPhoneWindow.h */,
+				BB4EB866108A2F6C009A3FC1 /* ofAppiPhoneWindow.mm */,
+				BB4EB867108A2F6C009A3FC1 /* ofxiPhoneAccelerometer.mm */,
+				BB4EB868108A2F6C009A3FC1 /* ofxiPhoneAlerts.cpp */,
+				BB4EB869108A2F6C009A3FC1 /* ofxiPhoneAlerts.h */,
+				BB4EB86A108A2F6C009A3FC1 /* ofxiPhoneAlertsListener.h */,
+				BB4EB86B108A2F6C009A3FC1 /* ofxiPhoneApp.h */,
+				BB4EB86C108A2F6C009A3FC1 /* ofxiPhoneUtils.mm */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		BB7750E00F55072900A6267D /* data */ = {
@@ -996,17 +972,6 @@
 				BBCCF96F0F7F6E1B0034512A /* OscPrintReceivedElements.cpp in Sources */,
 				BBCCF9700F7F6E1B0034512A /* OscReceivedElements.cpp in Sources */,
 				BBCCF9710F7F6E1B0034512A /* OscTypes.cpp in Sources */,
-				BB00941C103B09D200B8782E /* GLView.mm in Sources */,
-				BB00941D103B09D200B8782E /* iPhoneAppDelegate.mm in Sources */,
-				BB00941E103B09D200B8782E /* iPhoneGlobals.mm in Sources */,
-				BB00941F103B09D200B8782E /* iPhoneSoundPlayer.mm in Sources */,
-				BB009420103B09D200B8782E /* iPhoneSoundStream.mm in Sources */,
-				BB009421103B09D200B8782E /* ofAppiPhoneWindow.mm in Sources */,
-				BB009422103B09D200B8782E /* AppDelegateBase.mm in Sources */,
-				BB009423103B09D200B8782E /* CocoaWindowBase.mm in Sources */,
-				BB009424103B09D200B8782E /* ofxiPhoneAccelerometer.mm in Sources */,
-				BB009425103B09D200B8782E /* ofxiPhoneAlerts.cpp in Sources */,
-				BB009426103B09D200B8782E /* ofxiPhoneUtils.mm in Sources */,
 				BB009429103B09D200B8782E /* ofxAccelerometer.cpp in Sources */,
 				BB00942C103B09D200B8782E /* ofxMultiTouch.cpp in Sources */,
 				BB55633E103B10C7009CE4D4 /* MSAViewController.mm in Sources */,
@@ -1015,6 +980,15 @@
 				BB132BB5103C11E100B770D9 /* TuioServer.cpp in Sources */,
 				BB132BB6103C11E100B770D9 /* TuioTime.cpp in Sources */,
 				BB132BB7103C11E100B770D9 /* UdpSender.cpp in Sources */,
+				BB4EB88F108A2F6C009A3FC1 /* EAGLView.mm in Sources */,
+				BB4EB890108A2F6C009A3FC1 /* iPhoneAppDelegate.mm in Sources */,
+				BB4EB891108A2F6C009A3FC1 /* iPhoneGlobals.mm in Sources */,
+				BB4EB892108A2F6C009A3FC1 /* iPhoneSoundPlayer.mm in Sources */,
+				BB4EB893108A2F6C009A3FC1 /* iPhoneSoundStream.mm in Sources */,
+				BB4EB895108A2F6C009A3FC1 /* ofAppiPhoneWindow.mm in Sources */,
+				BB4EB896108A2F6C009A3FC1 /* ofxiPhoneAccelerometer.mm in Sources */,
+				BB4EB897108A2F6C009A3FC1 /* ofxiPhoneAlerts.cpp in Sources */,
+				BB4EB898108A2F6C009A3FC1 /* ofxiPhoneUtils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

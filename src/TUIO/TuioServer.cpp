@@ -34,7 +34,7 @@ TuioServer::TuioServer()
 	,blobProfileEnabled		(true)
 	,source_name			(NULL)
 {
-	sender = new UdpSender();
+	primary_sender = new UdpSender();
 	initialize();
 }
 
@@ -47,12 +47,12 @@ TuioServer::TuioServer(const char *host, int port)
 ,blobProfileEnabled		(true)
 ,source_name			(NULL)
 {
-	sender = new UdpSender(host,port);
+	primary_sender = new UdpSender(host,port);
 	initialize();
 }
 
 TuioServer::TuioServer(OscSender *oscsend)
-	:sender					(oscsend)
+	:primary_sender					(oscsend)
 	,local_sender			(false)
 	,full_update			(false)	
 	,periodic_update		(false)	
@@ -65,7 +65,9 @@ TuioServer::TuioServer(OscSender *oscsend)
 }
 
 void TuioServer::initialize() {
-	int size = sender->getBufferSize();
+	
+	senderList.push_back(primary_sender);
+	int size = primary_sender->getBufferSize();
 	oscBuffer = new char[size];
 	oscPacket = new osc::OutboundPacketStream(oscBuffer,size);
 	fullBuffer = new char[size];
@@ -85,25 +87,65 @@ void TuioServer::initialize() {
 }
 
 TuioServer::~TuioServer() {
+
+	initFrame(TuioTime::getSessionTime());
+	stopUntouchedMovingCursors();
+	stopUntouchedMovingObjects();
+	stopUntouchedMovingBlobs();
+	
+	initFrame(TuioTime::getSessionTime());
+	removeUntouchedStoppedCursors();
+	removeUntouchedStoppedObjects();
+	removeUntouchedStoppedBlobs();
+	
 	sendEmptyCursorBundle();
 	sendEmptyObjectBundle();
 	sendEmptyBlobBundle();
 
-	delete oscPacket;
 	delete []oscBuffer;
-	delete fullPacket;
+	delete oscPacket;
 	delete []fullBuffer;
+	delete fullPacket;
 	
-	if(source_name) delete source_name;
-	if(local_sender) delete sender;
+	if (source_name) delete[] source_name;
+	if( local_sender) delete primary_sender;
+}
+
+
+void TuioServer::addOscSender(OscSender *sender) {
+
+	// add source address if previously local
+	/*if ((source_name) && (primary_sender->isLocal()) && (senderList.size()==1)) {
+		setSourceName(source_name);
+	}*/ 
+	
+	// resize packets to smallest transport method
+	unsigned int size = sender->getBufferSize();
+	if (size<oscPacket->Capacity()) {
+		osc::OutboundPacketStream *temp = oscPacket;
+		oscPacket = new osc::OutboundPacketStream(oscBuffer,size);
+		delete temp;
+		temp = fullPacket;
+		fullPacket = new osc::OutboundPacketStream(oscBuffer,size);
+		delete temp;
+		
+	}
+	
+	senderList.push_back(sender);
+}
+
+void TuioServer::deliverOscPacket(osc::OutboundPacketStream  *packet) {
+
+	for (unsigned int i=0;i<senderList.size();i++)
+		senderList[i]->sendOscPacket(packet);
 }
 
 void TuioServer::setSourceName(const char *src) {
 	
 	if (!source_name) source_name = new char[256];
 
-	if (sender->isLocal()) {
-		sprintf(source_name,src);
+	if (primary_sender->isLocal()) {
+		sprintf(source_name,"%s",src);
 	} else { 
 		char hostname[64];
 		char *source_addr = NULL;
@@ -126,7 +168,7 @@ void TuioServer::setSourceName(const char *src) {
 			}
 		} else {
 			//generate a random internet address
-			srand ( time(NULL) );
+			srand ( (unsigned int)time(NULL) );
 			int32 r = rand();
 			addr = (struct in_addr*)&r;
 			source_addr = inet_ntoa(*addr);
@@ -174,7 +216,7 @@ void TuioServer::commitFrame() {
 		}
 	}
 	updateObject = false;
-	
+
 	if(updateCursor) {
 		startCursorBundle();
 		for (std::list<TuioCursor*>::iterator tuioCursor = cursorList.begin(); tuioCursor!=cursorList.end(); tuioCursor++) {
@@ -212,14 +254,13 @@ void TuioServer::commitFrame() {
 	if(updateBlob) {
 		startBlobBundle();
 		for (std::list<TuioBlob*>::iterator tuioBlob =blobList.begin(); tuioBlob!=blobList.end(); tuioBlob++) {
-			
 			// start a new packet if we exceed the packet capacity
 			if ((oscPacket->Capacity()-oscPacket->Size())<BLB_MESSAGE_SIZE) {
 				sendBlobBundle(currentFrame);
 				startBlobBundle();
 			}
 			TuioBlob *tblb = (*tuioBlob);
-			if ((full_update) || (tblb->getTuioTime()==currentFrameTime)) addBlobMessage(tblb);				
+			if ((full_update) || (tblb->getTuioTime()==currentFrameTime)) addBlobMessage(tblb);		
 		}
 		blobUpdateTime = TuioTime(currentFrameTime);
 		sendBlobBundle(currentFrame);
@@ -252,7 +293,7 @@ void TuioServer::sendEmptyCursorBundle() {
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dcur") << "alive" << osc::EndMessage;	
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dcur") << "fseq" << -1 << osc::EndMessage;
 	(*oscPacket) << osc::EndBundle;
-	sender->sendOSC( oscPacket );
+	deliverOscPacket( oscPacket );
 }
 
 void TuioServer::startCursorBundle() {	
@@ -290,7 +331,7 @@ void TuioServer::addCursorMessage(TuioCursor *tcur) {
 void TuioServer::sendCursorBundle(long fseq) {
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dcur") << "fseq" << (int32)fseq << osc::EndMessage;
 	(*oscPacket) << osc::EndBundle;
-	sender->sendOSC( oscPacket );
+	deliverOscPacket( oscPacket );
 }
 
 void TuioServer::sendEmptyObjectBundle() {
@@ -300,7 +341,7 @@ void TuioServer::sendEmptyObjectBundle() {
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dobj") << "alive" << osc::EndMessage;	
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dobj") << "fseq" << -1 << osc::EndMessage;
 	(*oscPacket) << osc::EndBundle;
-	sender->sendOSC( oscPacket );
+	deliverOscPacket( oscPacket );
 }
 
 void TuioServer::startObjectBundle() {
@@ -331,7 +372,7 @@ void TuioServer::addObjectMessage(TuioObject *tobj) {
 	float angle = tobj->getAngle();
 	float rvel = tobj->getRotationSpeed();
 	if (invert_a) {
-		angle = 1 - angle;
+		angle = 2.0f*(float)M_PI - angle;
 		rvel = -1 * rvel;
 	}
 	
@@ -344,7 +385,7 @@ void TuioServer::addObjectMessage(TuioObject *tobj) {
 void TuioServer::sendObjectBundle(long fseq) {
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dobj") << "fseq" << (int32)fseq << osc::EndMessage;
 	(*oscPacket) << osc::EndBundle;
-	sender->sendOSC( oscPacket );
+	deliverOscPacket( oscPacket );
 }
 
 
@@ -355,7 +396,7 @@ void TuioServer::sendEmptyBlobBundle() {
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dblb") << "alive" << osc::EndMessage;	
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dblb") << "fseq" << -1 << osc::EndMessage;
 	(*oscPacket) << osc::EndBundle;
-	sender->sendOSC( oscPacket );
+	deliverOscPacket( oscPacket );
 }
 
 void TuioServer::startBlobBundle() {	
@@ -386,7 +427,7 @@ void TuioServer::addBlobMessage(TuioBlob *tblb) {
 	float angle = tblb->getAngle();
 	float rvel = tblb->getRotationSpeed();
 	if (invert_a) {
-		angle = 1 - angle;
+		angle = 2.0f*(float)M_PI - angle;
 		rvel = -1 * rvel;
 	}
 	
@@ -399,7 +440,8 @@ void TuioServer::addBlobMessage(TuioBlob *tblb) {
 void TuioServer::sendBlobBundle(long fseq) {
 	(*oscPacket) << osc::BeginMessage( "/tuio/2Dblb") << "fseq" << (int32)fseq << osc::EndMessage;
 	(*oscPacket) << osc::EndBundle;
-	sender->sendOSC( oscPacket );
+
+	deliverOscPacket( oscPacket );
 }
 
 void TuioServer::sendFullMessages() {
@@ -423,7 +465,7 @@ void TuioServer::sendFullMessages() {
 			// add the immediate fseq message and send the cursor packet
 			(*fullPacket) << osc::BeginMessage( "/tuio/2Dcur") << "fseq" << -1 << osc::EndMessage;
 			(*fullPacket) << osc::EndBundle;
-			sender->sendOSC( fullPacket );
+			deliverOscPacket( fullPacket );
 			
 			// prepare the new cursor packet
 			fullPacket->Clear();	
@@ -459,7 +501,7 @@ void TuioServer::sendFullMessages() {
 	// add the immediate fseq message and send the cursor packet
 	(*fullPacket) << osc::BeginMessage( "/tuio/2Dcur") << "fseq" << -1 << osc::EndMessage;
 	(*fullPacket) << osc::EndBundle;
-	sender->sendOSC( fullPacket );
+	deliverOscPacket( fullPacket );
 	
 	// prepare the object packet
 	fullPacket->Clear();
@@ -478,7 +520,7 @@ void TuioServer::sendFullMessages() {
 			// add the immediate fseq message and send the object packet
 			(*fullPacket) << osc::BeginMessage( "/tuio/2Dobj") << "fseq" << -1 << osc::EndMessage;
 			(*fullPacket) << osc::EndBundle;
-			sender->sendOSC( fullPacket );
+			deliverOscPacket( fullPacket );
 			
 			// prepare the new object packet
 			fullPacket->Clear();	
@@ -506,7 +548,7 @@ void TuioServer::sendFullMessages() {
 		float angle = (*tuioObject)->getAngle();
 		float rvel = (*tuioObject)->getRotationSpeed();
 		if (invert_a) {
-			angle = 1 - angle;
+			angle =  2.0f*(float)M_PI - angle;
 			rvel = -1 * rvel;
 		}
 		
@@ -520,7 +562,7 @@ void TuioServer::sendFullMessages() {
 	// add the immediate fseq message and send the object packet
 	(*fullPacket) << osc::BeginMessage( "/tuio/2Dobj") << "fseq" << -1 << osc::EndMessage;
 	(*fullPacket) << osc::EndBundle;
-	sender->sendOSC( fullPacket );
+	deliverOscPacket( fullPacket );
 	
 	// prepare the blob packet
 	fullPacket->Clear();
@@ -539,7 +581,7 @@ void TuioServer::sendFullMessages() {
 			// add the immediate fseq message and send the object packet
 			(*fullPacket) << osc::BeginMessage( "/tuio/2Dblb") << "fseq" << -1 << osc::EndMessage;
 			(*fullPacket) << osc::EndBundle;
-			sender->sendOSC( fullPacket );
+			deliverOscPacket( fullPacket );
 			
 			// prepare the new blob packet
 			fullPacket->Clear();	
@@ -567,7 +609,7 @@ void TuioServer::sendFullMessages() {
 		float angle = (*tuioBlob)->getAngle();
 		float rvel = (*tuioBlob)->getRotationSpeed();
 		if (invert_a) {
-			angle = 1 - angle;
+			angle = 2.0f*(float)M_PI - angle;
 			rvel = -1 * rvel;
 		}		
 		
@@ -581,7 +623,7 @@ void TuioServer::sendFullMessages() {
 	// add the immediate fseq message and send the blob packet
 	(*fullPacket) << osc::BeginMessage( "/tuio/2Dblb") << "fseq" << -1 << osc::EndMessage;
 	(*fullPacket) << osc::EndBundle;
-	sender->sendOSC( fullPacket );
+	deliverOscPacket( fullPacket );
 }
 
 

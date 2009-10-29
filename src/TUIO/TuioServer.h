@@ -24,6 +24,8 @@
 
 #include "TuioManager.h"
 #include "UdpSender.h"
+#include <iostream>
+#include <vector>
 #include <stdio.h>
 #ifndef WIN32
 #include <netdb.h>
@@ -63,7 +65,7 @@ namespace TUIO {
 	 * </code></p>
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 1.4
+	 * @version 1.5
 	 */ 
 	class LIBDECL TuioServer : public TuioManager { 
 	
@@ -172,16 +174,21 @@ namespace TUIO {
 		 * @param	src	the desired name of this TUIO source
 		 */
 		void setSourceName(const char *src);
+		void addOscSender(OscSender *sender);
 		
 		void enableObjectProfile(bool flag) { objectProfileEnabled = flag; };
 		void enableCursorProfile(bool flag) { cursorProfileEnabled = flag; };
 		void enableBlobProfile(bool flag) { blobProfileEnabled = flag; };
 				
 	private:
-				
-		OscSender *sender;
-		bool local_sender;
+			
 		void initialize();
+		
+		OscSender *primary_sender;
+		bool local_sender;
+
+		std::vector<OscSender*> senderList;
+		void deliverOscPacket(osc::OutboundPacketStream  *packet);
 		
 		osc::OutboundPacketStream  *oscPacket;
 		char *oscBuffer; 
@@ -209,5 +216,5 @@ namespace TUIO {
 		bool objectProfileEnabled, cursorProfileEnabled, blobProfileEnabled;		
 		char *source_name;
 	};
-};
+}
 #endif /* INCLUDED_TuioServer_H */

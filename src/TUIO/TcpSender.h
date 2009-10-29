@@ -19,57 +19,62 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_UDPSENDER_H
-#define INCLUDED_UDPSENDER_H
+#ifndef INCLUDED_TCPSENDER_H
+#define INCLUDED_TCPSENDER_H
 
 #include "OscSender.h"
-#include "ip/UdpSocket.h"
 
-#define IP_MTU_SIZE 1500
-#define MAX_UDP_SIZE 4096
-#define MIN_UDP_SIZE 576
+#ifdef WIN32
+#include <winsock.h>
+#include <io.h>
+typedef int socklen_t;
+#else
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#endif
+
+#define MAX_TCP_SIZE 65536
 
 namespace TUIO {
 	
 	/**
-	 * The UdpSender implements the UDP transport method for OSC
+	 * The TcpSender implements the TCP transport method for OSC
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 1.5
 	 */ 
-	class LIBDECL UdpSender : public OscSender {
+	class LIBDECL TcpSender : public OscSender {
 				
 	public:
 
 		/**
-		 * The default constructor creates a UdpSender that sends to the default UDP port 3333 on localhost
-		 * using the maximum packet size of 65536 bytes for single packets on the loopback device
+		 * The default constructor creates a TcpSender that sends to the default TUIO port 3333 on localhost
 		 */
-		UdpSender();
+		TcpSender();
 		
 		/**
-		 * This constructor creates a UdpSender that sends to the provided port on the the given host
-		 * using the default MTU size of 1500 bytes to deliver unfragmented UDP packets on a LAN
+		 * This constructor creates a TcpSender that sends to the provided port on the the given host
 		 *
 		 * @param  host  the receiving host name
-		 * @param  port  the outgoing UDP port number
+		 * @param  port  the outgoing TUIO TCP port number
 		 */
-		
-		UdpSender(const char *host, int port);		
-		/**
-		 * This constructor creates a UdpSender that sends to the provided port on the the given host
-		 * the UDP packet size can be set to a value between 576 and 65536 bytes
-		 *
-		 * @param  host  the receiving host name
-		 * @param  port  the outgoing UDP port number
-		 * @param  size  the maximum UDP packet size
-		 */
-		UdpSender(const char *host, int port, int size);
+		TcpSender(const char *host, int port);		
 
+		/**
+		 * This constructor creates a TcpSender that listens to the provided port
+		 *
+		 * @param  port  the incoming TUIO TCP port number
+		 */
+		TcpSender(int port);	
+		
 		/**
 		 * The destructor closes the socket. 
 		 */
-		~UdpSender();
+		~TcpSender();
 		
 		/**
 		 * This method delivers the provided OSC data
@@ -85,10 +90,26 @@ namespace TUIO {
 		 *
 		 * @return true if the connection is alive
 		 */
-		 bool isConnected ();
+		bool isConnected ();
+
 		
+#ifdef WIN32
+		SOCKET tcp_socket, tcp_client_connection;
+#else
+		int tcp_socket, tcp_client_connection;
+#endif
+
+		bool connected;
 	private:
-		UdpTransmitSocket *socket;
+		char data_size[4];
+		
+
+#ifdef WIN32
+		HANDLE server_thread;
+#else
+		pthread_t server_thread;
+#endif
+		
 	};
 }
-#endif /* INCLUDED_UDPSENDER_H */
+#endif /* INCLUDED_TCPSENDER_H */

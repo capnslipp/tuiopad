@@ -174,6 +174,7 @@ namespace TUIO {
 		 * @param	src	the desired name of this TUIO source
 		 */
 		void setSourceName(const char *src);
+		void setSourceName(const char *name, const char *ip);
 		void addOscSender(OscSender *sender);
 		
 		void enableObjectProfile(bool flag) { objectProfileEnabled = flag; };

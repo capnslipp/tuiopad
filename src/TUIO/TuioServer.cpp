@@ -77,9 +77,9 @@ void TuioServer::initialize() {
 	cursorUpdateTime = TuioTime(currentFrameTime);
 	blobUpdateTime = TuioTime(currentFrameTime);
 	
-	sendEmptyCursorBundle();
-	sendEmptyObjectBundle();
-	sendEmptyBlobBundle();
+	if (cursorProfileEnabled) sendEmptyCursorBundle();
+	if (objectProfileEnabled) sendEmptyObjectBundle();
+	if (blobProfileEnabled) sendEmptyBlobBundle();
 	
 	invert_x = false;
 	invert_y = false;
@@ -98,17 +98,17 @@ TuioServer::~TuioServer() {
 	removeUntouchedStoppedObjects();
 	removeUntouchedStoppedBlobs();
 	
-	sendEmptyCursorBundle();
-	sendEmptyObjectBundle();
-	sendEmptyBlobBundle();
-
+	if (cursorProfileEnabled) sendEmptyCursorBundle();
+	if (objectProfileEnabled) sendEmptyObjectBundle();
+	if (blobProfileEnabled) sendEmptyBlobBundle();
+	
 	delete []oscBuffer;
 	delete oscPacket;
 	delete []fullBuffer;
 	delete fullPacket;
 	
 	if (source_name) delete[] source_name;
-	if( local_sender) delete primary_sender;
+	if (local_sender) delete primary_sender;
 }
 
 
@@ -139,6 +139,12 @@ void TuioServer::deliverOscPacket(osc::OutboundPacketStream  *packet) {
 	for (unsigned int i=0;i<senderList.size();i++)
 		senderList[i]->sendOscPacket(packet);
 }
+
+void TuioServer::setSourceName(const char *name, const char *ip) {
+	if (!source_name) source_name = new char[256];
+	sprintf(source_name,"%s@%s",name,ip);
+}
+
 
 void TuioServer::setSourceName(const char *src) {
 	

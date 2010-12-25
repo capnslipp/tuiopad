@@ -1,11 +1,11 @@
 
-#ifndef TESTAPP_H
-#define TESTAPP_H
+#ifndef TUIOPAD_H
+#define TUIOPAD_H
 
 #import "ofMain.h"
 #include "ofxMultiTouch.h"
 
-class testApp : public ofBaseApp, ofxMultiTouchListener
+class TuioPad : public ofBaseApp, ofxMultiTouchListener
 {
 
 public:

@@ -13,7 +13,6 @@
 #import "MSATuioSenderCPP.h"
 #import "MSASettings.h"
 
-
 @implementation MSAViewController
 
 @synthesize settings;
@@ -25,8 +24,8 @@
 #pragma mark ----- Utility -----
 
 -(void)connect {
-	NSLog(@"MSAViewController::connect %@ %@", hostTextField.text, portTextField.text);
-	tuioSender->setup([hostTextField.text UTF8String], [portTextField.text intValue]);
+	NSLog(@"MSAViewController::connect %@ %@ %i", hostTextField.text, portTextField.text, packetSwitch.selectedSegmentIndex);
+	tuioSender->setup([hostTextField.text UTF8String], [portTextField.text intValue], packetSwitch.selectedSegmentIndex, [[settings getIpAddress] UTF8String]);
 	
 	if(periodicUpdatesSwitch.on) tuioSender->tuioServer->enablePeriodicMessages();
 	else tuioSender->tuioServer->disablePeriodicMessages();
@@ -37,10 +36,15 @@
 
 }
 
+-(void)disconnect {
+	tuioSender->close();
+}
+
 
 #pragma mark ----- Control events -----
 
 -(IBAction) orientControlChanged:(id)sender {
+		
 	switch(orientControl.selectedSegmentIndex) {
 		case 0:	
 			deviceOrientation = [[UIDevice currentDevice] orientation];
@@ -73,26 +77,51 @@
 
 
 -(IBAction) connectPressed:(id)sender {
-	[settings setString:hostTextField.text forKey:kSetting_HostIP];
+	
+	if (!network) return;
+	
+	[settings setInt:packetSwitch.selectedSegmentIndex forKey:kSetting_Packet];
+	if (packetSwitch.selectedSegmentIndex<2) [settings setString:hostTextField.text forKey:kSetting_HostIP];
 	[settings setInt:[portTextField.text intValue] forKey:kSetting_Port];
 	[settings setInt:orientControl.selectedSegmentIndex forKey:kSetting_Orientation];
 	[settings setInt:periodicUpdatesSwitch.on forKey:kSetting_PeriodicUpdates];
 	[settings setInt:fullUpdatesSwitch.on forKey:kSetting_FullUpdates];
-	
 	[settings saveSettings];
-
-	[self connect];
+	
 	[self close];
+	[self connect];
+	
+}
+
+
+-(IBAction) packetSelected:(id)sender {
+	if (packetSwitch.selectedSegmentIndex==2) {
+		NSLog(@"MSAViewController::set %@", hostTextField.text);
+		[settings setString:hostTextField.text forKey:kSetting_HostIP];
+		hostTextField.text = @"incoming connection";
+		hostTextField.textColor = [UIColor grayColor];
+		//hostLabel.text = @"server";
+		hostTextField.enabled = NO;
+		hostButton.enabled = NO;
+	} else {
+		hostTextField.text = [settings getString:kSetting_HostIP];
+		hostTextField.enabled = YES;
+		hostButton.enabled = YES;
+		hostTextField.textColor = [UIColor blackColor];
+		//hostLabel.text = @"client";
+	}
 }
 
 
 
 -(IBAction) detectHostPressed:(id)sender {
-	hostTextField.text = [settings getDefaultFor:kSetting_HostIP];
+	if (packetSwitch.selectedSegmentIndex<2)
+		hostTextField.text = [settings getDefaultFor:kSetting_HostIP];
 }
 
 
 -(IBAction) defaultPortPressed:(id)sender {
+	packetSwitch.selectedSegmentIndex = 0;
 	portTextField.text = [NSString stringWithFormat:@"%i", [[settings getDefaultFor:kSetting_Port] intValue]];
 }
 
@@ -105,7 +134,7 @@
 
 -(void)open:(bool)animate {
 	NSLog(@"MSAViewController::open %i", animate);
-	
+		
 	if(self.view.superview == nil) {
 		if(animate) {
 			[UIView beginAnimations:nil context:NULL];
@@ -120,10 +149,12 @@
 			[[[UIApplication sharedApplication] keyWindow] addSubview:self.view];
 		}
 		
-		ofSetFrameRate(0);		// suspend update loop while UI is visible
-	}
+			}
 	
+	// suspend update loop while UI is visible
 	isOn = true;
+	[self disconnect];
+	ofSetFrameRate(1);			
 }
 
 
@@ -139,9 +170,22 @@
 	[self viewDidDisappear:YES];
 	[UIView commitAnimations];
 	
-	ofSetFrameRate(60);			// restore update loop
-	
+
+	ofSetFrameRate(60);			// restore update loop	
 	isOn = false;
+}
+
+-(IBAction) exitPressed:(id)sender {
+	
+	[settings setInt:packetSwitch.selectedSegmentIndex forKey:kSetting_Packet];
+	if (packetSwitch.selectedSegmentIndex<2) [settings setString:hostTextField.text forKey:kSetting_HostIP];
+	[settings setInt:[portTextField.text intValue] forKey:kSetting_Port];
+	[settings setInt:orientControl.selectedSegmentIndex forKey:kSetting_Orientation];
+	[settings setInt:periodicUpdatesSwitch.on forKey:kSetting_PeriodicUpdates];
+	[settings setInt:fullUpdatesSwitch.on forKey:kSetting_FullUpdates];
+	[settings saveSettings];
+	
+	exit(0);
 }
 
 
@@ -153,17 +197,47 @@
 	
 	[UIView setAnimationBeginsFromCurrentState:YES];
 	
+	
 	tuioSender = new MSATuioSenderCPP();
 	
-	hostTextField.text						= [settings getString:kSetting_HostIP];
+	NSString *HostIP = [settings getString:kSetting_HostIP];
+	packetSwitch.selectedSegmentIndex		= [settings getInt:kSetting_Packet];
+	if (packetSwitch.selectedSegmentIndex<2)
+		hostTextField.text					= [settings getString:kSetting_HostIP];	
+	else {
+		hostTextField.text = @"incoming connection";
+		hostTextField.textColor = [UIColor grayColor];
+		hostTextField.enabled = NO;
+		hostButton.enabled = NO;
+	}
+	[settings setString:HostIP forKey:kSetting_HostIP];
 	portTextField.text						= [NSString stringWithFormat:@"%i", [settings getInt:kSetting_Port]];
 	orientControl.selectedSegmentIndex		= [settings getInt:kSetting_Orientation];
 	periodicUpdatesSwitch.on				= [settings getInt:kSetting_PeriodicUpdates];
 	fullUpdatesSwitch.on					= [settings getInt:kSetting_FullUpdates];
 	
+	[self.navigationController pushViewController:self animated:YES];
+	
 	[self orientControlChanged:nil];
 	
-	[self connect];
+	network = [settings connectedToNetwork];
+	if (network) {
+		NSString *address = [settings getIpAddress];
+		
+		NSString *status = [NSString stringWithFormat:@"current network address is %@", address];
+		statusLabel.textColor = [UIColor whiteColor];
+		statusLabel.text = status;
+		[startButton setEnabled: YES];
+		NSLog([NSString stringWithFormat:@"MSAViewController: %@", status]);
+	} else {
+		statusLabel.textColor = [UIColor redColor];
+		statusLabel.text = @"no active network connection available!";
+		[startButton setEnabled: NO];
+		//NSLog(@"MSAViewController: no active network connection available!");
+	}
+	
+//	[self connect];
+
 }
 
 

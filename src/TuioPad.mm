@@ -1,6 +1,6 @@
 
 
-#include "testApp.h"
+#include "TuioPad.h"
 
 #include "ofxAccelerometer.h"
 #include "ofxiPhone.h"
@@ -22,7 +22,7 @@ ofPoint				restAccel;
 
 #pragma mark App Loop Callbacks
 
-void testApp::setup() {
+void TuioPad::setup() {
 	ofSetFrameRate(60);
 	ofBackground(255, 255, 255);
 	ofSetBackgroundAuto(true);
@@ -32,27 +32,38 @@ void testApp::setup() {
 	
 	imageUp.loadImage("ThisWayUp.jpg");
 	
-	viewController	= [[MSAViewController alloc] initWithNibName:@"ui" bundle:nil];	
+	NSString *nibName = @"TuioPhone";
+	if ([[UIDevice currentDevice].model rangeOfString:@"iPad"].location != NSNotFound) {
+		NSLog(@"TuioPad: got iPad");
+		nibName = @"TuioPad";
+	} 
+	
+	viewController	= [[MSAViewController alloc] initWithNibName:nibName bundle:nil];	
 	
 	// open UI, not animated
 	[viewController open:false];
 }
 
-
-void testApp::update() {
-
+void TuioPad::update() {
+	if ([viewController isOn]) return;
+	
 	// if device is shaken hard, open UI, animated
 	ofPoint &acc = ofxAccelerometer.getForce();
-//	float f = acc.x*acc.x + acc.y*acc.y + acc.z*acc.z;
-//	printf("%f\n", f);
-	if(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z > 4) [viewController open:true];
-		
+	float shake = acc.x*acc.x + acc.y*acc.y + acc.z*acc.z;
+
+	if(shake > 4) {
+		[viewController open:true];
+		return;
+	}
 		
 	[viewController tuioSender]->update();
 }
 
 
-void testApp::draw() {
+void TuioPad::draw() {
+	
+	if ([viewController isOn]) return;
+	
 	glPushMatrix();
 	glTranslatef(ofGetWidth()/2, ofGetHeight()/2, 0);
 	static float currentUpRot = -90;
@@ -88,7 +99,7 @@ void testApp::draw() {
 
 
 
-void testApp::exit() {
+void TuioPad::exit() {
 	[viewController release];
 }
 
@@ -123,23 +134,23 @@ void rotXY(float x, float y) {
 }
 
 
-void testApp::touchDoubleTap(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
+void TuioPad::touchDoubleTap(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
 }
 
 
-void testApp::touchDown(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
+void TuioPad::touchDown(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
 	fingerDrawer[touchId].touchDown(x, y);
 	rotXY(x, y);
 	[viewController tuioSender]->cursorPressed(rotatedTouchPosition.x, rotatedTouchPosition.y, touchId);
 }
 
-void testApp::touchMoved(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
+void TuioPad::touchMoved(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
 	fingerDrawer[touchId].touchMoved(x, y);
 	rotXY(x, y);	
 	[viewController tuioSender]->cursorDragged(rotatedTouchPosition.x, rotatedTouchPosition.y, touchId);
 }
 
-void testApp::touchUp(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
+void TuioPad::touchUp(float x, float y, int touchId, ofxMultiTouchCustomData *data) {
 	fingerDrawer[touchId].touchUp();	
 	rotXY(x, y);	
 	[viewController tuioSender]->cursorReleased(rotatedTouchPosition.x, rotatedTouchPosition.y, touchId);

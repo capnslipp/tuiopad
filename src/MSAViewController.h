@@ -20,12 +20,19 @@ class MSATuioSenderCPP;
 	IBOutlet UISegmentedControl	*orientControl;
 	IBOutlet UISwitch			*periodicUpdatesSwitch;
 	IBOutlet UISwitch			*fullUpdatesSwitch;
+	IBOutlet UILabel			*statusLabel;
+	IBOutlet UILabel			*hostLabel;
+	IBOutlet UIButton			*startButton;
+	IBOutlet UIButton			*hostButton;
+	IBOutlet UISegmentedControl	*packetSwitch;
+
 	
 	IBOutlet MSASettings		*settings;
 	
 	MSATuioSenderCPP			*tuioSender;
 
 	bool						isOn;
+	bool						network;
 	int							deviceOrientation;
 }
 
@@ -44,6 +51,10 @@ class MSATuioSenderCPP;
 -(IBAction) orientControlChanged:(id)sender;
 -(IBAction) backgroundPressed:(id)sender;
 -(IBAction) connectPressed:(id)sender;
+-(IBAction) exitPressed:(id)sender;
+-(IBAction) packetSelected:(id)sender;
 
+-(void) connect;
+-(void) disconnect;
 
 @end

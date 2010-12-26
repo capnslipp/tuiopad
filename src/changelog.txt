@@ -1,6 +1,0 @@
-TUIO Pad for iPhone changelog
-
-
-v1.0
---------------------
-- initial release

@@ -44,6 +44,8 @@
 		B227C49412B44F510016E747 /* TuioServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B227C48512B44F510016E747 /* TuioServer.cpp */; };
 		B227C49512B44F510016E747 /* TuioTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B227C48712B44F510016E747 /* TuioTime.cpp */; };
 		B227C49612B44F510016E747 /* UdpSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B227C48912B44F510016E747 /* UdpSender.cpp */; };
+		B22A5F8612C78154003BA9E5 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = B22A5F8412C78154003BA9E5 /* Icon72.png */; };
+		B22A5F8712C78154003BA9E5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B22A5F8512C78154003BA9E5 /* Icon@2x.png */; };
 		B2705A6712C49F4C0035BBD7 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2705A6612C49F4C0035BBD7 /* Logo@2x.png */; };
 		B2705A7412C4A0BF0035BBD7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2705A7312C4A0BF0035BBD7 /* Default@2x.png */; };
 		B2705A7A12C4A2260035BBD7 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = B2705A7912C4A2260035BBD7 /* Default-Portrait.png */; };
@@ -158,6 +160,8 @@
 		B227C48812B44F510016E747 /* TuioTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioTime.h; path = src/TUIO/TuioTime.h; sourceTree = SOURCE_ROOT; };
 		B227C48912B44F510016E747 /* UdpSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UdpSender.cpp; path = src/TUIO/UdpSender.cpp; sourceTree = SOURCE_ROOT; };
 		B227C48A12B44F510016E747 /* UdpSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UdpSender.h; path = src/TUIO/UdpSender.h; sourceTree = SOURCE_ROOT; };
+		B22A5F8412C78154003BA9E5 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		B22A5F8512C78154003BA9E5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "data/Icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		B2705A6612C49F4C0035BBD7 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		B2705A7312C4A0BF0035BBD7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "data/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		B2705A7912C4A2260035BBD7 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait.png"; path = "data/Default-Portrait.png"; sourceTree = SOURCE_ROOT; };
@@ -481,6 +485,8 @@
 		BB24DD8B10DA77E000E9C588 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				B22A5F8412C78154003BA9E5 /* Icon72.png */,
+				B22A5F8512C78154003BA9E5 /* Icon@2x.png */,
 				B2705A7912C4A2260035BBD7 /* Default-Portrait.png */,
 				B2705A7312C4A0BF0035BBD7 /* Default@2x.png */,
 				B2705A6612C49F4C0035BBD7 /* Logo@2x.png */,
@@ -817,6 +823,8 @@
 				B2705A6712C49F4C0035BBD7 /* Logo@2x.png in Resources */,
 				B2705A7412C4A0BF0035BBD7 /* Default@2x.png in Resources */,
 				B2705A7A12C4A2260035BBD7 /* Default-Portrait.png in Resources */,
+				B22A5F8612C78154003BA9E5 /* Icon72.png in Resources */,
+				B22A5F8712C78154003BA9E5 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +1007,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				COMPRESS_PNG_FILES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
@@ -1022,6 +1031,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
 		};

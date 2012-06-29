@@ -23,6 +23,8 @@
 #import "MSATuioSenderCPP.h"
 #import "MSASettings.h"
 
+#import "AdvancedSettingsViewController.h"
+
 @implementation MSAViewController
 
 @synthesize settings;
@@ -122,6 +124,11 @@
 	}
 }
 
+- (IBAction)moreButtonClicked:(id)sender {
+    AdvancedSettingsViewController *advancedVC = [[[AdvancedSettingsViewController alloc] initWithNibName:@"AdvancedSettingsViewController" bundle:nil] retain];
+    [self.navigationController pushViewController:advancedVC animated:YES];
+}
+
 
 
 -(IBAction) detectHostPressed:(id)sender {
@@ -152,15 +159,18 @@
 			[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:[[UIApplication sharedApplication] keyWindow] cache:YES];
 			[UIView setAnimationCurve: ANIMATION_CURVE];
 			[self viewWillAppear:YES];
-			[[[UIApplication sharedApplication] keyWindow] addSubview:self.view];
+			[[[UIApplication sharedApplication] keyWindow] addSubview:self.navigationController.view];
 			[self viewDidAppear:YES];
 			[UIView commitAnimations];
-		} else {
-			[[[UIApplication sharedApplication] keyWindow] addSubview:self.view];
+		} 
+        else {
+			[[[UIApplication sharedApplication] keyWindow] addSubview:self.navigationController.view];
 		}
 		
-			}
-	
+    }
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.navigationController.view];
+    self.navigationController.navigationBarHidden = YES;
+
 	// suspend update loop while UI is visible
 	isOn = true;
 	[self disconnect];
@@ -176,7 +186,7 @@
 	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:[[UIApplication sharedApplication] keyWindow] cache:YES];
 	[UIView setAnimationCurve: ANIMATION_CURVE];
 	[self viewWillDisappear:YES];
-	[self.view removeFromSuperview];
+	[self.navigationController.view removeFromSuperview];
 	[self viewDidDisappear:YES];
 	[UIView commitAnimations];
 	
@@ -225,8 +235,12 @@
 	orientControl.selectedSegmentIndex		= [settings getInt:kSetting_Orientation];
 	periodicUpdatesSwitch.on				= [settings getInt:kSetting_PeriodicUpdates];
 	fullUpdatesSwitch.on					= [settings getInt:kSetting_FullUpdates];
+//    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:navController.view];
 	
-	[self.navigationController pushViewController:self animated:YES];
+//	[self.navigationController pushViewController:self animated:YES];
+    
 	
 	[self orientControlChanged:nil];
 	
@@ -248,6 +262,14 @@
 	
 //	[self connect];
 
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 
@@ -275,8 +297,14 @@
 
 - (void)dealloc {
 	delete tuioSender;
+    [moreButton release];
     [super dealloc];
 }
 
 
+- (void)viewDidUnload {
+    [moreButton release];
+    moreButton = nil;
+    [super viewDidUnload];
+}
 @end

@@ -25,7 +25,7 @@ class MSATuioSenderCPP;
 @class MSASettings;
 
 
-@interface MSAViewController : UIViewController {
+@interface MSAViewController : UIViewController <UINavigationControllerDelegate> {
 	IBOutlet UITextField		*hostTextField;
 	IBOutlet UITextField		*portTextField;
 	IBOutlet UISegmentedControl	*orientControl;
@@ -36,6 +36,7 @@ class MSATuioSenderCPP;
 	IBOutlet UIButton			*startButton;
 	IBOutlet UIButton			*hostButton;
 	IBOutlet UISegmentedControl	*packetSwitch;
+    IBOutlet UIButton *moreButton;
 
 	
 	IBOutlet MSASettings		*settings;
@@ -64,6 +65,7 @@ class MSATuioSenderCPP;
 -(IBAction) connectPressed:(id)sender;
 -(IBAction) exitPressed:(id)sender;
 -(IBAction) packetSelected:(id)sender;
+- (IBAction)moreButtonClicked:(id)sender;
 
 -(void) connect;
 -(void) disconnect;

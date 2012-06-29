@@ -24,6 +24,10 @@
 		5E2568A810ED26CD00A9501C /* PocoXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688410ED26CC00A9501C /* PocoXML.a */; };
 		8108F065159E26C400E1439B /* AdvancedSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F064159E26C400E1439B /* AdvancedSettingsViewController.m */; };
 		8108F067159E273F00E1439B /* AdvancedSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */; };
+		8108F06D159E391200E1439B /* drawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F06A159E391200E1439B /* drawView.m */; };
+		8108F06E159E391200E1439B /* LearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F06C159E391200E1439B /* LearnViewController.m */; };
+		8108F071159E392200E1439B /* LearnViewPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F06F159E392200E1439B /* LearnViewPad.xib */; };
+		8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F070159E392200E1439B /* LearnViewPhone.xib */; };
 		B227C42012B44F080016E747 /* ThisWayUp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B227C41F12B44F080016E747 /* ThisWayUp.jpg */; };
 		B227C45212B44F1F0016E747 /* MSASettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = B227C42312B44F1F0016E747 /* MSASettings.mm */; };
 		B227C45312B44F1F0016E747 /* MSAViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B227C42512B44F1F0016E747 /* MSAViewController.mm */; };
@@ -112,6 +116,12 @@
 		8108F063159E26C400E1439B /* AdvancedSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSettingsViewController.h; sourceTree = "<group>"; };
 		8108F064159E26C400E1439B /* AdvancedSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedSettingsViewController.m; sourceTree = "<group>"; };
 		8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedSettingsViewController.xib; path = xibs/AdvancedSettingsViewController.xib; sourceTree = "<group>"; };
+		8108F069159E391200E1439B /* drawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawView.h; sourceTree = "<group>"; };
+		8108F06A159E391200E1439B /* drawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = drawView.m; sourceTree = "<group>"; };
+		8108F06B159E391200E1439B /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
+		8108F06C159E391200E1439B /* LearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnViewController.m; sourceTree = "<group>"; };
+		8108F06F159E392200E1439B /* LearnViewPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPad.xib; path = xibs/LearnViewPad.xib; sourceTree = "<group>"; };
+		8108F070159E392200E1439B /* LearnViewPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPhone.xib; path = xibs/LearnViewPhone.xib; sourceTree = "<group>"; };
 		B227C41612B44E7A0016E747 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B227C41F12B44F080016E747 /* ThisWayUp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ThisWayUp.jpg; path = data/ThisWayUp.jpg; sourceTree = SOURCE_ROOT; };
 		B227C42112B44F1F0016E747 /* MSAFingerDrawerCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSAFingerDrawerCPP.h; path = src/MSAFingerDrawerCPP.h; sourceTree = SOURCE_ROOT; };
@@ -372,6 +382,17 @@
 			path = ../../../libs/poco/lib/osx;
 			sourceTree = SOURCE_ROOT;
 		};
+		8108F068159E391200E1439B /* LearnView */ = {
+			isa = PBXGroup;
+			children = (
+				8108F069159E391200E1439B /* drawView.h */,
+				8108F06A159E391200E1439B /* drawView.m */,
+				8108F06B159E391200E1439B /* LearnViewController.h */,
+				8108F06C159E391200E1439B /* LearnViewController.m */,
+			);
+			path = LearnView;
+			sourceTree = "<group>";
+		};
 		B227C42912B44F1F0016E747 /* oscpack */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +485,8 @@
 		B2B6810812B5448600CF2FE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8108F06F159E392200E1439B /* LearnViewPad.xib */,
+				8108F070159E392200E1439B /* LearnViewPhone.xib */,
 				B2E6BD9F12C0F1420071368A /* TuioPad.xib */,
 				B2B680A712B46EED00CF2FE3 /* TuioPhone.xib */,
 				B29E40BA12B45866003FA434 /* Entitlements.plist */,
@@ -736,6 +759,7 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				8108F068159E391200E1439B /* LearnView */,
 				E4D8936D11527B74007E1F53 /* TuioPad.mm */,
 				E4D8936C11527B74007E1F53 /* TuioPad.h */,
 				B29E92D412B581FF00BC14E0 /* MSATuioSenderCPP.h */,
@@ -834,6 +858,8 @@
 				B22A5F8612C78154003BA9E5 /* Icon72.png in Resources */,
 				B22A5F8712C78154003BA9E5 /* Icon@2x.png in Resources */,
 				8108F067159E273F00E1439B /* AdvancedSettingsViewController.xib in Resources */,
+				8108F071159E392200E1439B /* LearnViewPad.xib in Resources */,
+				8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +911,8 @@
 				B227C49612B44F510016E747 /* UdpSender.cpp in Sources */,
 				B29E92D612B5820000BC14E0 /* MSATuioSenderCPP.mm in Sources */,
 				8108F065159E26C400E1439B /* AdvancedSettingsViewController.m in Sources */,
+				8108F06D159E391200E1439B /* drawView.m in Sources */,
+				8108F06E159E391200E1439B /* LearnViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

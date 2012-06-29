@@ -13,4 +13,8 @@
     NSArray *sections;
     NSDictionary *rows;
 }
+@property (retain, nonatomic) IBOutlet UIButton *learnButton;
+
+- (IBAction)learnButtonPressed:(id)sender;
+
 @end

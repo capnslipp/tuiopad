@@ -7,18 +7,20 @@
 //
 
 #import "AdvancedSettingsViewController.h"
+#import "LearnViewController.h"
 
 @interface AdvancedSettingsViewController ()
 
 @end
 
 @implementation AdvancedSettingsViewController
+@synthesize learnButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = @"Advanced Settings";
     }
     return self;
 }
@@ -44,6 +46,7 @@
 
 - (void)viewDidUnload
 {
+    [self setLearnButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -54,6 +57,15 @@
 }
 
 - (void)dealloc {
+    [learnButton release];
     [super dealloc];
+}
+- (IBAction)learnButtonPressed:(id)sender {
+    LearnViewController *learnVC;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPhone" bundle:nil];
+    }
+    else learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPad" bundle:nil];
+    [self.navigationController pushViewController:learnVC animated:YES];
 }
 @end

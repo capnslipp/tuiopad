@@ -11,8 +11,7 @@
 
 
 @implementation LearnViewController
-
-// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+@synthesize theView, theTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,11 +21,6 @@
     return self;
 }
 
-
-@synthesize theView, theTextField;
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -53,6 +47,10 @@
     [rightButton release];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [theTextField becomeFirstResponder];
+}
+
 
 -(IBAction)saveButtonClicked:(id)sender {
 //    if (!saveButtonState) {
@@ -60,14 +58,18 @@
 //        [self changeButtonState:sender];
 //        return;
 //    }
+    if (theTextField.text.length==0) {
+        theLabel.text = @"No ID specified";
+        return;
+    }
     
-    if(theView.dots.count != 3)
+    else if(theView.dots.count != 3)
     {
         theLabel.text = [NSString stringWithFormat:@"Triangle with %d points?",  [[theView dots] count]];
         return;
     }
     
-    if([self IDExists]) 
+    else if([self IDExists]) 
     {        
         NSLog(@"\nID already exists");
         UIAlertView *alert =
@@ -81,15 +83,7 @@
         return;
     }
     
-    // we have 3 points and the id doesn't exist -> store the triangle in the datafile.dat
-    // disable user interaction -> the dots are frozen
-
-//    theView.userInteractionEnabled = NO;
-//    [self changeButtonState:sender];
-
-    
     else [self performSaving];
-
 }
 
 - (void) performSaving {
@@ -139,17 +133,6 @@
 	[UIView commitAnimations];
 }
 
--(IBAction)clearButtonClicked:(id)sender{
-    // file handling
-    
-    UIActionSheet *myMenu = [[UIActionSheet alloc]
-                             initWithTitle: @"Clear the complete pattern list?"
-                             delegate:self
-                             cancelButtonTitle:@"Cancel"
-                             destructiveButtonTitle:@"Clear"
-                             otherButtonTitles:nil];
-    [myMenu showInView:self.view];    
-}
 
 - (void) changeButtonState:(id)sender {
     if (saveButtonState) 
@@ -197,35 +180,6 @@
 }
 
 
-
-#pragma mark - action sheet
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
-{
-    if (buttonIdx!=0) {
-        [actionSheet release];
-        return;
-    }
-    NSFileManager *filemgr;
-    NSString *dataFile;
-    NSString *docsDir;
-    NSArray *dirPaths;
-    
-    filemgr = [NSFileManager defaultManager];
-    
-    // Identify the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // Build the path to the data file
-    dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
-    if ([filemgr fileExistsAtPath: dataFile])
-    {
-        [filemgr removeItemAtPath:dataFile error:nil];
-    }
-    [actionSheet release];
-}
 
 #pragma mark - alert view
 

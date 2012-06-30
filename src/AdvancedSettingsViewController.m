@@ -8,6 +8,7 @@
 
 #import "AdvancedSettingsViewController.h"
 #import "LearnViewController.h"
+#import "ExistingObjectsViewController.h"
 
 @interface AdvancedSettingsViewController ()
 
@@ -15,6 +16,7 @@
 
 @implementation AdvancedSettingsViewController
 @synthesize learnButton;
+@synthesize showObjectsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,6 +49,7 @@
 - (void)viewDidUnload
 {
     [self setLearnButton:nil];
+    [self setShowObjectsButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -58,6 +61,7 @@
 
 - (void)dealloc {
     [learnButton release];
+    [showObjectsButton release];
     [super dealloc];
 }
 - (IBAction)learnButtonPressed:(id)sender {
@@ -68,5 +72,10 @@
     else learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPad" bundle:nil];
     [self.navigationItem.backBarButtonItem setTitle:@"Back"];
     [self.navigationController pushViewController:learnVC animated:YES];
+}
+
+- (IBAction)showObjectsButtonPressed:(id)sender {
+    ExistingObjectsViewController *existingVC = [[ExistingObjectsViewController alloc] initWithNibName:@"ExistingObjectsViewController" bundle:nil];
+    [self.navigationController pushViewController:existingVC animated:YES];
 }
 @end

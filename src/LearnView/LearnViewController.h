@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DrawView.h"
 
-@interface LearnViewController : UIViewController <UIActionSheetDelegate, UITextFieldDelegate, UIAlertViewDelegate> {
+@interface LearnViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate> {
 	IBOutlet UIButton *saveButton;
     IBOutlet UIButton *closeButton;
-    IBOutlet UIButton *clearButton;
     IBOutlet UILabel *theLabel;
     IBOutlet UILabel *exIDsLabel;
     IBOutlet UITextField *theTextField;
@@ -27,7 +26,6 @@
 
 -(IBAction) saveButtonClicked:(id)sender;
 -(IBAction) closeButtonClicked:(id)sender;
--(IBAction) clearButtonClicked:(id)sender;
 
 - (void) changeButtonState: (id) sender;  
 - (void) performSaving;

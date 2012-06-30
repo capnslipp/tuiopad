@@ -14,7 +14,9 @@
     NSDictionary *rows;
 }
 @property (retain, nonatomic) IBOutlet UIButton *learnButton;
+@property (retain, nonatomic) IBOutlet UIButton *showObjectsButton;
 
 - (IBAction)learnButtonPressed:(id)sender;
+- (IBAction)showObjectsButtonPressed:(id)sender;
 
 @end

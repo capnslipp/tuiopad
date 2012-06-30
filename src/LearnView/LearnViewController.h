@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DrawView.h"
 
-@interface LearnViewController : UIViewController <UIActionSheetDelegate, UITextFieldDelegate> {
+@interface LearnViewController : UIViewController <UIActionSheetDelegate, UITextFieldDelegate, UIAlertViewDelegate> {
 	IBOutlet UIButton *saveButton;
     IBOutlet UIButton *closeButton;
     IBOutlet UIButton *clearButton;
@@ -18,10 +18,7 @@
     IBOutlet UITextField *theTextField;
     DrawView *theView;
     
-    int* m_Ids;
-    
-    NSMutableArray *m_IDsArray;
-    int m_existingIDsCount;
+    NSMutableArray *IDsArray;
     BOOL saveButtonState;
 }
 
@@ -32,9 +29,10 @@
 -(IBAction) closeButtonClicked:(id)sender;
 -(IBAction) clearButtonClicked:(id)sender;
 
-- (void) changeButtonState: (id) sender;   
+- (void) changeButtonState: (id) sender;  
+- (void) performSaving;
+- (void) performOverwrite;
 
--(void)getExistingIDs;
 -(BOOL)IDExists;
 
 @end

@@ -27,6 +27,7 @@
     for (UITouch * touch in event.allTouches) {
         if(touch.phase==UITouchPhaseEnded||[touch phase]==UITouchPhaseCancelled) continue;
         CGPoint location = [touch locationInView:self]; 
+        if(location.x < 0 || location.y < 0) continue;
         NSValue* point = [NSValue valueWithCGPoint:location];
         [self.dots addObject:point];
     }

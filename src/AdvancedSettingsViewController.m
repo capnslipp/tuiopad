@@ -66,6 +66,7 @@
         learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPhone" bundle:nil];
     }
     else learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPad" bundle:nil];
+    [self.navigationItem.backBarButtonItem setTitle:@"Back"];
     [self.navigationController pushViewController:learnVC animated:YES];
 }
 @end

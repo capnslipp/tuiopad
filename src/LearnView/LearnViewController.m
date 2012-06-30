@@ -7,6 +7,7 @@
 //
 
 #import "LearnViewController.h"
+#import "FileManagerHelper.h"
 
 
 @implementation LearnViewController
@@ -36,7 +37,7 @@
 	}     
     
     else 
-        rect = CGRectMake(0.0f, 160.0f, 320.0f, 320.0f);
+        rect = CGRectMake(0.0f, 116.0f, 320.0f, 320.0f);
     
     theView = [[DrawView alloc] initWithFrame:rect];
     [self.view addSubview:theView];    
@@ -45,20 +46,20 @@
     
     saveButtonState = YES;
     
-    [self getExistingIDs];
+    IDsArray = [FileManagerHelper getExistingIDs];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = backButton;
-    [backButton release];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonClicked:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+    [rightButton release];
 }
 
 
 -(IBAction)saveButtonClicked:(id)sender {
-    if (!saveButtonState) {
-        theView.userInteractionEnabled = YES;
-        [self changeButtonState:sender];
-        return;
-    }
+//    if (!saveButtonState) {
+//        theView.userInteractionEnabled = YES;
+//        [self changeButtonState:sender];
+//        return;
+//    }
     
     if(theView.dots.count != 3)
     {
@@ -70,11 +71,11 @@
     {        
         NSLog(@"\nID already exists");
         UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle: @"ID already exists"
-                                   message: @"Choose another ID!"
+        [[UIAlertView alloc] initWithTitle: @"ID already exists!"
+                                   message: @"Overwrite?"
                                   delegate: self
-                         cancelButtonTitle: @"OK"
-                         otherButtonTitles: nil];
+                         cancelButtonTitle: @"Cancel"
+                         otherButtonTitles: @"Yes", nil];
         [alert show];
         [alert release];
         return;
@@ -83,61 +84,48 @@
     // we have 3 points and the id doesn't exist -> store the triangle in the datafile.dat
     // disable user interaction -> the dots are frozen
 
-    theView.userInteractionEnabled = NO;
-    [self changeButtonState:sender];
+//    theView.userInteractionEnabled = NO;
+//    [self changeButtonState:sender];
 
     
-    
+    else [self performSaving];
+
+}
+
+- (void) performSaving {
     NSString *dotsInString = @"";
     
     for (int i = 0; i < [[theView dots] count]; i++) {
-//        Dot *aDot = [[theView dots] objectAtIndex:i];
-//        CGPoint aDot = [[theView dots] objectAtIndex:i];
         NSValue* value = [theView.dots objectAtIndex:i];
         CGPoint aDot = [value CGPointValue];
         NSString *dotStr = [NSString stringWithFormat:@"%f %f ", aDot.x/theView.frame.size.width, aDot.y/theView.frame.size.height];
-//        NSLog(@"%@", dotStr);
         dotsInString = [dotsInString stringByAppendingString:dotStr];
     }
     
     NSString *symbID = [NSString stringWithFormat:@"%@ ", theTextField.text];
-    dotsInString = [dotsInString stringByAppendingString:symbID];
-    NSLog(@"%@", dotsInString);
     
-    NSFileManager *filemgr;
-    NSData *databuffer;
-    NSString *dataFile;
-    NSString *docsDir;
-    NSArray *dirPaths;
+    [FileManagerHelper saveObject:dotsInString withID:symbID];
     
-    filemgr = [NSFileManager defaultManager];
+    IDsArray = [FileManagerHelper getExistingIDs];
+    theLabel.text = [NSString stringWithFormat:@"Saved triangle"];
+}
+
+- (void) performOverwrite {
+    NSString *dotsInString = @"";
     
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
-    
-    if ([filemgr fileExistsAtPath: dataFile])
-    {
-        // Read file contents and display in textBox
-        NSData *databuffer;
-        databuffer = [filemgr contentsAtPath: dataFile];
-        
-        NSString *datastring = [[NSString alloc] initWithData: databuffer encoding:NSASCIIStringEncoding];
-        
-        dotsInString = [datastring stringByAppendingString:dotsInString];
-        [datastring release];
+    for (int i = 0; i < [[theView dots] count]; i++) {
+        NSValue* value = [theView.dots objectAtIndex:i];
+        CGPoint aDot = [value CGPointValue];
+        NSString *dotStr = [NSString stringWithFormat:@"%f %f ", aDot.x/theView.frame.size.width, aDot.y/theView.frame.size.height];
+        dotsInString = [dotsInString stringByAppendingString:dotStr];
     }
     
-    databuffer = [dotsInString dataUsingEncoding: NSASCIIStringEncoding];
+    NSString *symbID = [NSString stringWithFormat:@"%@ ", theTextField.text];
     
-    [filemgr createFileAtPath: dataFile contents: databuffer attributes:nil];
+    [FileManagerHelper overwriteObjectWithID:symbID withObject:dotsInString];
     
-    [filemgr release];
-    
-    theLabel.text = [NSString stringWithFormat:@"Saved triangle"];
-
+    IDsArray = [FileManagerHelper getExistingIDs];
+    theLabel.text = [NSString stringWithFormat:@"Saved triangle (overwritten)"];
 }
 
 -(IBAction)closeButtonClicked:(id)sender {
@@ -181,57 +169,6 @@
     return YES;
 }
 
-#pragma mark getIDs
-
--(void)getExistingIDs {
-    m_IDsArray = [[NSMutableArray alloc] init];
-    
-    // file handling
-    NSFileManager *filemgr;
-    NSString *dataFile;
-    NSString *docsDir;
-    NSArray *dirPaths;
-    
-    filemgr = [NSFileManager defaultManager];
-    
-    // Identify the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // Build the path to the data file
-    dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
-    
-    // Check if the file already exists
-    if ([filemgr fileExistsAtPath: dataFile])
-    {
-        // Read file contents and display in textBox
-        NSData *databuffer;
-        databuffer = [filemgr contentsAtPath: dataFile];
-        
-        NSString *datastring = [[NSString alloc] initWithData: databuffer encoding:NSASCIIStringEncoding];
-        NSMutableArray * singleValues = [[NSMutableArray alloc] initWithArray:[datastring componentsSeparatedByString:@" "] copyItems: YES];
-        NSInteger objCount = [singleValues count]/7;
-        m_existingIDsCount = objCount;
-        
-        //m_Ids = malloc(sizeof(int)*m_existingIDsCount);
-        
-        for(int i = 0; i < m_existingIDsCount; i++)
-        {
-            //m_Ids[i] = [[singleValues objectAtIndex:6+(i*7)] intValue];
-            [m_IDsArray addObject:[singleValues objectAtIndex:6+(i*7) ]];
-        }
-        
-        [datastring release];
-    }
-    
-    [filemgr release];
-    NSString *temp = exIDsLabel.text;
-    for (int i = 0; i< m_IDsArray.count; i++) {
-        temp = [temp stringByAppendingString:[NSString stringWithFormat:@" %d,", [[m_IDsArray objectAtIndex:i] intValue]]]; 
-    }
-    exIDsLabel.text = temp;
-}
 
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -248,11 +185,11 @@
 {
     int temp = [theTextField.text intValue];
     NSLog(@"textfield text = %d", temp);
-    NSLog(@"\nidsarray count is %d", [m_IDsArray count]);
-    for(int i = 0; i < [m_IDsArray count]; i ++)
+    NSLog(@"\nidsarray count is %d", [IDsArray count]);
+    for(int i = 0; i < [IDsArray count]; i ++)
     {
         //if (m_Ids[i] == [theTextField.text intValue]) {
-        if([[m_IDsArray objectAtIndex:i] intValue] == temp) {
+        if([[IDsArray objectAtIndex:i] intValue] == temp) {
             return true;
         }
     }
@@ -288,6 +225,18 @@
         [filemgr removeItemAtPath:dataFile error:nil];
     }
     [actionSheet release];
+}
+
+#pragma mark - alert view
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        return;
+    }
+    else if (buttonIndex == 1)
+    {
+        [self performOverwrite];
+    }
 }
 
 

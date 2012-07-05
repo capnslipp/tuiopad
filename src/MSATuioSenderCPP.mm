@@ -18,19 +18,23 @@
 */
 
 #include "MSATuioSenderCPP.h"
+#include "TriangleManager.h"
+#include "TriangleObject.h"
 
 
 void MSATuioSenderCPP::cursorPressed(float x, float y, int cursorId) {
 	myCursor[cursorId].x		= x;
 	myCursor[cursorId].y		= y;
 	myCursor[cursorId].isAlive	= true;
+    
+    if(objectProfileEnabled) triangleManager->addNewCursor(&myCursor[cursorId]);
 }
 
 
 void MSATuioSenderCPP::cursorDragged(float x, float y, int cursorId) {
 	myCursor[cursorId].x		= x;
 	myCursor[cursorId].y		= y;
-	myCursor[cursorId].isAlive	= true;
+	if (!myCursor[cursorId].isUsedInTriangle) myCursor[cursorId].isAlive	= true;
 	myCursor[cursorId].moved	= true;
 }
 
@@ -39,6 +43,9 @@ void MSATuioSenderCPP::cursorReleased(float x, float y, int cursorId) {
 	myCursor[cursorId].x		= x;
 	myCursor[cursorId].y		= y;
 	myCursor[cursorId].isAlive	= false;
+    myCursor[cursorId].isUsedInTriangle = false;
+    
+    if(objectProfileEnabled) triangleManager->removeCursor(&myCursor[cursorId]);
 }
 
 
@@ -59,6 +66,14 @@ void MSATuioSenderCPP::setup(std::string host, int port, int tcp, std::string ip
 	tuioServer->enableBlobProfile(false);	
 	tuioServer->setSourceName( "TuioPad",ip.c_str());
 	currentTime = TuioTime::getSessionTime();	
+    
+    objectProfileEnabled = objectProfile;
+    cursorProfileEnabled = cursorProfile;    
+    // instantiate trianglemanager and set the triangle list
+    if (objectProfileEnabled) {
+        triangleManager = new TriangleManager();
+        triangleManager->setDefinedTriangleList();
+    }
 }
 
 void MSATuioSenderCPP::close() {
@@ -81,27 +96,58 @@ void MSATuioSenderCPP::update() {
 		
 		float x = myCursor[i].x;
 		float y = myCursor[i].y;
-		
-		if(myCursor[i].isAlive && !myCursor[i].wasAlive) {
-			if(verbose) printf("MSATuioSenderCPP - addTuioCursor %i %f, %f\n", i, x, y);
-			tuioCursor[i] = tuioServer->addTuioCursor(x,y);	
-			
-		} else if(!myCursor[i].isAlive && myCursor[i].wasAlive) {
-			if(verbose) printf("MSATuioSenderCPP - removeTuioCursor %i %f, %f\n", i, x, y);
-			
-			if(tuioCursor[i]) tuioServer->removeTuioCursor(tuioCursor[i]);
-			else printf("** WEIRD: Trying to remove tuioCursor %i but it's null\n", i);
-			
-		} else if(myCursor[i].isAlive && myCursor[i].wasAlive && myCursor[i].moved) {
-			myCursor[i].moved = false;
-			if(verbose) printf("MSATuioSenderCPP - updateTuioCursor %i %f, %f\n", i, x, y);
-			if(tuioCursor[i]) tuioServer->updateTuioCursor(tuioCursor[i], x, y);
-			else printf("** WEIRD: Trying to update tuioCursor %i but it's null\n", i);
-			
-		}
-		
-		myCursor[i].wasAlive = myCursor[i].isAlive;
+		if (cursorProfileEnabled) {
+            if(myCursor[i].isAlive && !myCursor[i].wasAlive) {
+                if(verbose) printf("MSATuioSenderCPP - addTuioCursor %i %f, %f\n", i, x, y);
+                tuioCursor[i] = tuioServer->addTuioCursor(x,y);	
+                
+            } else if(!myCursor[i].isAlive && myCursor[i].wasAlive) {
+                if(verbose) printf("MSATuioSenderCPP - removeTuioCursor %i %f, %f\n", i, x, y);
+                
+                if(tuioCursor[i]) tuioServer->removeTuioCursor(tuioCursor[i]);
+                else printf("** WEIRD: Trying to remove tuioCursor %i but it's null\n", i);
+                
+            } else if(myCursor[i].isAlive && myCursor[i].wasAlive && myCursor[i].moved) {
+                myCursor[i].moved = false;
+                if(verbose) printf("MSATuioSenderCPP - updateTuioCursor %i %f, %f\n", i, x, y);
+                if(tuioCursor[i]) tuioServer->updateTuioCursor(tuioCursor[i], x, y);
+                else printf("** WEIRD: Trying to update tuioCursor %i but it's null\n", i);
+            }
+            
+            myCursor[i].wasAlive = myCursor[i].isAlive;
+        }
+
 	}
+    
+    if (objectProfileEnabled) {
+        triangleManager->update();
+        for ( int i = 0; i < MAX_OBJECT_NUMBER; i++)
+        {
+            if(triangleManager->triangleObject[i])
+            {
+                TriangleObject *tro = triangleManager->triangleObject[i];
+                
+                if (tro->isAlive && !tro->wasAlive) {
+                    tuioObject[i] = tuioServer->addTuioObject(tro->getSymbolID(), tro->getX(), tro->getY(), tro->getAngle());
+                    tro->wasAlive = true;
+                }
+                else if (tro->isAlive && tro->wasAlive) {
+                    if (tuioObject[i]) {
+                        tuioServer->updateTuioObject(tuioObject[i], tro->getX(), tro->getY(), tro->getAngle());
+                    }
+                }
+                else if (tro->wasAlive && !tro->isAlive) {
+                    if (tuioObject[i]) {
+                        tuioServer->removeTuioObject(tuioObject[i]);
+                        tuioObject[i] = NULL;
+                    }
+                    tro->wasAlive = false;
+                }
+            }
+        }
+        
+    }
+    
 	tuioServer->stopUntouchedMovingCursors();
 	tuioServer->commitFrame();
 }

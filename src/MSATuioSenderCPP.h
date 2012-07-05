@@ -26,6 +26,8 @@
 #include "ofxiPhone.h"
 
 #define OF_MAX_TOUCHES 10
+#define MAX_OBJECT_NUMBER 3
+
 using namespace TUIO;
 
 class MyCursorInfo {
@@ -35,16 +37,23 @@ public:
 	bool isAlive;		// is it alive this frame
 	bool wasAlive;		// was it alive this frame
 	bool moved;			// did it move this frame
+    
+    bool isUsedInTriangle;
 	
 	
 	MyCursorInfo() {
 		isAlive		= false;
 		wasAlive	= false;
 		moved		= false;
+        isUsedInTriangle = false;
 	}
+    
+    MyCursorInfo(float xPos, float yPos) : x(xPos), y(yPos) { 
+        MyCursorInfo(); 
+    }
 };
 
-
+class TriangleManager;
 
 class MSATuioSenderCPP { 
 public:
@@ -65,7 +74,7 @@ public:
 		if (oscSender)  delete oscSender;
 	};
 	
-	void setup(std::string host, int port, int tcp, std::string ip, bool objectProfile = false, bool cursorProfile = true);
+	void setup(std::string host, int port, int tcp, std::string ip, bool objectProfile = 0, bool cursorProfile = 1);
 	void update();
 	void close();
 
@@ -79,4 +88,9 @@ protected:
 	TuioCursor		*tuioCursor[OF_MAX_TOUCHES];
 	MyCursorInfo	myCursor[OF_MAX_TOUCHES];
 	TuioTime		currentTime;
+    
+    TuioObject		*tuioObject[MAX_OBJECT_NUMBER];
+    TriangleManager *triangleManager;
+    
+    bool objectProfileEnabled, cursorProfileEnabled;
 };

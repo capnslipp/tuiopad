@@ -42,7 +42,7 @@ void MSATuioSenderCPP::cursorReleased(float x, float y, int cursorId) {
 }
 
 
-void MSATuioSenderCPP::setup(std::string host, int port, int tcp, std::string ip) {
+void MSATuioSenderCPP::setup(std::string host, int port, int tcp, std::string ip, bool objectProfile, bool cursorProfile) {
 	//if(this->host.compare(host) == 0 && this->port == port) return;
 	
 	if(verbose) printf("MSATuioSenderCPP::setup(host: %s, port: %i\n", host.c_str(), port);
@@ -54,7 +54,8 @@ void MSATuioSenderCPP::setup(std::string host, int port, int tcp, std::string ip
 	else if (tcp==2) oscSender = new TcpSender(port);
 	else oscSender = new UdpSender((char*)host.c_str(), port);
 	tuioServer = new TuioServer(oscSender);
-	tuioServer->enableObjectProfile(false);
+	tuioServer->enableObjectProfile(objectProfile);
+    tuioServer->enableCursorProfile(cursorProfile);
 	tuioServer->enableBlobProfile(false);	
 	tuioServer->setSourceName( "TuioPad",ip.c_str());
 	currentTime = TuioTime::getSessionTime();	

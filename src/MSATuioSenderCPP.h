@@ -65,7 +65,7 @@ public:
 		if (oscSender)  delete oscSender;
 	};
 	
-	void setup(std::string host, int port, int tcp, std::string ip);
+	void setup(std::string host, int port, int tcp, std::string ip, bool objectProfile = false, bool cursorProfile = true);
 	void update();
 	void close();
 

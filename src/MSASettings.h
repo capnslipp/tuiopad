@@ -30,6 +30,12 @@
 #define kSetting_PeriodicUpdates	@"PeriodicUpdates"
 #define kSetting_FullUpdates		@"FullUpdates"
 
+// new settings (oleg)
+#define kSetting_EnableCursorProfile    @"CursorProfileEnabled"
+#define kSetting_EnableObjectProfile    @"ObjectProfileEnabled"
+#define kSetting_EnableVNCOVERHTML5     @"VNCHTML5Enabled"
+#define kSetting_VNC_IP                 @"VNC_IP"
+
 #define kSettings_Key				@"TuioPadSettings"
 
 

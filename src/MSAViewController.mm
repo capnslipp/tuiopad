@@ -37,7 +37,9 @@
 
 -(void)connect {
 	NSLog(@"MSAViewController::connect %@ %@ %i", hostTextField.text, portTextField.text, packetSwitch.selectedSegmentIndex);
-	tuioSender->setup([hostTextField.text UTF8String], [portTextField.text intValue], packetSwitch.selectedSegmentIndex, [[settings getIpAddress] UTF8String]);
+    bool cProfile = [settings getInt:kSetting_EnableCursorProfile];
+    bool oProfile = [settings getInt:kSetting_EnableObjectProfile];
+	tuioSender->setup([hostTextField.text UTF8String], [portTextField.text intValue], packetSwitch.selectedSegmentIndex, [[settings getIpAddress] UTF8String],  oProfile, cProfile);
 	
 	if(periodicUpdatesSwitch.on) tuioSender->tuioServer->enablePeriodicMessages();
 	else tuioSender->tuioServer->disablePeriodicMessages();
@@ -126,6 +128,7 @@
 
 - (IBAction)moreButtonClicked:(id)sender {
     AdvancedSettingsViewController *advancedVC = [[[AdvancedSettingsViewController alloc] initWithNibName:@"AdvancedSettingsViewController" bundle:nil] retain];
+//    advancedVC.settings = self.settings;
     [self.navigationController pushViewController:advancedVC animated:YES];
 }
 

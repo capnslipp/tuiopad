@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSASettings.h"
 
 @interface AdvancedSettingsViewController : UIViewController <UINavigationControllerDelegate>
 {
@@ -15,6 +16,12 @@
 }
 @property (retain, nonatomic) IBOutlet UIButton *learnButton;
 @property (retain, nonatomic) IBOutlet UIButton *showObjectsButton;
+@property (retain, nonatomic) IBOutlet UISwitch *cursorProfileSwitch;
+@property (retain, nonatomic) IBOutlet UISwitch *objectProfileSwitch;
+@property (retain, nonatomic) IBOutlet UISwitch *VNCSwitch;
+@property (retain, nonatomic) IBOutlet UITextField *VNCIPTextfield;
+
+@property (readonly, nonatomic) IBOutlet MSASettings *settings;
 
 - (IBAction)learnButtonPressed:(id)sender;
 - (IBAction)showObjectsButtonPressed:(id)sender;

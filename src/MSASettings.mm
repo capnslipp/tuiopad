@@ -177,6 +177,10 @@
 				[NSNumber numberWithInt:0], kSetting_Orientation, 
 				[NSNumber numberWithInt:1], kSetting_PeriodicUpdates, 
 				[NSNumber numberWithInt:1], kSetting_FullUpdates, 
+                [NSNumber numberWithInt:1], kSetting_EnableCursorProfile,
+                [NSNumber numberWithInt:0], kSetting_EnableObjectProfile,
+                [NSNumber numberWithInt:0], kSetting_EnableVNCOVERHTML5,
+                [self getBroadcastAddress], kSetting_VNC_IP,
 				nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObject:defaults forKey:kSettings_Key]];

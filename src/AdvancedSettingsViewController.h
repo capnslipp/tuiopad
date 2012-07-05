@@ -3,7 +3,7 @@
 //  TuioPad
 //
 //  Created by Oleg Langer on 29.06.12.
-//  Copyright (c) 2012 Fachhochschule Düsseldorf. All rights reserved.
+//  Copyright (c) 2012 Oleg Langer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -21,7 +21,7 @@
 @property (retain, nonatomic) IBOutlet UISwitch *VNCSwitch;
 @property (retain, nonatomic) IBOutlet UITextField *VNCIPTextfield;
 
-@property (readonly, nonatomic) IBOutlet MSASettings *settings;
+@property (assign, nonatomic) MSASettings *settings;
 
 - (IBAction)learnButtonPressed:(id)sender;
 - (IBAction)showObjectsButtonPressed:(id)sender;

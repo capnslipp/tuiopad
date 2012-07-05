@@ -31,6 +31,9 @@
 		8108F06E159E391200E1439B /* LearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F06C159E391200E1439B /* LearnViewController.m */; };
 		8108F071159E392200E1439B /* LearnViewPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F06F159E392200E1439B /* LearnViewPad.xib */; };
 		8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F070159E392200E1439B /* LearnViewPhone.xib */; };
+		81CACBEA159F5AAD000320DD /* SimpleTriangle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */; };
+		81CACBEB159F5AAD000320DD /* TriangleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE7159F5AAD000320DD /* TriangleManager.mm */; };
+		81CACBEC159F5AAD000320DD /* TriangleObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE9159F5AAD000320DD /* TriangleObject.mm */; };
 		B227C42012B44F080016E747 /* ThisWayUp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B227C41F12B44F080016E747 /* ThisWayUp.jpg */; };
 		B227C45212B44F1F0016E747 /* MSASettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = B227C42312B44F1F0016E747 /* MSASettings.mm */; };
 		B227C45312B44F1F0016E747 /* MSAViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B227C42512B44F1F0016E747 /* MSAViewController.mm */; };
@@ -116,20 +119,26 @@
 		5E25688210ED26CC00A9501C /* PocoNet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoNet.a; path = ../../../libs/poco/lib/osx/PocoNet.a; sourceTree = SOURCE_ROOT; };
 		5E25688310ED26CC00A9501C /* PocoUtil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoUtil.a; path = ../../../libs/poco/lib/osx/PocoUtil.a; sourceTree = SOURCE_ROOT; };
 		5E25688410ED26CC00A9501C /* PocoXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoXML.a; path = ../../../libs/poco/lib/osx/PocoXML.a; sourceTree = SOURCE_ROOT; };
-		810176F7159F17240065C088 /* ExistingObjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingObjectsViewController.h; sourceTree = "<group>"; };
-		810176F8159F17240065C088 /* ExistingObjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingObjectsViewController.m; sourceTree = "<group>"; };
+		810176F7159F17240065C088 /* ExistingObjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ExistingObjectsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		810176F8159F17240065C088 /* ExistingObjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExistingObjectsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		810176F9159F17240065C088 /* ExistingObjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingObjectsViewController.xib; sourceTree = "<group>"; };
-		810176FD159F182F0065C088 /* FileManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileManagerHelper.h; path = src/Helper/FileManagerHelper.h; sourceTree = "<group>"; };
-		810176FE159F182F0065C088 /* FileManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileManagerHelper.m; path = src/Helper/FileManagerHelper.m; sourceTree = "<group>"; };
-		8108F063159E26C400E1439B /* AdvancedSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSettingsViewController.h; sourceTree = "<group>"; };
-		8108F064159E26C400E1439B /* AdvancedSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedSettingsViewController.m; sourceTree = "<group>"; };
+		810176FD159F182F0065C088 /* FileManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = FileManagerHelper.h; path = src/Helper/FileManagerHelper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		810176FE159F182F0065C088 /* FileManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = FileManagerHelper.m; path = src/Helper/FileManagerHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8108F063159E26C400E1439B /* AdvancedSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AdvancedSettingsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		8108F064159E26C400E1439B /* AdvancedSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AdvancedSettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedSettingsViewController.xib; path = xibs/AdvancedSettingsViewController.xib; sourceTree = "<group>"; };
-		8108F069159E391200E1439B /* drawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawView.h; sourceTree = "<group>"; };
-		8108F06A159E391200E1439B /* drawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = drawView.m; sourceTree = "<group>"; };
+		8108F069159E391200E1439B /* drawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = drawView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		8108F06A159E391200E1439B /* drawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = drawView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8108F06B159E391200E1439B /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
 		8108F06C159E391200E1439B /* LearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnViewController.m; sourceTree = "<group>"; };
 		8108F06F159E392200E1439B /* LearnViewPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPad.xib; path = xibs/LearnViewPad.xib; sourceTree = "<group>"; };
 		8108F070159E392200E1439B /* LearnViewPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPhone.xib; path = xibs/LearnViewPhone.xib; sourceTree = "<group>"; };
+		81CACBE4159F5AAD000320DD /* SimpleTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleTriangle.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SimpleTriangle.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		81CACBE6159F5AAD000320DD /* TriangleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleManager.h; sourceTree = "<group>"; };
+		81CACBE7159F5AAD000320DD /* TriangleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriangleManager.mm; sourceTree = "<group>"; };
+		81CACBE8159F5AAD000320DD /* TriangleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleObject.h; sourceTree = "<group>"; };
+		81CACBE9159F5AAD000320DD /* TriangleObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriangleObject.mm; sourceTree = "<group>"; };
 		B227C41612B44E7A0016E747 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B227C41F12B44F080016E747 /* ThisWayUp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ThisWayUp.jpg; path = data/ThisWayUp.jpg; sourceTree = SOURCE_ROOT; };
 		B227C42112B44F1F0016E747 /* MSAFingerDrawerCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSAFingerDrawerCPP.h; path = src/MSAFingerDrawerCPP.h; sourceTree = SOURCE_ROOT; };
@@ -412,6 +421,19 @@
 				810176F9159F17240065C088 /* ExistingObjectsViewController.xib */,
 			);
 			path = LearnView;
+			sourceTree = "<group>";
+		};
+		81CACBE3159F5AAD000320DD /* Triangles */ = {
+			isa = PBXGroup;
+			children = (
+				81CACBE4159F5AAD000320DD /* SimpleTriangle.h */,
+				81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */,
+				81CACBE6159F5AAD000320DD /* TriangleManager.h */,
+				81CACBE7159F5AAD000320DD /* TriangleManager.mm */,
+				81CACBE8159F5AAD000320DD /* TriangleObject.h */,
+				81CACBE9159F5AAD000320DD /* TriangleObject.mm */,
+			);
+			path = Triangles;
 			sourceTree = "<group>";
 		};
 		B227C42912B44F1F0016E747 /* oscpack */ = {
@@ -780,6 +802,7 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				81CACBE3159F5AAD000320DD /* Triangles */,
 				810176FC159F17D00065C088 /* Helper */,
 				8108F068159E391200E1439B /* LearnView */,
 				E4D8936D11527B74007E1F53 /* TuioPad.mm */,
@@ -938,6 +961,9 @@
 				8108F06E159E391200E1439B /* LearnViewController.m in Sources */,
 				810176FA159F17240065C088 /* ExistingObjectsViewController.m in Sources */,
 				810176FF159F182F0065C088 /* FileManagerHelper.m in Sources */,
+				81CACBEA159F5AAD000320DD /* SimpleTriangle.mm in Sources */,
+				81CACBEB159F5AAD000320DD /* TriangleManager.mm in Sources */,
+				81CACBEC159F5AAD000320DD /* TriangleObject.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

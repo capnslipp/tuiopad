@@ -2,8 +2,8 @@
 //  LearnViewController.m
 //  TuioPad
 //
-//  Created by berimac on 14.12.11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Oleg Langer on 14.12.11.
+//  Copyright 2011 Oleg Langer. All rights reserved.
 //
 
 #import "LearnViewController.h"

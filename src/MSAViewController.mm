@@ -128,7 +128,7 @@
 
 - (IBAction)moreButtonClicked:(id)sender {
     AdvancedSettingsViewController *advancedVC = [[[AdvancedSettingsViewController alloc] initWithNibName:@"AdvancedSettingsViewController" bundle:nil] retain];
-//    advancedVC.settings = self.settings;
+    advancedVC.settings = self.settings;
     [self.navigationController pushViewController:advancedVC animated:YES];
 }
 

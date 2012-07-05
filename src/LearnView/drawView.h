@@ -3,7 +3,7 @@
 //  TuioPad
 //
 //  Created by Oleg Langer on 03.01.12.
-//  Copyright (c) 2012 Fachhochschule Düsseldorf. All rights reserved.
+//  Copyright (c) 2012 Oleg Langer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

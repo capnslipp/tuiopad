@@ -24,34 +24,12 @@
 #include "TcpSender.h"
 #include "TuioCursor.h"
 #include "ofxiPhone.h"
+#include "MyCursorInfo.h"
 
 #define OF_MAX_TOUCHES 10
 #define MAX_OBJECT_NUMBER 3
 
 using namespace TUIO;
-
-class MyCursorInfo {
-public:
-	float x, y;
-	
-	bool isAlive;		// is it alive this frame
-	bool wasAlive;		// was it alive this frame
-	bool moved;			// did it move this frame
-    
-    bool isUsedInTriangle;
-	
-	
-	MyCursorInfo() {
-		isAlive		= false;
-		wasAlive	= false;
-		moved		= false;
-        isUsedInTriangle = false;
-	}
-    
-    MyCursorInfo(float xPos, float yPos) : x(xPos), y(yPos) { 
-        MyCursorInfo(); 
-    }
-};
 
 class TriangleManager;
 

@@ -22,6 +22,7 @@ public:
 		isAlive = false;
 		wasAlive = false;
 		moved = false;
+        angle = 0.0f;
 	};
     TriangleObject(SimpleTriangle* tr);
 	~TriangleObject(){};
@@ -40,8 +41,8 @@ public:
     float getY();
     float getAngle();
     void setTriangle(SimpleTriangle *);
-    int getSymbolID();
     
+    int getSymbolID();
     string testOutput();
 };
 

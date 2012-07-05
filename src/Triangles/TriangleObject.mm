@@ -9,6 +9,7 @@
 
 #include "TriangleObject.h"
 #include "ofxiPhone.h"
+#include "MyCursorInfo.h"
 
 
 void TriangleObject::setTriangle(SimpleTriangle *tr)
@@ -29,15 +30,24 @@ float TriangleObject::getY() {
 }
 
 float TriangleObject::getAngle() {
-    return 0.0f;
+    return angle;
 }
 
 void TriangleObject::update()
 {
-    //    m_triangle->computeParameters();    // params of the base class
     x = triangle->getCentroidX();
     y = triangle->getCentroidY();
-//    angle = - triangle->getOrientationPoint().getAngle(m_x, m_y);
+    
+    float xp = triangle->getOrientationPoint()->x;
+    float yp = triangle->getOrientationPoint()->y;
+    
+    float side = x-xp;
+	float height = y-yp;
+	
+	float distance = sqrtf(side*side + height*height);
+	
+	angle = - (float)(asin(side/distance)+M_PI/2);
+	if (height<0) angle = 2.0f*(float)M_PI-angle;
 }
 
 

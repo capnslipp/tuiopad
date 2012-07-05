@@ -38,7 +38,7 @@ public:
     void adjustPointsClockwise();
     void sortSides();
     
-    float getDistanceBetweenCursors(MyCursorInfo* c1, MyCursorInfo* c2);
+    float distanceBetweenCursors(MyCursorInfo* c1, MyCursorInfo* c2);
     
     bool compareWith(SimpleTriangle*, float aspectRatio);
 
@@ -48,12 +48,12 @@ public:
     vector<float> getSides();
     vector<MyCursorInfo*> getCursors();
     
-    vector<int> getCursorIDs();
     int getSymbolID();
     void setSymbolID(int);
     
     float getCentroidX();
     float getCentroidY();
+    MyCursorInfo* getOrientationPoint();
     
 //    SimpleTriangle* getTransformedTriangle(float aspectRatio);
     
@@ -77,7 +77,6 @@ protected:
     
                    
     vector <float> sideList;
-    vector <int> cursorIDs;
 };
 
 #endif

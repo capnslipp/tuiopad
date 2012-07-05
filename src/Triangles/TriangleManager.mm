@@ -8,8 +8,6 @@
 
 #include "TriangleManager.h"
 #include "TriangleObject.h"
-#include "MSATuioSenderCPP.h"
-
 #import "FileManagerHelper.h"
 
 long matchCounter = 0;

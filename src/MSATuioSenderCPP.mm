@@ -129,11 +129,14 @@ void MSATuioSenderCPP::update() {
                 
                 if (tro->isAlive && !tro->wasAlive) {
                     tuioObject[i] = tuioServer->addTuioObject(tro->getSymbolID(), tro->getX(), tro->getY(), tro->getAngle());
+//                    cout << endl << "added object " << "angle = " << tro->getAngle();
                     tro->wasAlive = true;
                 }
                 else if (tro->isAlive && tro->wasAlive) {
                     if (tuioObject[i]) {
                         tuioServer->updateTuioObject(tuioObject[i], tro->getX(), tro->getY(), tro->getAngle());
+//                        cout << endl << "updated object " << "angle = " << tro->getAngle();
+
                     }
                 }
                 else if (tro->wasAlive && !tro->isAlive) {
@@ -151,8 +154,3 @@ void MSATuioSenderCPP::update() {
 	tuioServer->stopUntouchedMovingCursors();
 	tuioServer->commitFrame();
 }
-
-
-
-
-

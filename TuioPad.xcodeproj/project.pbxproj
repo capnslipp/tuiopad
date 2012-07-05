@@ -133,6 +133,7 @@
 		8108F06C159E391200E1439B /* LearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnViewController.m; sourceTree = "<group>"; };
 		8108F06F159E392200E1439B /* LearnViewPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPad.xib; path = xibs/LearnViewPad.xib; sourceTree = "<group>"; };
 		8108F070159E392200E1439B /* LearnViewPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPhone.xib; path = xibs/LearnViewPhone.xib; sourceTree = "<group>"; };
+		8109D78515A5D424008CB736 /* MyCursorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCursorInfo.h; sourceTree = "<group>"; };
 		81CACBE4159F5AAD000320DD /* SimpleTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleTriangle.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SimpleTriangle.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		81CACBE6159F5AAD000320DD /* TriangleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleManager.h; sourceTree = "<group>"; };
@@ -809,6 +810,7 @@
 				E4D8936C11527B74007E1F53 /* TuioPad.h */,
 				B29E92D412B581FF00BC14E0 /* MSATuioSenderCPP.h */,
 				B29E92D512B5820000BC14E0 /* MSATuioSenderCPP.mm */,
+				8109D78515A5D424008CB736 /* MyCursorInfo.h */,
 				B227C42112B44F1F0016E747 /* MSAFingerDrawerCPP.h */,
 				B227C42212B44F1F0016E747 /* MSASettings.h */,
 				B227C42312B44F1F0016E747 /* MSASettings.mm */,

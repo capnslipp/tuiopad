@@ -9,7 +9,7 @@
 #include <iostream>
 #include "SimpleTriangle.h"
 #include "ofxiPhone.h"  // currently used only for ostringstream
-#include "MSATuioSenderCPP.h"
+#include "MyCursorInfo.h"
 
 
 SimpleTriangle::SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3) {
@@ -39,9 +39,9 @@ void SimpleTriangle::computeParameters()
 {
     this->adjustPointsClockwise();  // ensure that the points are ordered clockwise
     
-    r1 = getDistanceBetweenCursors(cursors.at(0), cursors.at(1));
-    r2 = getDistanceBetweenCursors(cursors.at(1), cursors.at(2));
-    r3 = getDistanceBetweenCursors(cursors.at(0), cursors.at(2));
+    r1 = distanceBetweenCursors(cursors.at(0), cursors.at(1));
+    r2 = distanceBetweenCursors(cursors.at(1), cursors.at(2));
+    r3 = distanceBetweenCursors(cursors.at(0), cursors.at(2));
     sideList.push_back(r1);
     sideList.push_back(r2);
     sideList.push_back(r3);
@@ -88,7 +88,7 @@ void SimpleTriangle::sortSides()
 
 
 
-float SimpleTriangle::getDistanceBetweenCursors(MyCursorInfo* c1, MyCursorInfo* c2) {
+float SimpleTriangle::distanceBetweenCursors(MyCursorInfo* c1, MyCursorInfo* c2) {
 	float dx = c1->x - c2->x;
 	float dy = c1->y - c2->y;
 	return sqrtf(dx*dx+dy*dy);
@@ -122,14 +122,14 @@ bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
     }
     
     vector<float> transformedSides;
-    transformedSides.push_back(getDistanceBetweenCursors(&c1Transformed, &c2Transformed));
-    transformedSides.push_back(getDistanceBetweenCursors(&c2Transformed, &c3Transformed));
-    transformedSides.push_back(getDistanceBetweenCursors(&c1Transformed, &c3Transformed));
+    transformedSides.push_back(distanceBetweenCursors(&c1Transformed, &c2Transformed));
+    transformedSides.push_back(distanceBetweenCursors(&c2Transformed, &c3Transformed));
+    transformedSides.push_back(distanceBetweenCursors(&c1Transformed, &c3Transformed));
     
     sideList.clear();
-    sideList.push_back(getDistanceBetweenCursors(&c1Transformed, &c2Transformed));
-    sideList.push_back(getDistanceBetweenCursors(&c2Transformed, &c3Transformed));
-    sideList.push_back(getDistanceBetweenCursors(&c1Transformed, &c3Transformed));
+    sideList.push_back(distanceBetweenCursors(&c1Transformed, &c2Transformed));
+    sideList.push_back(distanceBetweenCursors(&c2Transformed, &c3Transformed));
+    sideList.push_back(distanceBetweenCursors(&c1Transformed, &c3Transformed));
     
     sortSides();
     
@@ -190,8 +190,9 @@ void SimpleTriangle::setSymbolID(int ID)
     symbolID = ID;
 }
 
-
-
+MyCursorInfo* SimpleTriangle::getOrientationPoint() {
+    return cursors.at(0);
+}
 
 
 //

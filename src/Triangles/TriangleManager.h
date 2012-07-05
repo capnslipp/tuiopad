@@ -26,9 +26,7 @@ public:
     ~TriangleManager(){};
     
     void update();
-    
-    string saySmthng();
-    
+        
     void addNewCursor(MyCursorInfo* cursorInfo);
     void removeCursor(MyCursorInfo* cursorInfo);
     

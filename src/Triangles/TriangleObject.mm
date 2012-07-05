@@ -11,12 +11,6 @@
 #include "ofxiPhone.h"
 #include "MyCursorInfo.h"
 
-
-void TriangleObject::setTriangle(SimpleTriangle *tr)
-{
-	this->triangle = tr;
-}
-
 int TriangleObject::getSymbolID() {
     return triangle->getSymbolID();
 }
@@ -41,14 +35,19 @@ void TriangleObject::update()
     float xp = triangle->getOrientationPoint()->x;
     float yp = triangle->getOrientationPoint()->y;
     
-    float side = x-xp;
-	float height = y-yp;
+    float side = xp - x;
+	float height = yp - y;
 	
 	float distance = sqrtf(side*side + height*height);
 	
-	angle = - (float)(asin(side/distance)+M_PI/2);
-	if (height<0) angle = 2.0f*(float)M_PI-angle;
+	angle = (float)(M_PI/2 - asin(side/distance));
+	if (height<0) 
+        angle = 2.0f*(float)M_PI-angle;
+//    printf("\n%s  angle = %f\tside = %f\tdistance = %f\theight = %f", __FUNCTION__, angle, side, distance, height);
+//    cout << "\ndevice orientation = " << [UIDevice currentDevice].orientation << endl;
+//    printf("\ncentroid x = %f y = %f\toPoint x = %f y = %f", x, y, xp, yp);
 }
+
 
 
 string TriangleObject::testOutput()

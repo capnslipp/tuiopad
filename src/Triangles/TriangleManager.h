@@ -34,23 +34,22 @@ public:
     void compareTriangles();
     void handleNewTriObjects();
     void updateExistingTriObject();
+    
     void removeTriObject(int trObjectID);
     void removeTriObjectContainingPoint(MyCursorInfo* cur);
     
     void setDefinedTriangleList();
 
+    TriangleObject* getObject(int index);
+    
+private:
     vector <MyCursorInfo*> freePoints;
     vector <MyCursorInfo*> usedPoints;
-    TriangleObject	*triangleObject[MAX_OBJECT_NUMBER];
-    
-    
     vector <SimpleTriangle*> workingTriangleList;
     vector <SimpleTriangle*> newTriangleList;
     vector <SimpleTriangle*> definedTriangleList;
-		
     
-private:
- 
+     TriangleObject	*triangleObject[MAX_OBJECT_NUMBER];
 };
 
 

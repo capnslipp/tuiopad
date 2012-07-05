@@ -31,9 +31,6 @@ public:
     SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3);
     SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3, int symbolID);
     
-    
-    
-    
     void computeParameters();
     void adjustPointsClockwise();
     void sortSides();
@@ -50,31 +47,21 @@ public:
     
     int getSymbolID();
     void setSymbolID(int);
-    
     float getCentroidX();
     float getCentroidY();
     MyCursorInfo* getOrientationPoint();
-    
-//    SimpleTriangle* getTransformedTriangle(float aspectRatio);
-    
-    
+
 // debugging utilities    
     string testOutput();
     
 protected:
-    vector<MyCursorInfo*> cursors;
-//    vector<MyCursorInfo*> transformedCursors;
-    
+    vector<MyCursorInfo*> cursors;    
     float lastAspectRatio;
-    
-    
-    
-    
-    float r1,r2,r3;     // distances between points
+ 
+    float r1,r2,r3;     // distances between points (wont be used later, need them for logging now)
     bool orientation;
     int orientationPointID;
     int symbolID;
-    
                    
     vector <float> sideList;
 };

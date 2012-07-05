@@ -18,7 +18,6 @@ TriangleManager::TriangleManager()
 }
 
 
-
 void TriangleManager::addNewCursor(MyCursorInfo *cursorInfo) {
     freePoints.push_back(cursorInfo);
 }
@@ -41,16 +40,11 @@ void TriangleManager::update()
         handleNewTriObjects();
     }
     updateExistingTriObject();
-//    cout << "\nnewtrianglelistsize = " << newTriangleList.size();
-    //    cout << "\nworkingtrianglelistsize = " << workingTriangleList.size();
-    //    cout << "\nfreecurpossize = " << freeCursorIDs.size();
-    //    cout << "\ndefinedtrianglesize = " << definedTriangleList.size();
 }
 
 void TriangleManager::handleNewCursors()
 {
     vector<MyCursorInfo*>::iterator i1, i2, i3;
-//    i1 = freePoints.begin();
     for(i1 = freePoints.begin(); i1 != freePoints.end(); ++i1)
     {
         i2 = i1;
@@ -83,12 +77,9 @@ void TriangleManager::compareTriangles()
                 SimpleTriangle *B = definedTriangleList.at(idef);                
                 if (A->compareWith(B, aspectRatio))
                 {
-//                    std::cout << "\nTRIANGLES MATCH!!!\t" << ++matchCounter << "\n";
                     A->setSymbolID(B->getSymbolID());
-                    
                     // if recognized, put the current triangle to the working list
                     workingTriangleList.push_back(A);
-                    
                     // remove used points from freepoints
                     vector<MyCursorInfo*> p = A->getCursors();
                     for(vector<MyCursorInfo*>::iterator it = p.begin(); it != p.end(); it++) {
@@ -97,7 +88,6 @@ void TriangleManager::compareTriangles()
                         vector<MyCursorInfo*>::iterator pos = find(freePoints.begin(), freePoints.end(), (*it));
                         if ( pos != freePoints.end() ) freePoints.erase(pos);
                     }
-                    
                     // remove this triangle from the new triangle list
                     vector<SimpleTriangle*>::iterator pos = find(newTriangleList.begin(),newTriangleList.end(),A);
                     if ( pos != newTriangleList.end() ) newTriangleList.erase(pos);
@@ -116,13 +106,9 @@ void TriangleManager::handleNewTriObjects()
 		{
 			if(!triangleObject[io]->isAlive)	// if the place is free
 			{
-//                cout << workingTriangleList.at(i)->testOutput();
-                triangleObject[io]->setTriangle(workingTriangleList.at(i));
+                triangleObject[io]->triangle = workingTriangleList.at(i);
                 triangleObject[io]->isAlive = true;
-                
-//                cout << triangleObject[io]->testOutput();
-				triangleObject[io]->update();
-//                cout << triangleObject[io]->testOutput();
+                triangleObject[io]->update();
 				break;
 			}
 		}
@@ -212,4 +198,8 @@ void TriangleManager::setDefinedTriangleList()
 //        cout << T->testOutput();
     }
     cout << "\ndefinedtrianglesize = " << definedTriangleList.size();
+}
+
+TriangleObject* TriangleManager::getObject(int index) {
+    return triangleObject[index];
 }

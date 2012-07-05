@@ -170,7 +170,7 @@
 -(void)awakeFromNib {
 	NSLog(@"MSASettings::awakeFromNib");
 	
-	defaults = [[NSDictionary alloc] initWithObjectsAndKeys:
+	defaults = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 				[self getBroadcastAddress], kSetting_HostIP,
 				[NSNumber numberWithInt:3333], kSetting_Port,
 				[NSNumber numberWithInt:0], kSetting_Packet,

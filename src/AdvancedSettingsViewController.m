@@ -100,10 +100,12 @@
 }
 - (IBAction)learnButtonPressed:(id)sender {
     LearnViewController *learnVC;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPhone" bundle:nil];
-    }
-    else learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPad" bundle:nil];
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+//        learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPhone" bundle:nil];
+//    }
+//    else learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPad" bundle:nil];
+    
+    learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPhone" bundle:nil];
     [self.navigationItem.backBarButtonItem setTitle:@"Back"];
     [self.navigationController pushViewController:learnVC animated:YES];
     [learnVC release];

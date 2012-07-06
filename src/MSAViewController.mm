@@ -153,6 +153,8 @@
 #define ANIMATION_CURVE		UIViewAnimationCurveEaseIn
 
 -(void)open:(bool)animate {
+    self.navigationController.navigationBarHidden = YES;
+
 	NSLog(@"MSAViewController::open %i", animate);
 		
 	if(self.view.superview == nil) {
@@ -172,7 +174,6 @@
 		
     }
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.navigationController.view];
-    self.navigationController.navigationBarHidden = YES;
 
 	// suspend update loop while UI is visible
 	isOn = true;

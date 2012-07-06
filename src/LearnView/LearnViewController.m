@@ -11,7 +11,8 @@
 
 
 @implementation LearnViewController
-@synthesize theView, theTextField;
+@synthesize theTextField;
+@synthesize IDsArray = _IDsArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,12 +36,13 @@
     
     theView = [[DrawView alloc] initWithFrame:rect];
     [self.view addSubview:theView];    
+    [theView release];
     
     self.theTextField.delegate = self;
     
     saveButtonState = YES;
     
-    IDsArray = [FileManagerHelper getExistingIDs];
+    self.IDsArray = [FileManagerHelper getExistingIDs];
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonClicked:)];
     self.navigationItem.rightBarButtonItem = rightButton;
@@ -99,8 +101,7 @@
     NSString *symbID = [NSString stringWithFormat:@"%@ ", theTextField.text];
     
     [FileManagerHelper saveObject:dotsInString withID:symbID];
-    
-    IDsArray = [FileManagerHelper getExistingIDs];
+    self.IDsArray = [FileManagerHelper getExistingIDs];
     theLabel.text = [NSString stringWithFormat:@"Saved triangle"];
 }
 
@@ -117,8 +118,7 @@
     NSString *symbID = [NSString stringWithFormat:@"%@ ", theTextField.text];
     
     [FileManagerHelper overwriteObjectWithID:symbID withObject:dotsInString];
-    
-    IDsArray = [FileManagerHelper getExistingIDs];
+    self.IDsArray = [FileManagerHelper getExistingIDs];
     theLabel.text = [NSString stringWithFormat:@"Saved triangle (overwritten)"];
 }
 
@@ -168,11 +168,11 @@
 {
     int temp = [theTextField.text intValue];
     NSLog(@"textfield text = %d", temp);
-    NSLog(@"\nidsarray count is %d", [IDsArray count]);
-    for(int i = 0; i < [IDsArray count]; i ++)
+    NSLog(@"\nself.IDsArray count is %d", [self.IDsArray count]);
+    for(int i = 0; i < [self.IDsArray count]; i ++)
     {
         //if (m_Ids[i] == [theTextField.text intValue]) {
-        if([[IDsArray objectAtIndex:i] intValue] == temp) {
+        if([[self.IDsArray objectAtIndex:i] intValue] == temp) {
             return true;
         }
     }
@@ -209,6 +209,8 @@
 
 
 - (void)dealloc {
+    [self.IDsArray release];
+    NSLog(@"theview retainCount is %d", [theView retainCount]);
     [super dealloc];
 }
 

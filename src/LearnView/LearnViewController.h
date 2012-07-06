@@ -17,12 +17,11 @@
     IBOutlet UITextField *theTextField;
     DrawView *theView;
     
-    NSMutableArray *IDsArray;
     BOOL saveButtonState;
 }
 
-@property (readonly, nonatomic) IBOutlet DrawView *theView;
 @property (readonly, nonatomic) IBOutlet UITextField *theTextField;
+@property (retain, nonatomic) NSMutableArray *IDsArray;
 
 -(IBAction) saveButtonClicked:(id)sender;
 -(IBAction) closeButtonClicked:(id)sender;

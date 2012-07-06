@@ -34,11 +34,12 @@
     NSString *docsDir = [dirPaths objectAtIndex:0];
     NSString *dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
+    NSLog(@"retaincount of nsdictionary in %s is %d", __FUNCTION__, [dict retainCount]);
     return dict;
 }
 
 + (NSMutableArray *) getExistingIDs {
-    NSMutableArray *existingIDs = [[NSMutableArray alloc] init];
+    NSMutableArray *existingIDs = [[[NSMutableArray alloc] init] autorelease];
     
     // file handling
     NSFileManager *filemgr = [NSFileManager defaultManager];
@@ -52,9 +53,9 @@
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
         existingIDs = [NSMutableArray arrayWithArray:[dict allKeys]];
     }
-    
-    [filemgr release];
-    return [existingIDs copy];
+
+//    return [existingIDs copy];
+    return existingIDs;
 }
 
 + (void) deleteAllObjects {

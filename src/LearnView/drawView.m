@@ -16,13 +16,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.dots = [[NSMutableArray alloc] init];
+        NSLog(@"\ndots retaincount = %d", [self.dots retainCount]);
     }
     return self;
 }
 
+
 - (void) addPointsFromTouches:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.dots = [[NSMutableArray alloc] init];
+    [self.dots removeAllObjects];
     
     for (UITouch * touch in event.allTouches) {
         if(touch.phase==UITouchPhaseEnded||[touch phase]==UITouchPhaseCancelled) continue;
@@ -67,6 +69,7 @@
 }
 
 - (void) dealloc {
+    [self.dots release];
     [super dealloc];
 }
 

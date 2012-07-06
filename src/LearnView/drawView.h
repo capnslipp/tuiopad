@@ -11,7 +11,7 @@
 
 @interface DrawView : UIView
 
-@property (nonatomic, retain) NSMutableArray *dots;
+@property (nonatomic, assign) NSMutableArray *dots;
 
 - (void) addPointsFromTouches:(NSSet *)touches withEvent:(UIEvent *)event;
 

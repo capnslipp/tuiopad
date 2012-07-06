@@ -106,10 +106,12 @@
     else learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPad" bundle:nil];
     [self.navigationItem.backBarButtonItem setTitle:@"Back"];
     [self.navigationController pushViewController:learnVC animated:YES];
+    [learnVC release];
 }
 
 - (IBAction)showObjectsButtonPressed:(id)sender {
     ExistingObjectsViewController *existingVC = [[ExistingObjectsViewController alloc] initWithNibName:@"ExistingObjectsViewController" bundle:nil];
     [self.navigationController pushViewController:existingVC animated:YES];
+    [existingVC release];
 }
 @end

@@ -23,6 +23,8 @@
     if (self) {
         // Custom initialization
         self.objectsDict = [FileManagerHelper getObjects];
+        NSLog(@"retaincount of nsdictionary in %s is %d", __FUNCTION__, [self.objectsDict retainCount]);
+
         [self setTitle:@"Existing Objects"];
     }
     return self;
@@ -65,7 +67,7 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"Object ID %@", [[self.objectsDict allKeys] objectAtIndex:indexPath.row]];
@@ -114,6 +116,7 @@
 
 - (void)dealloc {
     [tableView release];
+    [self.objectsDict release];
     [super dealloc];
 }
 @end

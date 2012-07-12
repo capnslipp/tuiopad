@@ -67,7 +67,7 @@ void TuioPad::update() {
 	// if device is shaken hard, open UI, animated
 	ofPoint &acc = ofxAccelerometer.getForce();
 	float shake = acc.x*acc.x + acc.y*acc.y + acc.z*acc.z;
-
+    
 	if(shake > 4) {
 		[viewController open:true];
 		return;
@@ -108,10 +108,10 @@ void TuioPad::draw() {
 	glRotatef(currentUpRot, 0, 0, 1);
 	glColor4f(1, 1, 1, 1);
 	ofSetRectMode(OF_RECTMODE_CENTER);
-	imageUp.draw(0, 0);
+	if (![viewController isUsingWebView]) imageUp.draw(0, 0);
 	glPopMatrix();
 	
-	for(int i=0; i<OF_MAX_TOUCHES; i++) fingerDrawer[i].draw();	
+	if (![viewController isUsingWebView]) for(int i=0; i<OF_MAX_TOUCHES; i++) fingerDrawer[i].draw();	
 }
 
 

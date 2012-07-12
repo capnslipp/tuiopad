@@ -34,7 +34,6 @@
     NSString *docsDir = [dirPaths objectAtIndex:0];
     NSString *dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
-    NSLog(@"retaincount of nsdictionary in %s is %d", __FUNCTION__, [dict retainCount]);
     return dict;
 }
 

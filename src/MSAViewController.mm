@@ -24,6 +24,10 @@
 #import "MSASettings.h"
 
 #import "AdvancedSettingsViewController.h"
+#import "WebViewController.h"
+
+#include "ofxiPhoneExtras.h"
+
 
 @implementation MSAViewController
 
@@ -31,6 +35,8 @@
 @synthesize tuioSender;
 @synthesize isOn;
 @synthesize deviceOrientation;
+@synthesize webViewController;
+@synthesize isUsingWebView;
 
 
 #pragma mark ----- Utility -----
@@ -127,9 +133,10 @@
 }
 
 - (IBAction)moreButtonClicked:(id)sender {
-    AdvancedSettingsViewController *advancedVC = [[[AdvancedSettingsViewController alloc] initWithNibName:@"AdvancedSettingsViewController" bundle:nil] retain];
+    AdvancedSettingsViewController *advancedVC = [[AdvancedSettingsViewController alloc] initWithNibName:@"AdvancedSettingsViewController" bundle:nil];
     advancedVC.settings = self.settings;
     [self.navigationController pushViewController:advancedVC animated:YES];
+    [advancedVC release];
 }
 
 
@@ -184,6 +191,52 @@
 
 -(void) close {
 	NSLog(@"MSAViewController::close");
+    
+    if ([settings getInt:kSetting_EnableVNCOVERHTML5]) {
+        ofBackground(0, 0, 0);
+        float *bgptr = ofBgColorPtr();
+        bgptr[3] = 0;       // there is no method to set the alpha channel of this member
+        ofSetBackgroundAuto(true);
+        ofxiPhoneSetGLViewTransparent(true);
+        isUsingWebView = true;
+
+        
+        if (!self.webViewController) {
+//            WebViewController *webVC = [[WebViewController alloc] init];
+//            self.webViewController = webVC;
+//            [self.webViewController setURL:[settings getString:kSetting_VNC_IP] withPort:nil];
+            [self setEnableWebView:YES];
+        }
+        
+//        bool found = false;
+//        for (UIView *v in [[[UIApplication sharedApplication] keyWindow] subviews]) {
+//            if ([v isKindOfClass:[WebViewController class]])
+//                found = true;
+//        }
+        if ([[[[UIApplication sharedApplication] keyWindow] subviews] count] == 2) {
+            UIView* mainView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
+            [mainView setBackgroundColor:[UIColor clearColor]];
+            [[[UIApplication sharedApplication] keyWindow] insertSubview:self.webViewController.view belowSubview:mainView];
+            [self configureWebView];
+        }
+    }
+    
+    else {
+        ofBackground(255, 255, 255);
+        ofxiPhoneSetGLViewTransparent(false);
+        isUsingWebView = false;
+        
+        // remove webview if it's inside the keywindow subviews
+//        for (UIView *v in [[[UIApplication sharedApplication] keyWindow] subviews]) {
+//            if ([v isKindOfClass:[WebViewController class]])
+//                [v removeFromSuperview];
+//        }
+//        if ([[[[UIApplication sharedApplication] keyWindow] subviews] count] == 3) {
+//            UIView *bottomView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
+//            [bottomView removeFromSuperview];
+//        }
+    }
+
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:ANIMATION_TIME];
@@ -256,16 +309,13 @@
 		statusLabel.textColor = [UIColor whiteColor];
 		statusLabel.text = status;
 		[startButton setEnabled: YES];
-		NSLog([NSString stringWithFormat:@"MSAViewController: %@", status]);
+		NSLog(@"MSAViewController: %@", status);
 	} else {
 		statusLabel.textColor = [UIColor redColor];
 		statusLabel.text = @"no active network connection available!";
 		[startButton setEnabled: NO];
 		//NSLog(@"MSAViewController: no active network connection available!");
 	}
-	
-//	[self connect];
-
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -287,8 +337,25 @@
 	}
 }
 
+#pragma mark - AdvancedSettings delegate methods
 
+- (void) setEnableWebView:(BOOL)enable {
+    if (enable) {
+        if (self.webViewController) return;
+        self.webViewController = [[WebViewController alloc] init];
+    }
+    else {
+        if (self.webViewController != nil) {
+            [self.webViewController release];
+            self.webViewController = nil;
+        }
+    }
+}
 
+- (void) configureWebView {
+    [self.webViewController setURL:[settings getString:kSetting_VNC_IP] withPort:nil];
+    [self.webViewController loadURL];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

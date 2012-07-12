@@ -9,7 +9,7 @@
 #ifndef TuioPad_SimpleTriangle_h
 #define TuioPad_SimpleTriangle_h
 
-#define DISTANCE_TOLERANCE 0.075f
+#define DISTANCE_TOLERANCE 0.01f
 #define ORIENTATION_CLOCKWISE true
 #define ORIENTATION_COUNTER_CLOCKWISE false
 

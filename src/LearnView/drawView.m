@@ -17,7 +17,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.dots = [[NSMutableArray alloc] init];
-        NSLog(@"\ndots retaincount = %d", [self.dots retainCount]);
     }
     return self;
 }

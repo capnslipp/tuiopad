@@ -21,11 +21,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AdvancedSettingsViewController.h"
+
 class MSATuioSenderCPP;
 @class MSASettings;
+@class WebViewController;
 
 
-@interface MSAViewController : UIViewController <UINavigationControllerDelegate> {
+@interface MSAViewController : UIViewController <UINavigationControllerDelegate, AdvancedSettingsDelegate> {
 	IBOutlet UITextField		*hostTextField;
 	IBOutlet UITextField		*portTextField;
 	IBOutlet UISegmentedControl	*orientControl;
@@ -52,6 +55,9 @@ class MSATuioSenderCPP;
 @property (readonly, nonatomic)		MSASettings			*settings;
 @property (readonly, nonatomic)		bool				isOn;
 @property (readonly, nonatomic)		int					deviceOrientation;
+
+@property (nonatomic, retain) WebViewController* webViewController;
+@property (readonly, nonatomic) bool isUsingWebView;
 
 
 -(void) open:(bool)animate;

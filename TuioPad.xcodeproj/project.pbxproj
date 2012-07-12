@@ -31,6 +31,8 @@
 		8108F06E159E391200E1439B /* LearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F06C159E391200E1439B /* LearnViewController.m */; };
 		8108F071159E392200E1439B /* LearnViewPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F06F159E392200E1439B /* LearnViewPad.xib */; };
 		8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F070159E392200E1439B /* LearnViewPhone.xib */; };
+		81AAE27315AEB395008F1916 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AAE27115AEB395008F1916 /* WebViewController.m */; };
+		81AAE27415AEB395008F1916 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81AAE27215AEB395008F1916 /* WebViewController.xib */; };
 		81CACBEA159F5AAD000320DD /* SimpleTriangle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */; };
 		81CACBEB159F5AAD000320DD /* TriangleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE7159F5AAD000320DD /* TriangleManager.mm */; };
 		81CACBEC159F5AAD000320DD /* TriangleObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE9159F5AAD000320DD /* TriangleObject.mm */; };
@@ -125,7 +127,7 @@
 		810176FD159F182F0065C088 /* FileManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = FileManagerHelper.h; path = src/Helper/FileManagerHelper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		810176FE159F182F0065C088 /* FileManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = FileManagerHelper.m; path = src/Helper/FileManagerHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8108F063159E26C400E1439B /* AdvancedSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AdvancedSettingsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		8108F064159E26C400E1439B /* AdvancedSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AdvancedSettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8108F064159E26C400E1439B /* AdvancedSettingsViewController.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; lineEnding = 0; path = AdvancedSettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedSettingsViewController.xib; path = xibs/AdvancedSettingsViewController.xib; sourceTree = "<group>"; };
 		8108F069159E391200E1439B /* drawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = drawView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8108F06A159E391200E1439B /* drawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = drawView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -134,6 +136,9 @@
 		8108F06F159E392200E1439B /* LearnViewPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPad.xib; path = xibs/LearnViewPad.xib; sourceTree = "<group>"; };
 		8108F070159E392200E1439B /* LearnViewPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPhone.xib; path = xibs/LearnViewPhone.xib; sourceTree = "<group>"; };
 		8109D78515A5D424008CB736 /* MyCursorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCursorInfo.h; sourceTree = "<group>"; };
+		81AAE27015AEB395008F1916 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = WebView/WebViewController.h; sourceTree = "<group>"; };
+		81AAE27115AEB395008F1916 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = WebView/WebViewController.m; sourceTree = "<group>"; };
+		81AAE27215AEB395008F1916 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WebViewController.xib; path = WebView/WebViewController.xib; sourceTree = "<group>"; };
 		81CACBE4159F5AAD000320DD /* SimpleTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleTriangle.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SimpleTriangle.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		81CACBE6159F5AAD000320DD /* TriangleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleManager.h; sourceTree = "<group>"; };
@@ -422,6 +427,16 @@
 				810176F9159F17240065C088 /* ExistingObjectsViewController.xib */,
 			);
 			path = LearnView;
+			sourceTree = "<group>";
+		};
+		81AAE26F15AEB339008F1916 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				81AAE27015AEB395008F1916 /* WebViewController.h */,
+				81AAE27115AEB395008F1916 /* WebViewController.m */,
+				81AAE27215AEB395008F1916 /* WebViewController.xib */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		81CACBE3159F5AAD000320DD /* Triangles */ = {
@@ -803,6 +818,7 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				81AAE26F15AEB339008F1916 /* WebView */,
 				81CACBE3159F5AAD000320DD /* Triangles */,
 				810176FC159F17D00065C088 /* Helper */,
 				8108F068159E391200E1439B /* LearnView */,
@@ -908,6 +924,7 @@
 				8108F071159E392200E1439B /* LearnViewPad.xib in Resources */,
 				8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */,
 				810176FB159F17240065C088 /* ExistingObjectsViewController.xib in Resources */,
+				81AAE27415AEB395008F1916 /* WebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +983,7 @@
 				81CACBEA159F5AAD000320DD /* SimpleTriangle.mm in Sources */,
 				81CACBEB159F5AAD000320DD /* TriangleManager.mm in Sources */,
 				81CACBEC159F5AAD000320DD /* TriangleObject.mm in Sources */,
+				81AAE27315AEB395008F1916 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,11 +1079,9 @@
 		B248878C12B97362007511C0 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD_32_BIT)",
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1073,6 +1089,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1100,6 +1117,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1147,17 +1165,16 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD_32_BIT)",
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
@@ -1190,6 +1207,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1200,11 +1218,9 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD_32_BIT)",
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1212,6 +1228,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1239,6 +1256,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

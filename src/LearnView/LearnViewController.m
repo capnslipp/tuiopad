@@ -53,13 +53,12 @@
     [theTextField becomeFirstResponder];
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
 
 -(IBAction)saveButtonClicked:(id)sender {
-//    if (!saveButtonState) {
-//        theView.userInteractionEnabled = YES;
-//        [self changeButtonState:sender];
-//        return;
-//    }
     if (theTextField.text.length==0) {
         theLabel.text = @"No ID specified";
         return;
@@ -167,11 +166,8 @@
 -(BOOL)IDExists
 {
     int temp = [theTextField.text intValue];
-    NSLog(@"textfield text = %d", temp);
-    NSLog(@"\nself.IDsArray count is %d", [self.IDsArray count]);
     for(int i = 0; i < [self.IDsArray count]; i ++)
     {
-        //if (m_Ids[i] == [theTextField.text intValue]) {
         if([[self.IDsArray objectAtIndex:i] intValue] == temp) {
             return true;
         }
@@ -195,22 +191,16 @@
 
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 
 - (void)dealloc {
     [self.IDsArray release];
-    NSLog(@"theview retainCount is %d", [theView retainCount]);
     [super dealloc];
 }
 

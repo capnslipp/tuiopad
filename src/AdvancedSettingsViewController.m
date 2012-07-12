@@ -9,9 +9,14 @@
 #import "AdvancedSettingsViewController.h"
 #import "LearnViewController.h"
 #import "ExistingObjectsViewController.h"
+#import "WebViewController.h"
+#import "MSAViewController.h"
 
 @interface AdvancedSettingsViewController ()
-
+- (void) refreshVNCControls: (BOOL)enabled;
+- (void) configureWebView: (BOOL) enabled;
+- (void) animateViewUp;
+- (void) animateViewDown;
 @end
 
 @implementation AdvancedSettingsViewController
@@ -21,7 +26,11 @@
 @synthesize objectProfileSwitch;
 @synthesize VNCSwitch;
 @synthesize VNCIPTextfield;
+@synthesize ipLabel;
+@synthesize openWebViewButton;
 @synthesize settings;
+@synthesize webViewlabel;
+@synthesize autoButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,14 +62,23 @@
     objectProfileSwitch.on		= [settings getInt:kSetting_EnableObjectProfile];
     VNCSwitch.on                = [settings getInt:kSetting_EnableVNCOVERHTML5];
     
+    [self refreshVNCControls:VNCSwitch.on];
 	if (VNCSwitch.on ) {
         VNCIPTextfield.text					= [settings getString:kSetting_VNC_IP];	
-        [VNCIPTextfield setEnabled:YES];
     }
 	else {
-        [VNCIPTextfield setEnabled:NO];
 	}
+    
+    MSAViewController *msaVC;
+    if ([[self.navigationController.viewControllers objectAtIndex:0] isKindOfClass:[MSAViewController class]])
+        msaVC = [self.navigationController.viewControllers objectAtIndex:0];
+    if (msaVC) delegate = msaVC;
+    
+    [delegate setEnableWebView:VNCSwitch.on];
+    
 	[settings setString:HostIP forKey:kSetting_HostIP];
+    
+
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -80,6 +98,10 @@
     [self setObjectProfileSwitch:nil];
     [self setVNCSwitch:nil];
     [self setVNCIPTextfield:nil];
+    [self setOpenWebViewButton:nil];
+    [self setIpLabel:nil];
+    [self setWebViewlabel:nil];
+    [self setAutoButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -96,8 +118,15 @@
     [objectProfileSwitch release];
     [VNCSwitch release];
     [VNCIPTextfield release];
+    [openWebViewButton release];
+    [ipLabel release];
+    [webViewlabel release];
+    [autoButton release];
     [super dealloc];
 }
+
+#pragma mark - IBACTIONS
+
 - (IBAction)learnButtonPressed:(id)sender {
     LearnViewController *learnVC;
 //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -115,5 +144,87 @@
     ExistingObjectsViewController *existingVC = [[ExistingObjectsViewController alloc] initWithNibName:@"ExistingObjectsViewController" bundle:nil];
     [self.navigationController pushViewController:existingVC animated:YES];
     [existingVC release];
+}
+
+- (IBAction)vncSwitchChanged:(id)sender {
+    [self refreshVNCControls:VNCSwitch.on];
+    [delegate setEnableWebView:VNCSwitch.on];
+    [delegate configureWebView];
+
+//    [self configureWebView:VNCSwitch.on];
+}
+- (IBAction)autoButtonPressed:(id)sender {
+    [self.VNCIPTextfield setText:[settings getString:kSetting_HostIP]];
+    [settings setString:[settings getString:kSetting_HostIP] forKey:kSetting_VNC_IP];
+}
+
+- (IBAction)openWebViewPressed:(id)sender {
+    MSAViewController *msaVC;
+    if ([[self.navigationController.viewControllers objectAtIndex:0] isKindOfClass:[MSAViewController class]])
+        msaVC = [self.navigationController.viewControllers objectAtIndex:0];
+    
+    if ([[[[UIApplication sharedApplication] keyWindow] subviews] count] == 3) {
+        UIView *bottomView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
+        [bottomView removeFromSuperview];
+    }
+    
+    [self.navigationController pushViewController:msaVC.webViewController animated:YES];
+    [delegate configureWebView];
+}
+
+#pragma mark - other stuff
+
+- (void) refreshVNCControls: (BOOL) enabled{
+    self.ipLabel.hidden = !enabled;
+    self.openWebViewButton.hidden = !enabled;
+    self.VNCIPTextfield.hidden = !enabled;
+    self.webViewlabel.hidden = !enabled;
+}
+
+- (void) configureWebView:(BOOL)enabled {
+//    MSAViewController *msaVC;
+//    if ([[self.navigationController.viewControllers objectAtIndex:0] isKindOfClass:[MSAViewController class]])
+//        msaVC = [self.navigationController.viewControllers objectAtIndex:0];
+}
+
+#pragma mark - textfield delegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{ 
+    [textField resignFirstResponder]; 
+    return YES;
+}
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField {     
+    [self animateViewUp];
+}
+
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    [self animateViewDown];
+    if ([[textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] != 0) 
+        [settings setString:textField.text forKey:kSetting_VNC_IP];
+}
+
+#pragma mark - view animation
+
+- (void) animateViewUp {
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect newFrame = self.view.frame;
+        newFrame.origin.y = newFrame.origin.y - 100.0;
+        self.view.frame = newFrame;
+    }
+                     completion:^(BOOL){
+                         
+                     }];
+}
+
+- (void) animateViewDown {
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect newFrame = self.view.frame;
+        newFrame.origin.y = newFrame.origin.y + 100.0;
+        self.view.frame = newFrame;
+    }
+                     completion:^(BOOL){
+                         
+                     }];
 }
 @end

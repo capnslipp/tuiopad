@@ -23,8 +23,6 @@
     if (self) {
         // Custom initialization
         self.objectsDict = [FileManagerHelper getObjects];
-        NSLog(@"retaincount of nsdictionary in %s is %d", __FUNCTION__, [self.objectsDict retainCount]);
-
         [self setTitle:@"Existing Objects"];
     }
     return self;

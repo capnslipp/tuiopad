@@ -35,17 +35,12 @@ void TriangleObject::update()
     float xp = triangle->getOrientationPoint()->x;
     float yp = triangle->getOrientationPoint()->y;
     
-    float side = xp - x;
-	float height = yp - y;
-	
+    float side = x -  xp;
+	float height = y - yp;
 	float distance = sqrtf(side*side + height*height);
-	
-	angle = (float)(M_PI/2 - asin(side/distance));
-	if (height<0) 
+	angle = (float)(M_PI/2 - asin(height/distance));
+	if (side>0) 
         angle = 2.0f*(float)M_PI-angle;
-//    printf("\n%s  angle = %f\tside = %f\tdistance = %f\theight = %f", __FUNCTION__, angle, side, distance, height);
-//    cout << "\ndevice orientation = " << [UIDevice currentDevice].orientation << endl;
-//    printf("\ncentroid x = %f y = %f\toPoint x = %f y = %f", x, y, xp, yp);
 }
 
 

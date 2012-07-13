@@ -38,6 +38,10 @@ void TriangleObject::update()
     float side = x -  xp;
 	float height = y - yp;
 	float distance = sqrtf(side*side + height*height);
+    if (height == distance) {
+        angle = 0;
+        return;
+    }
 	angle = (float)(M_PI/2 - asin(height/distance));
 	if (side>0) 
         angle = 2.0f*(float)M_PI-angle;

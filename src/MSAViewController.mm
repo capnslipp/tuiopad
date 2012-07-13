@@ -221,14 +221,10 @@
         bgptr[3] = 1.0f; 
         
         // remove webview if it's inside the keywindow subviews
-//        for (UIView *v in [[[UIApplication sharedApplication] keyWindow] subviews]) {
-//            if ([v isKindOfClass:[WebViewController class]])
-//                [v removeFromSuperview];
-//        }
-//        if ([[[[UIApplication sharedApplication] keyWindow] subviews] count] == 3) {
-//            UIView *bottomView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
-//            [bottomView removeFromSuperview];
-//        }
+        if ([[[[UIApplication sharedApplication] keyWindow] subviews] count] == 3) {
+            UIView *bottomView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
+            [bottomView removeFromSuperview];
+        }
     }
 
 	

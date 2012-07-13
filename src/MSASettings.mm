@@ -44,7 +44,7 @@
 				// Get NSString from C String  
 				address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)]; 
 				// Check if interface is en0 which is the wifi connection on the iPhone  
-				NSLog([NSString stringWithFormat:@"MSASettings::found network device %s",temp_addr->ifa_name]);
+				NSLog(@"MSASettings::found network device %s",temp_addr->ifa_name);
 				if([[NSString stringWithUTF8String:temp_addr->ifa_name] rangeOfString:@"en"].location != NSNotFound) break;
 			} 
 			temp_addr = temp_addr->ifa_next; 
@@ -181,6 +181,7 @@
                 [NSNumber numberWithInt:0], kSetting_EnableObjectProfile,
                 [NSNumber numberWithInt:0], kSetting_EnableVNCOVERHTML5,
                 [self getBroadcastAddress], kSetting_VNC_IP,
+                [NSNumber numberWithInt:80], kSetting_VNC_PORT,
 				nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObject:defaults forKey:kSettings_Key]];

@@ -31,6 +31,8 @@
 @property (retain, nonatomic) IBOutlet UISwitch *VNCSwitch;
 @property (retain, nonatomic) IBOutlet UITextField *VNCIPTextfield;
 @property (retain, nonatomic) IBOutlet UILabel *ipLabel;
+@property (retain, nonatomic) IBOutlet UILabel *portLabel;
+@property (retain, nonatomic) IBOutlet UITextField *portTextfield;
 
 @property (retain, nonatomic) IBOutlet UIButton *openWebViewButton;
 @property (retain, nonatomic) IBOutlet UILabel *webViewlabel;

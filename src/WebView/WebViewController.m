@@ -45,15 +45,19 @@
     [[[UIApplication sharedApplication] keyWindow] insertSubview:self.view belowSubview:mainView];
 }
 
--(void)setURL:(NSString *)host withPort:(NSString *)port
-{
+-(void)setURL:(NSString *)host withPort:(NSString *)port {
     if (!host || host.length == 0) return;
-    if (![[host substringToIndex:7] isEqualToString:@"http://"])
-        host = [NSString stringWithFormat:@"http://%@", host];
-    if(port && port !=@"")
-        URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@:%@",host,port]];
-    else
-        URL = [NSURL URLWithString:host];
+    if (host.length > 7)
+        if (![[host substringToIndex:7] isEqualToString:@"http://"])
+            host = [NSString stringWithFormat:@"http://%@", host];
+    if(port && port !=@"") {
+        if (URL) [URL release];
+        URL = [[NSURL URLWithString:[NSString stringWithFormat:@"%@:%@",host,port]] retain];
+    }
+    else {
+        if (URL) [URL release];
+        URL = [[NSURL URLWithString:host] retain];
+    }
 }
 
 - (void) loadURL {
@@ -72,7 +76,8 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"%@", [error localizedDescription]);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -81,7 +86,7 @@
 }
 
 - (void)dealloc {
-    [URL release];
+    if (URL) [URL release];
     [webView release];
     [super dealloc];
 }

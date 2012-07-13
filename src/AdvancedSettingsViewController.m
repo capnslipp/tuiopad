@@ -14,7 +14,6 @@
 
 @interface AdvancedSettingsViewController ()
 - (void) refreshVNCControls: (BOOL)enabled;
-- (void) configureWebView: (BOOL) enabled;
 - (void) animateViewUp;
 - (void) animateViewDown;
 @end
@@ -27,6 +26,8 @@
 @synthesize VNCSwitch;
 @synthesize VNCIPTextfield;
 @synthesize ipLabel;
+@synthesize portLabel;
+@synthesize portTextfield;
 @synthesize openWebViewButton;
 @synthesize settings;
 @synthesize webViewlabel;
@@ -64,7 +65,7 @@
     
     [self refreshVNCControls:VNCSwitch.on];
 	if (VNCSwitch.on ) {
-        VNCIPTextfield.text					= [settings getString:kSetting_VNC_IP];	
+
     }
 	else {
 	}
@@ -102,6 +103,9 @@
     [self setIpLabel:nil];
     [self setWebViewlabel:nil];
     [self setAutoButton:nil];
+    
+    [self setPortLabel:nil];
+    [self setPortTextfield:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -122,6 +126,8 @@
     [ipLabel release];
     [webViewlabel release];
     [autoButton release];
+    [portLabel release];
+    [portTextfield release];
     [super dealloc];
 }
 
@@ -150,15 +156,19 @@
     [self refreshVNCControls:VNCSwitch.on];
     [delegate setEnableWebView:VNCSwitch.on];
     [delegate configureWebView];
-
-//    [self configureWebView:VNCSwitch.on];
 }
+
 - (IBAction)autoButtonPressed:(id)sender {
     [self.VNCIPTextfield setText:[settings getString:kSetting_HostIP]];
     [settings setString:[settings getString:kSetting_HostIP] forKey:kSetting_VNC_IP];
 }
 
 - (IBAction)openWebViewPressed:(id)sender {
+    if ([[[settings getString:kSetting_VNC_IP] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Host Url Error" message:@"The Host Url is not spicified!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
     MSAViewController *msaVC;
     if ([[self.navigationController.viewControllers objectAtIndex:0] isKindOfClass:[MSAViewController class]])
         msaVC = [self.navigationController.viewControllers objectAtIndex:0];
@@ -166,6 +176,7 @@
     if ([[[[UIApplication sharedApplication] keyWindow] subviews] count] == 3) {
         UIView *bottomView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
         [bottomView removeFromSuperview];
+        bottomView = nil;
     }
     
     [self.navigationController pushViewController:msaVC.webViewController animated:YES];
@@ -175,17 +186,21 @@
 #pragma mark - other stuff
 
 - (void) refreshVNCControls: (BOOL) enabled{
-    self.ipLabel.hidden = !enabled;
-    self.openWebViewButton.hidden = !enabled;
-    self.VNCIPTextfield.hidden = !enabled;
-    self.webViewlabel.hidden = !enabled;
+    enabled = !enabled;
+    self.ipLabel.hidden = enabled;
+    self.openWebViewButton.hidden = enabled;
+    self.VNCIPTextfield.hidden = enabled;
+    self.webViewlabel.hidden = enabled;
+    self.autoButton.hidden = enabled;
+    self.portLabel.hidden = enabled;
+    self.portTextfield.hidden = enabled;
+    
+    if ((!enabled)) {
+        VNCIPTextfield.text					= [settings getString:kSetting_VNC_IP];	
+        portTextfield.text                  = [NSString stringWithFormat:@"%d", [settings getInt:kSetting_VNC_PORT]];
+    }
 }
 
-- (void) configureWebView:(BOOL)enabled {
-//    MSAViewController *msaVC;
-//    if ([[self.navigationController.viewControllers objectAtIndex:0] isKindOfClass:[MSAViewController class]])
-//        msaVC = [self.navigationController.viewControllers objectAtIndex:0];
-}
 
 #pragma mark - textfield delegate methods
 
@@ -194,14 +209,22 @@
     return YES;
 }
 
-- (void) textFieldDidBeginEditing:(UITextField *)textField {     
-    [self animateViewUp];
+- (void) textFieldDidBeginEditing:(UITextField *)textField { 
+    if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone))
+        [self animateViewUp];
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-    [self animateViewDown];
-    if ([[textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] != 0) 
-        [settings setString:textField.text forKey:kSetting_VNC_IP];
+    if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone))
+        [self animateViewDown];
+    if (textField.tag == 33) {
+        if ([[textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] != 0) 
+            [settings setString:textField.text forKey:kSetting_VNC_IP];
+    }
+    else if (textField.tag == 44) {
+        if ([[textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] != 0) 
+            [settings setString:textField.text forKey:kSetting_VNC_PORT];
+    }
 }
 
 #pragma mark - view animation

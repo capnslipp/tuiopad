@@ -31,6 +31,10 @@ void TriangleManager::removeCursor(MyCursorInfo *cursorInfo) {
 
 void TriangleManager::update()
 {
+    if (newTriangleList.size() > 0)
+        for (int i = 0; i < newTriangleList.size(); i++) {
+            delete newTriangleList.at(i);
+        }
     newTriangleList.clear();
     
     if(freePoints.size() >= 3)
@@ -154,6 +158,7 @@ void TriangleManager::removeTriObject(int trObjectID) {
         (*it)->isAlive = true;
     }
     triangleObject[trObjectID]->isAlive = false;
+    delete triangleObject[trObjectID]->triangle;
 }
 
 void TriangleManager::removeTriObjectContainingPoint(MyCursorInfo* cursorInfo) {
@@ -171,6 +176,7 @@ void TriangleManager::removeTriObjectContainingPoint(MyCursorInfo* cursorInfo) {
                     (*it)->isAlive = true;
                 }
             triangleObject[i]->isAlive = false;
+            delete triangleObject[i]->triangle;
         }
 	}
 }

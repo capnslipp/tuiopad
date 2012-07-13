@@ -8,13 +8,15 @@
 
 #import "WebViewController.h"
 
-@interface WebViewController ()
+
+@interface WebViewController () 
 
 @end
 
 @implementation WebViewController
 @synthesize webView;
 @synthesize URL;
+@synthesize rotationAllowed;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidUnload
@@ -39,11 +40,23 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
     UIView* mainView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
     [mainView setBackgroundColor:[UIColor clearColor]];
     [[[UIApplication sharedApplication] keyWindow] insertSubview:self.view belowSubview:mainView];
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if (rotationAllowed) return YES;
+    else return (interfaceOrientation == UIDeviceOrientationPortrait);
+}
+
+#pragma mark - url request handling
 
 -(void)setURL:(NSString *)host withPort:(NSString *)port {
     if (!host || host.length == 0) return;
@@ -78,11 +91,6 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
 }
 
 - (void)dealloc {

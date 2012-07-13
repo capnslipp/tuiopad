@@ -12,10 +12,18 @@
 #import "WebViewController.h"
 #import "MSAViewController.h"
 
+#include "ofxAccelerometer.h"
+
+
 @interface AdvancedSettingsViewController ()
+{
+    NSTimer *accelerometerTimer;
+}
 - (void) refreshVNCControls: (BOOL)enabled;
 - (void) animateViewUp;
 - (void) animateViewDown;
+- (IBAction) checkAccelerometer: (id) sender;
+
 @end
 
 @implementation AdvancedSettingsViewController
@@ -82,15 +90,6 @@
 
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
-    [settings setInt:cursorProfileSwitch.on forKey:kSetting_EnableCursorProfile];
-    [settings setInt:objectProfileSwitch.on forKey:kSetting_EnableObjectProfile];
-    [settings setInt:VNCSwitch.on forKey:kSetting_EnableVNCOVERHTML5];
-    if ([VNCIPTextfield isEnabled] && VNCIPTextfield.text != nil) [settings setString:VNCIPTextfield.text forKey:kSetting_VNC_IP];
-
-	[settings saveSettings];
-}
-
 - (void)viewDidUnload
 {
     [self setLearnButton:nil];
@@ -108,6 +107,19 @@
     [self setPortTextfield:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [settings setInt:cursorProfileSwitch.on forKey:kSetting_EnableCursorProfile];
+    [settings setInt:objectProfileSwitch.on forKey:kSetting_EnableObjectProfile];
+    [settings setInt:VNCSwitch.on forKey:kSetting_EnableVNCOVERHTML5];
+    if ([VNCIPTextfield isEnabled] && VNCIPTextfield.text != nil) [settings setString:VNCIPTextfield.text forKey:kSetting_VNC_IP];
+    
+	[settings saveSettings];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -179,8 +191,12 @@
         bottomView = nil;
     }
     
-    [self.navigationController pushViewController:msaVC.webViewController animated:YES];
+//    [self.navigationController pushViewController:msaVC.webViewController animated:YES];
+    
+    accelerometerTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(checkAccelerometer:) userInfo:nil repeats:YES]; 
+    [self presentModalViewController:msaVC.webViewController animated:YES];
     [delegate configureWebView];
+    msaVC.webViewController.rotationAllowed = YES;
 }
 
 #pragma mark - other stuff
@@ -232,7 +248,7 @@
 - (void) animateViewUp {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect newFrame = self.view.frame;
-        newFrame.origin.y = newFrame.origin.y - 100.0;
+        newFrame.origin.y = newFrame.origin.y - 120.0;
         self.view.frame = newFrame;
     }
                      completion:^(BOOL){
@@ -243,11 +259,22 @@
 - (void) animateViewDown {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect newFrame = self.view.frame;
-        newFrame.origin.y = newFrame.origin.y + 100.0;
+        newFrame.origin.y = newFrame.origin.y + 120.0;
         self.view.frame = newFrame;
     }
                      completion:^(BOOL){
                          
                      }];
+}
+
+#pragma mark - accelerometer stuff
+- (IBAction)checkAccelerometer:(id)sender {
+    ofPoint &acc = ofxAccelerometer.getForce();
+	float shake = acc.x*acc.x + acc.y*acc.y + acc.z*acc.z;
+	if(shake > 4) {
+        [accelerometerTimer invalidate];
+		[self.presentedViewController dismissModalViewControllerAnimated:YES];
+		return;
+	}
 }
 @end

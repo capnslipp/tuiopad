@@ -12,6 +12,7 @@
 
 @property (retain, nonatomic) IBOutlet UIWebView *webView;
 @property (retain, nonatomic) NSURL* URL;
+@property (nonatomic) BOOL rotationAllowed;
 
 -(void)setURL:(NSString *)host withPort:(NSString *)port;
 - (void) loadURL;

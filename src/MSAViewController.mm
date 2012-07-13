@@ -181,6 +181,11 @@
 		
     }
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.navigationController.view];
+    if (self.webViewController) {
+        self.webViewController.rotationAllowed = NO;
+//        [self.webViewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait];
+        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];    
+    }
 
 	// suspend update loop while UI is visible
 	isOn = true;
@@ -211,6 +216,7 @@
             [self configureWebView];
             [self.webViewController.view setFrame:mainView.frame];
         }
+        self.webViewController.rotationAllowed = YES; 
     }
     
     else {

@@ -11,6 +11,8 @@
 
 #include "MSATuioSenderCPP.h"
 #include "SimpleTriangle.h"
+#include "TriangleObject.h"
+
 
 using namespace std;
 
@@ -18,11 +20,11 @@ class MyCursorInfo;
 class TriangleObject;
 
 
-
 class TriangleManager
 {
 public:
     TriangleManager();
+
     ~TriangleManager(){};
     
     void update();

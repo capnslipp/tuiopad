@@ -36,6 +36,7 @@
 #define kSetting_EnableVNCOVERHTML5     @"VNCHTML5Enabled"
 #define kSetting_VNC_IP                 @"VNC_IP"
 #define kSetting_VNC_PORT               @"VNC_PORT"
+#define kSetting_OBJECT_TOLERANCE       @"OBJECT_RECOGNITION_TOLERANCE"
 
 #define kSettings_Key				@"TuioPadSettings"
 

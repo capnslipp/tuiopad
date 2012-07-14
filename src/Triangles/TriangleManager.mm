@@ -7,16 +7,14 @@
 //
 
 #include "TriangleManager.h"
-#include "TriangleObject.h"
 #import "FileManagerHelper.h"
 
 long matchCounter = 0;
 
 TriangleManager::TriangleManager()
 {
-	for( int i = 0; i < MAX_OBJECT_NUMBER; i++) triangleObject[i] = new TriangleObject();
+    for( int i = 0; i < MAX_OBJECT_NUMBER; i++) triangleObject[i] = new TriangleObject();
 }
-
 
 void TriangleManager::addNewCursor(MyCursorInfo *cursorInfo) {
     freePoints.push_back(cursorInfo);

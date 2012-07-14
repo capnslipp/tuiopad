@@ -10,7 +10,21 @@
 #include "SimpleTriangle.h"
 #include "ofxiPhone.h"  // currently used only for ostringstream
 #include "MyCursorInfo.h"
+#include "TriangleManager.h"
 
+//extern float initial_tolerance;
+//extern float evaluated_tolerance;
+
+NSMutableDictionary *current_settings = [[[NSUserDefaults standardUserDefaults] objectForKey:kSettings_Key] mutableCopy];
+static float initial_tolerance = [[current_settings objectForKey:kSetting_OBJECT_TOLERANCE] floatValue];
+static float evaluated_tolerance = 0.0f;
+
+
+#define SIZE_OF_ABSDIFFS 100
+
+float absDiffs[SIZE_OF_ABSDIFFS];
+int absDiffCounter = 0;
+long double absDiffsSum = 0;
 
 SimpleTriangle::SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3) {
     cursors.push_back(c1);
@@ -117,11 +131,6 @@ bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
         c3Transformed.y *= aspectRatio;
     }
     
-    vector<float> transformedSides;
-    transformedSides.push_back(distanceBetweenCursors(&c1Transformed, &c2Transformed));
-    transformedSides.push_back(distanceBetweenCursors(&c2Transformed, &c3Transformed));
-    transformedSides.push_back(distanceBetweenCursors(&c1Transformed, &c3Transformed));
-    
     sideList.clear();
     sideList.push_back(distanceBetweenCursors(&c1Transformed, &c2Transformed));
     sideList.push_back(distanceBetweenCursors(&c2Transformed, &c3Transformed));
@@ -129,13 +138,35 @@ bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
     
     sortSides();
     
+    float absDiff = 0;
+    float absDiffsTemp[3];
     vector<float> hisSides = B->getSides();
     for (int i = 0; i<3; i++) {
         float diff = hisSides.at(i) - sideList.at(i);
-        float absDiff = fabs(diff);
-//        cout << "\nabsDiff = " << absDiff;
-        if(absDiff > DISTANCE_TOLERANCE) return false;
+        absDiff = fabs(diff);
+        absDiffsTemp[i] = absDiff;
+        if(absDiff > initial_tolerance) 
+            return false;
     }
+
+    for (int i = 0; i < 3; i++) {
+        absDiffs[absDiffCounter] = absDiffsTemp[i];
+        absDiffCounter++;
+        absDiffsSum += absDiffsTemp[i];
+        if (absDiffCounter == SIZE_OF_ABSDIFFS) break;
+    }
+
+        
+    if (absDiffCounter == SIZE_OF_ABSDIFFS) {
+        float max = *max_element(absDiffs,absDiffs + SIZE_OF_ABSDIFFS);
+        cout << endl << "Absdiffs:" << endl;
+        cout << "max element = " << fixed << max << endl;
+        if (max > evaluated_tolerance) evaluated_tolerance = max;
+        cout << "evaluated tolerance = " << fixed << evaluated_tolerance << endl;
+
+        absDiffCounter = 0;
+    }
+
 	return true;
 }
 

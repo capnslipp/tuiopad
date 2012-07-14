@@ -169,6 +169,12 @@
 
 -(void)awakeFromNib {
 	NSLog(@"MSASettings::awakeFromNib");
+    
+    float initialTolerance;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        initialTolerance = 0.4f;
+    else 
+        initialTolerance = 0.01f;
 	
 	defaults = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 				[self getBroadcastAddress], kSetting_HostIP,
@@ -182,11 +188,12 @@
                 [NSNumber numberWithInt:0], kSetting_EnableVNCOVERHTML5,
                 [self getBroadcastAddress], kSetting_VNC_IP,
                 [NSNumber numberWithInt:80], kSetting_VNC_PORT,
+                [NSNumber numberWithFloat:initialTolerance], kSetting_OBJECT_TOLERANCE,
 				nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObject:defaults forKey:kSettings_Key]];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
+    
 	[self loadSettings];
 }
 

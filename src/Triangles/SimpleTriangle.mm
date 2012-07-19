@@ -16,7 +16,8 @@
 //extern float evaluated_tolerance;
 
 NSMutableDictionary *current_settings = [[[NSUserDefaults standardUserDefaults] objectForKey:kSettings_Key] mutableCopy];
-static float initial_tolerance = [[current_settings objectForKey:kSetting_OBJECT_TOLERANCE] floatValue];
+//static float initial_tolerance = [[current_settings objectForKey:kSetting_OBJECT_TOLERANCE] floatValue];
+static float initial_tolerance = 0.1f;
 static float evaluated_tolerance = 0.0f;
 
 
@@ -168,6 +169,45 @@ bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
     }
 
 	return true;
+}
+
+float SimpleTriangle::getMaxSideDifference(SimpleTriangle *t, float aspectRatio) {
+    MyCursorInfo c1Transformed = *cursors.at(0);
+    MyCursorInfo c2Transformed = *cursors.at(1);
+    MyCursorInfo c3Transformed = *cursors.at(2);
+    
+    if (aspectRatio < 1)    // x coordinate has to be scaled down
+    {
+        c1Transformed.x /= aspectRatio;
+        c2Transformed.x /= aspectRatio;
+        c3Transformed.x /= aspectRatio;
+    }
+    else {                  // y coordinate has to be scaled up
+        c1Transformed.y *= aspectRatio;
+        c2Transformed.y *= aspectRatio;
+        c3Transformed.y *= aspectRatio;
+    }
+    
+    sideList.clear();
+    sideList.push_back(distanceBetweenCursors(&c1Transformed, &c2Transformed));
+    sideList.push_back(distanceBetweenCursors(&c2Transformed, &c3Transformed));
+    sideList.push_back(distanceBetweenCursors(&c1Transformed, &c3Transformed));
+    
+    sortSides();
+    
+    float maxDiff = 0;
+    vector<float> hisSides = t->getSides();
+    for (int i = 0; i<3; i++) {
+        float absDiff = fabs(hisSides.at(i) - sideList.at(i));
+        if (absDiff > maxDiff) maxDiff = absDiff;
+    }
+    
+//    if (maxDiff > 0.01f) {
+        cout << endl << "Original triangle" << endl << t->testOutput();
+        cout << endl << "tested triangle" << endl << this->testOutput();
+//    }
+    
+    return maxDiff;
 }
 
 #pragma mark getter - setter

@@ -12,6 +12,7 @@
 #include "SimpleTriangle.h"
 
 #import "UserDefaultsHelper.h"
+#import "EvaluatingViewController.h"
 
 #define IPHONE_DRAWVIEWSIZE 320
 
@@ -87,7 +88,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"\nobjectID = %@\nvalues = %@", currentObjectID, objectValues);
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -159,6 +160,9 @@
     [super dealloc];
 }
 - (IBAction)evaluateButtonPressed:(id)sender {
+    EvaluatingViewController *evaluatingVC = [[EvaluatingViewController alloc] init];
+    evaluatingVC.objectDots = dots;
+    [self presentModalViewController:evaluatingVC animated:YES];
 }
 
 - (IBAction)switchValueChanged:(id)sender {

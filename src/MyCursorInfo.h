@@ -28,7 +28,14 @@ public:
 	}
     
     MyCursorInfo(float xPos, float yPos) : x(xPos), y(yPos) { 
-        MyCursorInfo(); 
+        isAlive		= false;
+		wasAlive	= false;
+		moved		= false;
+        isUsedInTriangle = false;
+    }
+    
+    ~MyCursorInfo() {
+        
     }
 };
 

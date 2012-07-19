@@ -49,8 +49,11 @@ public:
     float getCentroidY();
     MyCursorInfo* getOrientationPoint();
 
+    float getMaxSideDifference(SimpleTriangle*, float aspectRatio);
+    
 // debugging utilities    
     string testOutput();
+    
     
 protected:
     vector<MyCursorInfo*> cursors;    

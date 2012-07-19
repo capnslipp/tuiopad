@@ -25,6 +25,8 @@
 		5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEF159415B80D83002BE744 /* EditObjectViewController.xib */; };
 		5EEF159815B80F79002BE744 /* EditObjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159715B80F79002BE744 /* EditObjectViewController.mm */; };
 		5EEF159B15B82BA4002BE744 /* UserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */; };
+		5EEF159E15B841C9002BE744 /* EvaluatingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159D15B841C9002BE744 /* EvaluatingViewController.mm */; };
+		5EEF15A015B84367002BE744 /* EvaluatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEF159F15B84367002BE744 /* EvaluatingViewController.xib */; };
 		810176FA159F17240065C088 /* ExistingObjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 810176F8159F17240065C088 /* ExistingObjectsViewController.m */; };
 		810176FB159F17240065C088 /* ExistingObjectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810176F9159F17240065C088 /* ExistingObjectsViewController.xib */; };
 		810176FF159F182F0065C088 /* FileManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 810176FE159F182F0065C088 /* FileManagerHelper.m */; };
@@ -129,6 +131,9 @@
 		5EEF159715B80F79002BE744 /* EditObjectViewController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = EditObjectViewController.mm; sourceTree = "<group>"; };
 		5EEF159915B82BA4002BE744 /* UserDefaultsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefaultsHelper.h; path = src/Helper/UserDefaultsHelper.h; sourceTree = "<group>"; };
 		5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaultsHelper.m; path = src/Helper/UserDefaultsHelper.m; sourceTree = "<group>"; };
+		5EEF159C15B841C9002BE744 /* EvaluatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluatingViewController.h; sourceTree = "<group>"; };
+		5EEF159D15B841C9002BE744 /* EvaluatingViewController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = EvaluatingViewController.mm; sourceTree = "<group>"; };
+		5EEF159F15B84367002BE744 /* EvaluatingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluatingViewController.xib; sourceTree = "<group>"; };
 		810176F7159F17240065C088 /* ExistingObjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ExistingObjectsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		810176F8159F17240065C088 /* ExistingObjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExistingObjectsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		810176F9159F17240065C088 /* ExistingObjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingObjectsViewController.xib; sourceTree = "<group>"; };
@@ -437,6 +442,8 @@
 				810176F9159F17240065C088 /* ExistingObjectsViewController.xib */,
 				5EEF159615B80F79002BE744 /* EditObjectViewController.h */,
 				5EEF159715B80F79002BE744 /* EditObjectViewController.mm */,
+				5EEF159C15B841C9002BE744 /* EvaluatingViewController.h */,
+				5EEF159D15B841C9002BE744 /* EvaluatingViewController.mm */,
 			);
 			path = LearnView;
 			sourceTree = "<group>";
@@ -564,6 +571,7 @@
 				B227C41612B44E7A0016E747 /* Info.plist */,
 				8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */,
 				5EEF159415B80D83002BE744 /* EditObjectViewController.xib */,
+				5EEF159F15B84367002BE744 /* EvaluatingViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -939,6 +947,7 @@
 				810176FB159F17240065C088 /* ExistingObjectsViewController.xib in Resources */,
 				81AAE27415AEB395008F1916 /* WebViewController.xib in Resources */,
 				5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */,
+				5EEF15A015B84367002BE744 /* EvaluatingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,6 +1009,7 @@
 				81AAE27315AEB395008F1916 /* WebViewController.m in Sources */,
 				5EEF159815B80F79002BE744 /* EditObjectViewController.mm in Sources */,
 				5EEF159B15B82BA4002BE744 /* UserDefaultsHelper.m in Sources */,
+				5EEF159E15B841C9002BE744 /* EvaluatingViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

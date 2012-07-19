@@ -8,6 +8,7 @@
 
 #import "ExistingObjectsViewController.h"
 #import "FileManagerHelper.h"
+#import "EditObjectViewController.h"
 
 @interface ExistingObjectsViewController ()
 
@@ -80,7 +81,11 @@
 #pragma mark - UITableView Delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSString *currentObjID = [[self.objectsDict allKeys] objectAtIndex:indexPath.row];
+    EditObjectViewController *editObjVC = [[EditObjectViewController alloc] initWithObjectID:currentObjID andValues:[self.objectsDict objectForKey:currentObjID]];
+    [self.navigationController pushViewController:editObjVC animated:YES];
+    [editObjVC release];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - actions

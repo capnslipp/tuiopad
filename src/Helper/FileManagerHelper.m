@@ -97,5 +97,51 @@
     }
 }
 
++ (void) setCustomRecognitionTolerance:(NSString *)tolerance forObjectWithID:(NSString *)objectID {
+    NSFileManager *filemgr = [NSFileManager defaultManager];    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    if (![filemgr fileExistsAtPath: dataFile])
+        return;
+    
+    dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
+    
+    NSString *objValues = [dict objectForKey:objectID];
+    
+    NSMutableArray * singleValues = [[[NSMutableArray alloc] initWithArray:[objValues componentsSeparatedByString:@" "] copyItems: YES] autorelease];
+    if (singleValues.count == 7) [singleValues removeObjectAtIndex:6];
+//    objValues = [objValues stringByAppendingString:tolerance];
+    objValues = @"";
+    for (int i = 0; i < singleValues.count; i++) {
+        objValues = [objValues stringByAppendingFormat:@"%@ ", [singleValues objectAtIndex:i]];
+    }
+    objValues = [objValues stringByAppendingString:tolerance];
+    [dict setValue:objValues forKey:objectID];
+    
+    [dict writeToFile:dataFile atomically:YES];
+}
+
++ (NSString*) getCustomRecognitionTolerance:(NSString *)objectID {
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
+    
+    NSString *objValues = [dict objectForKey:objectID];
+    NSMutableArray * singleValues = [[[NSMutableArray alloc] initWithArray:[objValues componentsSeparatedByString:@" "] copyItems: YES] autorelease];
+    if (singleValues.count != 7)
+        return @"default";
+    else {
+        NSString *retValue = [singleValues objectAtIndex:6];
+        if (retValue.length == 0) return @"default";
+        return retValue;
+    }
+
+}
+
 @end
 

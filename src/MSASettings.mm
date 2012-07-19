@@ -172,7 +172,7 @@
     
     float initialTolerance;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        initialTolerance = 0.4f;
+        initialTolerance = 0.04f;
     else 
         initialTolerance = 0.01f;
 	

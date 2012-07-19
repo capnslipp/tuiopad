@@ -19,4 +19,7 @@
 +(void) deleteObjectWithId:(NSString*)objectID;
 +(void) overwriteObjectWithID:(NSString*) objectID withObject:(NSString*)dots;
 
++ (void) setCustomRecognitionTolerance: (NSString*) tolerance forObjectWithID: (NSString*) objectID;
++ (NSString*) getCustomRecognitionTolerance: (NSString*) objectID; 
+
 @end

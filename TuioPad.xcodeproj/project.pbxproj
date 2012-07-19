@@ -22,6 +22,9 @@
 		5E2568A610ED26CD00A9501C /* PocoNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688210ED26CC00A9501C /* PocoNet.a */; };
 		5E2568A710ED26CD00A9501C /* PocoUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688310ED26CC00A9501C /* PocoUtil.a */; };
 		5E2568A810ED26CD00A9501C /* PocoXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688410ED26CC00A9501C /* PocoXML.a */; };
+		5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEF159415B80D83002BE744 /* EditObjectViewController.xib */; };
+		5EEF159815B80F79002BE744 /* EditObjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159715B80F79002BE744 /* EditObjectViewController.mm */; };
+		5EEF159B15B82BA4002BE744 /* UserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */; };
 		810176FA159F17240065C088 /* ExistingObjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 810176F8159F17240065C088 /* ExistingObjectsViewController.m */; };
 		810176FB159F17240065C088 /* ExistingObjectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810176F9159F17240065C088 /* ExistingObjectsViewController.xib */; };
 		810176FF159F182F0065C088 /* FileManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 810176FE159F182F0065C088 /* FileManagerHelper.m */; };
@@ -121,6 +124,11 @@
 		5E25688210ED26CC00A9501C /* PocoNet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoNet.a; path = ../../../libs/poco/lib/osx/PocoNet.a; sourceTree = SOURCE_ROOT; };
 		5E25688310ED26CC00A9501C /* PocoUtil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoUtil.a; path = ../../../libs/poco/lib/osx/PocoUtil.a; sourceTree = SOURCE_ROOT; };
 		5E25688410ED26CC00A9501C /* PocoXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoXML.a; path = ../../../libs/poco/lib/osx/PocoXML.a; sourceTree = SOURCE_ROOT; };
+		5EEF159415B80D83002BE744 /* EditObjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditObjectViewController.xib; sourceTree = "<group>"; };
+		5EEF159615B80F79002BE744 /* EditObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditObjectViewController.h; sourceTree = "<group>"; };
+		5EEF159715B80F79002BE744 /* EditObjectViewController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = EditObjectViewController.mm; sourceTree = "<group>"; };
+		5EEF159915B82BA4002BE744 /* UserDefaultsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefaultsHelper.h; path = src/Helper/UserDefaultsHelper.h; sourceTree = "<group>"; };
+		5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaultsHelper.m; path = src/Helper/UserDefaultsHelper.m; sourceTree = "<group>"; };
 		810176F7159F17240065C088 /* ExistingObjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ExistingObjectsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		810176F8159F17240065C088 /* ExistingObjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExistingObjectsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		810176F9159F17240065C088 /* ExistingObjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingObjectsViewController.xib; sourceTree = "<group>"; };
@@ -410,6 +418,8 @@
 			children = (
 				810176FD159F182F0065C088 /* FileManagerHelper.h */,
 				810176FE159F182F0065C088 /* FileManagerHelper.m */,
+				5EEF159915B82BA4002BE744 /* UserDefaultsHelper.h */,
+				5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */,
 			);
 			name = Helper;
 			path = ..;
@@ -425,6 +435,8 @@
 				810176F7159F17240065C088 /* ExistingObjectsViewController.h */,
 				810176F8159F17240065C088 /* ExistingObjectsViewController.m */,
 				810176F9159F17240065C088 /* ExistingObjectsViewController.xib */,
+				5EEF159615B80F79002BE744 /* EditObjectViewController.h */,
+				5EEF159715B80F79002BE744 /* EditObjectViewController.mm */,
 			);
 			path = LearnView;
 			sourceTree = "<group>";
@@ -551,6 +563,7 @@
 				B29E40BA12B45866003FA434 /* Entitlements.plist */,
 				B227C41612B44E7A0016E747 /* Info.plist */,
 				8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */,
+				5EEF159415B80D83002BE744 /* EditObjectViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -925,6 +938,7 @@
 				8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */,
 				810176FB159F17240065C088 /* ExistingObjectsViewController.xib in Resources */,
 				81AAE27415AEB395008F1916 /* WebViewController.xib in Resources */,
+				5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,6 +998,8 @@
 				81CACBEB159F5AAD000320DD /* TriangleManager.mm in Sources */,
 				81CACBEC159F5AAD000320DD /* TriangleObject.mm in Sources */,
 				81AAE27315AEB395008F1916 /* WebViewController.m in Sources */,
+				5EEF159815B80F79002BE744 /* EditObjectViewController.mm in Sources */,
+				5EEF159B15B82BA4002BE744 /* UserDefaultsHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

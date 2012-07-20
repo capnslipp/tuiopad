@@ -10,8 +10,75 @@
 #import "MyCursorInfo.h"
 #import "SimpleTriangle.h"
 
-
 static int eventCounter = 0;
+
+#define NUMBER_OF_BINS 30
+
+@interface PlotterView() {
+    CGPoint axesOrigin;
+    CGFloat xAxisWidth;
+    CGFloat yAxisWidth;
+    
+    CGFloat binWidth;
+    CGFloat binHeight;
+}
+
+@end
+
+
+@implementation PlotterView
+
+@synthesize values = _values;
+
+- (void) awakeFromNib {
+    self.values = [NSMutableArray arrayWithCapacity:NUMBER_OF_BINS];
+    for (int i = 0; i < NUMBER_OF_BINS; i ++) {
+        [self.values addObject:[NSNumber numberWithInt:0]];
+    }
+}
+
+- (void) layoutSubviews {
+    axesOrigin = CGPointMake(10, self.frame.size.height - 10);
+    xAxisWidth = self.frame.size.width-20;
+    yAxisWidth = self.frame.size.height-20;
+    
+    binWidth = xAxisWidth / NUMBER_OF_BINS;
+    binHeight = yAxisWidth;
+}
+
+- (void) drawRect:(CGRect)rect {
+
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    
+    // draw x axis
+    CGContextBeginPath(c);
+    CGContextMoveToPoint(c, axesOrigin.x, axesOrigin.y);
+    CGContextAddLineToPoint(c, axesOrigin.x + xAxisWidth, axesOrigin.y);
+    CGContextStrokePath(c);
+    
+    CGContextSetFillColorWithColor(c, [[UIColor greenColor] CGColor]);
+    CGContextSetStrokeColorWithColor(c, [[UIColor blackColor] CGColor]);    
+    
+    // create reusable path
+    CGMutablePathRef path = CGPathCreateMutable();
+    for (int i = 0; i < self.values.count; i ++) {
+        int currentBinHeight = [[self.values objectAtIndex:i] intValue];
+        CGRect r = CGRectMake(axesOrigin.x + i * binWidth, axesOrigin.y - currentBinHeight, binWidth, currentBinHeight);
+        CGPathAddRect(path, NULL, r);
+    }
+    
+    CGContextBeginPath(c);
+    CGContextAddPath(c, path);
+    CGContextStrokePath(c);
+    CGContextBeginPath(c);
+    CGContextAddPath(c, path);
+    CGContextFillPath(c);
+    CFRelease(path);
+}
+
+@end
+
+
 
 @interface EvaluatingViewController () {
     SimpleTriangle *originalTriangle;
@@ -24,9 +91,12 @@ static int eventCounter = 0;
 - (void) logTouchesStatesFromEvent: (UIEvent*) event;
 - (void) createTriangleFromDots: (UIEvent*) event;
 
+- (void) preparePlotterView;
+
 @end
 
 @implementation EvaluatingViewController
+@synthesize plotterView;
 @synthesize toleranceLabel;
 @synthesize closeButton;
 @synthesize objectDots = _objectDots;
@@ -43,6 +113,7 @@ static int eventCounter = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -50,6 +121,7 @@ static int eventCounter = 0;
 {
     [self setToleranceLabel:nil];
     [self setCloseButton:nil];
+    [self setPlotterView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -63,6 +135,8 @@ static int eventCounter = 0;
     
     originalTriangle =  new SimpleTriangle(p0, p1, p2);
     testingTriangle = NULL;
+    
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -90,7 +164,7 @@ static int eventCounter = 0;
         testingCursors.clear();
         delete testingTriangle;
     }
-    
+    [plotterView release];
     [super dealloc];
 }
 
@@ -104,6 +178,7 @@ static int eventCounter = 0;
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 //    [self logTouchesStatesFromEvent:event];    
+    NSLog(@"\n\nTOUCHES CANCELED!");
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -128,7 +203,11 @@ static int eventCounter = 0;
 #pragma mark - actions
 
 - (IBAction)closeButtonPressed:(id)sender {
-    [self.presentingViewController dismissModalViewControllerAnimated:YES];
+    if ([self parentViewController] != nil || ![self respondsToSelector:@selector(presentingViewController)]) {
+        [self.parentViewController dismissModalViewControllerAnimated:YES];
+    }
+    else
+        [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - trianlge stuff
@@ -153,9 +232,27 @@ static int eventCounter = 0;
     
     float currentDiff = testingTriangle->getMaxSideDifference(originalTriangle, aspectRatio);
     NSLog(@"\ncurrent dif = %f", currentDiff);
+    
+    // draw current diff into 
+    NSInteger roundedDiff = currentDiff*1000;
+    if (roundedDiff < 100) {    // values >= 100 are not considered (accuracy is too low)
+        // increment the number in appropriate bin and call drawrect
+        roundedDiff = (roundedDiff * NUMBER_OF_BINS) / 100;
+        NSInteger nr = [[self.plotterView.values objectAtIndex:roundedDiff] intValue];
+        nr++;
+        [self.plotterView.values replaceObjectAtIndex:roundedDiff withObject:[NSNumber numberWithInt:nr]];
+        [self.plotterView setNeedsDisplay];
+    }
+    
     if (currentDiff > maxComputedTolerance) maxComputedTolerance = currentDiff;
     
     self.toleranceLabel.text = [NSString stringWithFormat:@"Max. tolerance = %.2f", maxComputedTolerance * 100];
+}
+
+#pragma mark - plotter View
+
+- (void) preparePlotterView {
+//    self.plotterView.values = [[NSMutableArray arrayWithCapacity:10] retain];
 }
 
 @end

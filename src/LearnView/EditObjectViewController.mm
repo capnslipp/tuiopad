@@ -14,7 +14,6 @@
 #import "UserDefaultsHelper.h"
 #import "EvaluatingViewController.h"
 
-#define IPHONE_DRAWVIEWSIZE 320
 
 @implementation ObjectDrawingView : UIView
 
@@ -32,19 +31,23 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(ctx, [[UIColor blueColor] CGColor]);
 
-    CGContextAddArc(ctx, p0.x * IPHONE_DRAWVIEWSIZE, p0.y * IPHONE_DRAWVIEWSIZE, 10.0f, 0.0f, 2.0f * M_PI, YES);
+    CGContextAddArc(ctx, p0.x * self.frame.size.width, p0.y * self.frame.size.width, 10.0f, 0.0f, 2.0f * M_PI, YES);
     CGContextFillPath(ctx);
-    CGContextAddArc(ctx, p1.x * IPHONE_DRAWVIEWSIZE, p1.y * IPHONE_DRAWVIEWSIZE, 10.0f, 0.0f, 2.0f * M_PI, YES);
+    CGContextAddArc(ctx, p1.x * self.frame.size.width, p1.y * self.frame.size.width, 10.0f, 0.0f, 2.0f * M_PI, YES);
     CGContextFillPath(ctx);
-    CGContextAddArc(ctx, p2.x * IPHONE_DRAWVIEWSIZE, p2.y * IPHONE_DRAWVIEWSIZE, 10.0f, 0.0f, 2.0f * M_PI, YES);
+    CGContextAddArc(ctx, p2.x * self.frame.size.width, p2.y * self.frame.size.width, 10.0f, 0.0f, 2.0f * M_PI, YES);
     CGContextFillPath(ctx);
     
     // empty circle for orientation point
 
     CGContextSetLineWidth(ctx, 5.0f);
     CGContextSetStrokeColorWithColor(ctx, [[UIColor greenColor] CGColor]);
-    CGContextStrokeEllipseInRect(ctx, CGRectMake(orientationPoint->x * IPHONE_DRAWVIEWSIZE - 10, orientationPoint->y * IPHONE_DRAWVIEWSIZE - 10, 20, 20));
+    CGContextStrokeEllipseInRect(ctx, CGRectMake(orientationPoint->x * self.frame.size.width - 10, orientationPoint->y * self.frame.size.width - 10, 20, 20));
     CGContextFillPath(ctx);
+}
+
+- (void)layoutSubviews {
+    NSLog(@"objectdrawingview frame: %@", NSStringFromCGRect(self.frame) );
 }
 
 @end

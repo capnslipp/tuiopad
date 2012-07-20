@@ -10,9 +10,9 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-	<string>Icon.png</string>
-	<string>Icon72.png</string>
-	<string>Icon@2x.png</string>
+		<string>Icon.png</string>
+		<string>Icon72.png</string>
+		<string>Icon@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>org.tuio.tuiopad</string>
@@ -30,5 +30,9 @@
 	<string>1.0.0</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GillSans.ttc</string>
+	</array>
 </dict>
 </plist>

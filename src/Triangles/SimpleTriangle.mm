@@ -17,7 +17,7 @@
 
 NSMutableDictionary *current_settings = [[[NSUserDefaults standardUserDefaults] objectForKey:kSettings_Key] mutableCopy];
 //static float initial_tolerance = [[current_settings objectForKey:kSetting_OBJECT_TOLERANCE] floatValue];
-static float initial_tolerance = 0.1f;
+static float initial_tolerance = 1.0f;
 static float evaluated_tolerance = 0.0f;
 
 
@@ -146,27 +146,28 @@ bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
         float diff = hisSides.at(i) - sideList.at(i);
         absDiff = fabs(diff);
         absDiffsTemp[i] = absDiff;
+        printf("\nabsdiff %d = %.6f", i, absDiff);
         if(absDiff > initial_tolerance) 
             return false;
     }
 
-    for (int i = 0; i < 3; i++) {
-        absDiffs[absDiffCounter] = absDiffsTemp[i];
-        absDiffCounter++;
-        absDiffsSum += absDiffsTemp[i];
-        if (absDiffCounter == SIZE_OF_ABSDIFFS) break;
-    }
-
-        
-    if (absDiffCounter == SIZE_OF_ABSDIFFS) {
-        float max = *max_element(absDiffs,absDiffs + SIZE_OF_ABSDIFFS);
-        cout << endl << "Absdiffs:" << endl;
-        cout << "max element = " << fixed << max << endl;
-        if (max > evaluated_tolerance) evaluated_tolerance = max;
-        cout << "evaluated tolerance = " << fixed << evaluated_tolerance << endl;
-
-        absDiffCounter = 0;
-    }
+//    for (int i = 0; i < 3; i++) {
+//        absDiffs[absDiffCounter] = absDiffsTemp[i];
+//        absDiffCounter++;
+//        absDiffsSum += absDiffsTemp[i];
+//        if (absDiffCounter == SIZE_OF_ABSDIFFS) break;
+//    }
+//
+//        
+//    if (absDiffCounter == SIZE_OF_ABSDIFFS) {
+//        float max = *max_element(absDiffs,absDiffs + SIZE_OF_ABSDIFFS);
+//        cout << endl << "Absdiffs:" << endl;
+//        cout << "max element = " << fixed << max << endl;
+//        if (max > evaluated_tolerance) evaluated_tolerance = max;
+//        cout << "evaluated tolerance = " << fixed << evaluated_tolerance << endl;
+//
+//        absDiffCounter = 0;
+//    }
 
 	return true;
 }
@@ -200,13 +201,7 @@ float SimpleTriangle::getMaxSideDifference(SimpleTriangle *t, float aspectRatio)
     for (int i = 0; i<3; i++) {
         float absDiff = fabs(hisSides.at(i) - sideList.at(i));
         if (absDiff > maxDiff) maxDiff = absDiff;
-    }
-    
-//    if (maxDiff > 0.01f) {
-        cout << endl << "Original triangle" << endl << t->testOutput();
-        cout << endl << "tested triangle" << endl << this->testOutput();
-//    }
-    
+    }    
     return maxDiff;
 }
 

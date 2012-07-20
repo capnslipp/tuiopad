@@ -22,6 +22,7 @@
 		5E2568A610ED26CD00A9501C /* PocoNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688210ED26CC00A9501C /* PocoNet.a */; };
 		5E2568A710ED26CD00A9501C /* PocoUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688310ED26CC00A9501C /* PocoUtil.a */; };
 		5E2568A810ED26CD00A9501C /* PocoXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688410ED26CC00A9501C /* PocoXML.a */; };
+		5EBB1F7615B9A98F00F17834 /* GillSans.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 5EBB1F7515B9A98F00F17834 /* GillSans.ttc */; };
 		5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEF159415B80D83002BE744 /* EditObjectViewController.xib */; };
 		5EEF159815B80F79002BE744 /* EditObjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159715B80F79002BE744 /* EditObjectViewController.mm */; };
 		5EEF159B15B82BA4002BE744 /* UserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */; };
@@ -126,6 +127,7 @@
 		5E25688210ED26CC00A9501C /* PocoNet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoNet.a; path = ../../../libs/poco/lib/osx/PocoNet.a; sourceTree = SOURCE_ROOT; };
 		5E25688310ED26CC00A9501C /* PocoUtil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoUtil.a; path = ../../../libs/poco/lib/osx/PocoUtil.a; sourceTree = SOURCE_ROOT; };
 		5E25688410ED26CC00A9501C /* PocoXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoXML.a; path = ../../../libs/poco/lib/osx/PocoXML.a; sourceTree = SOURCE_ROOT; };
+		5EBB1F7515B9A98F00F17834 /* GillSans.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = GillSans.ttc; sourceTree = "<group>"; };
 		5EEF159415B80D83002BE744 /* EditObjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditObjectViewController.xib; sourceTree = "<group>"; };
 		5EEF159615B80F79002BE744 /* EditObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditObjectViewController.h; sourceTree = "<group>"; };
 		5EEF159715B80F79002BE744 /* EditObjectViewController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = EditObjectViewController.mm; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 		B2B6810812B5448600CF2FE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5EBB1F7515B9A98F00F17834 /* GillSans.ttc */,
 				8108F06F159E392200E1439B /* LearnViewPad.xib */,
 				8108F070159E392200E1439B /* LearnViewPhone.xib */,
 				B2E6BD9F12C0F1420071368A /* TuioPad.xib */,
@@ -948,6 +951,7 @@
 				81AAE27415AEB395008F1916 /* WebViewController.xib in Resources */,
 				5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */,
 				5EEF15A015B84367002BE744 /* EvaluatingViewController.xib in Resources */,
+				5EBB1F7615B9A98F00F17834 /* GillSans.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -85,6 +85,10 @@ void MSATuioSenderCPP::close() {
 		delete oscSender;
 		oscSender = NULL;
 	}
+    if (triangleManager) {
+        delete triangleManager;
+        triangleManager = NULL;
+    }
 }
 
 void MSATuioSenderCPP::update() {

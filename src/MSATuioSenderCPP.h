@@ -42,6 +42,7 @@ public:
 	MSATuioSenderCPP() {
 		oscSender	= NULL;
 		tuioServer	= NULL;
+        triangleManager = NULL;
 		//host		= "";
 		//port		= 0;
 		verbose		= false;

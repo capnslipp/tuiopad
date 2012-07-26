@@ -23,22 +23,22 @@
 		5E2568A710ED26CD00A9501C /* PocoUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688310ED26CC00A9501C /* PocoUtil.a */; };
 		5E2568A810ED26CD00A9501C /* PocoXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E25688410ED26CC00A9501C /* PocoXML.a */; };
 		5EBB1F7615B9A98F00F17834 /* GillSans.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 5EBB1F7515B9A98F00F17834 /* GillSans.ttc */; };
-		5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEF159415B80D83002BE744 /* EditObjectViewController.xib */; };
 		5EEF159815B80F79002BE744 /* EditObjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159715B80F79002BE744 /* EditObjectViewController.mm */; };
 		5EEF159B15B82BA4002BE744 /* UserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */; };
 		5EEF159E15B841C9002BE744 /* EvaluatingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF159D15B841C9002BE744 /* EvaluatingViewController.mm */; };
-		5EEF15A015B84367002BE744 /* EvaluatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEF159F15B84367002BE744 /* EvaluatingViewController.xib */; };
 		810176FA159F17240065C088 /* ExistingObjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 810176F8159F17240065C088 /* ExistingObjectsViewController.m */; };
-		810176FB159F17240065C088 /* ExistingObjectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810176F9159F17240065C088 /* ExistingObjectsViewController.xib */; };
 		810176FF159F182F0065C088 /* FileManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 810176FE159F182F0065C088 /* FileManagerHelper.m */; };
 		8108F065159E26C400E1439B /* AdvancedSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F064159E26C400E1439B /* AdvancedSettingsViewController.m */; };
 		8108F067159E273F00E1439B /* AdvancedSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */; };
 		8108F06D159E391200E1439B /* drawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F06A159E391200E1439B /* drawView.m */; };
 		8108F06E159E391200E1439B /* LearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108F06C159E391200E1439B /* LearnViewController.m */; };
-		8108F071159E392200E1439B /* LearnViewPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F06F159E392200E1439B /* LearnViewPad.xib */; };
 		8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8108F070159E392200E1439B /* LearnViewPhone.xib */; };
+		815388E615BB1E8500A71C6C /* AdvancedSettingsViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815388E515BB1E8500A71C6C /* AdvancedSettingsViewController~ipad.xib */; };
+		815388E815BB1FDB00A71C6C /* ExistingObjectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815388E715BB1FDB00A71C6C /* ExistingObjectsViewController.xib */; };
+		815388EA15BB200C00A71C6C /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815388E915BB200C00A71C6C /* WebViewController.xib */; };
+		815388ED15BB202900A71C6C /* EditObjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815388EB15BB202900A71C6C /* EditObjectViewController.xib */; };
+		815388EE15BB202900A71C6C /* EvaluatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815388EC15BB202900A71C6C /* EvaluatingViewController.xib */; };
 		81AAE27315AEB395008F1916 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AAE27115AEB395008F1916 /* WebViewController.m */; };
-		81AAE27415AEB395008F1916 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81AAE27215AEB395008F1916 /* WebViewController.xib */; };
 		81CACBEA159F5AAD000320DD /* SimpleTriangle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */; };
 		81CACBEB159F5AAD000320DD /* TriangleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE7159F5AAD000320DD /* TriangleManager.mm */; };
 		81CACBEC159F5AAD000320DD /* TriangleObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 81CACBE9159F5AAD000320DD /* TriangleObject.mm */; };
@@ -128,17 +128,14 @@
 		5E25688310ED26CC00A9501C /* PocoUtil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoUtil.a; path = ../../../libs/poco/lib/osx/PocoUtil.a; sourceTree = SOURCE_ROOT; };
 		5E25688410ED26CC00A9501C /* PocoXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = PocoXML.a; path = ../../../libs/poco/lib/osx/PocoXML.a; sourceTree = SOURCE_ROOT; };
 		5EBB1F7515B9A98F00F17834 /* GillSans.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = GillSans.ttc; sourceTree = "<group>"; };
-		5EEF159415B80D83002BE744 /* EditObjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditObjectViewController.xib; sourceTree = "<group>"; };
 		5EEF159615B80F79002BE744 /* EditObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditObjectViewController.h; sourceTree = "<group>"; };
 		5EEF159715B80F79002BE744 /* EditObjectViewController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = EditObjectViewController.mm; sourceTree = "<group>"; };
 		5EEF159915B82BA4002BE744 /* UserDefaultsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefaultsHelper.h; path = src/Helper/UserDefaultsHelper.h; sourceTree = "<group>"; };
 		5EEF159A15B82BA4002BE744 /* UserDefaultsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaultsHelper.m; path = src/Helper/UserDefaultsHelper.m; sourceTree = "<group>"; };
 		5EEF159C15B841C9002BE744 /* EvaluatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluatingViewController.h; sourceTree = "<group>"; };
 		5EEF159D15B841C9002BE744 /* EvaluatingViewController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = EvaluatingViewController.mm; sourceTree = "<group>"; };
-		5EEF159F15B84367002BE744 /* EvaluatingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluatingViewController.xib; sourceTree = "<group>"; };
 		810176F7159F17240065C088 /* ExistingObjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ExistingObjectsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		810176F8159F17240065C088 /* ExistingObjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExistingObjectsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		810176F9159F17240065C088 /* ExistingObjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingObjectsViewController.xib; sourceTree = "<group>"; };
 		810176FD159F182F0065C088 /* FileManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = FileManagerHelper.h; path = src/Helper/FileManagerHelper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		810176FE159F182F0065C088 /* FileManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = FileManagerHelper.m; path = src/Helper/FileManagerHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8108F063159E26C400E1439B /* AdvancedSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AdvancedSettingsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -148,12 +145,15 @@
 		8108F06A159E391200E1439B /* drawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = drawView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8108F06B159E391200E1439B /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
 		8108F06C159E391200E1439B /* LearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LearnViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		8108F06F159E392200E1439B /* LearnViewPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPad.xib; path = xibs/LearnViewPad.xib; sourceTree = "<group>"; };
 		8108F070159E392200E1439B /* LearnViewPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LearnViewPhone.xib; path = xibs/LearnViewPhone.xib; sourceTree = "<group>"; };
 		8109D78515A5D424008CB736 /* MyCursorInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCursorInfo.h; sourceTree = "<group>"; };
+		815388E515BB1E8500A71C6C /* AdvancedSettingsViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "AdvancedSettingsViewController~ipad.xib"; path = "xibs/AdvancedSettingsViewController~ipad.xib"; sourceTree = "<group>"; };
+		815388E715BB1FDB00A71C6C /* ExistingObjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExistingObjectsViewController.xib; path = xibs/ExistingObjectsViewController.xib; sourceTree = "<group>"; };
+		815388E915BB200C00A71C6C /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WebViewController.xib; path = xibs/WebViewController.xib; sourceTree = "<group>"; };
+		815388EB15BB202900A71C6C /* EditObjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditObjectViewController.xib; path = xibs/EditObjectViewController.xib; sourceTree = "<group>"; };
+		815388EC15BB202900A71C6C /* EvaluatingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EvaluatingViewController.xib; path = xibs/EvaluatingViewController.xib; sourceTree = "<group>"; };
 		81AAE27015AEB395008F1916 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = WebView/WebViewController.h; sourceTree = "<group>"; };
 		81AAE27115AEB395008F1916 /* WebViewController.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = WebViewController.m; path = WebView/WebViewController.m; sourceTree = "<group>"; };
-		81AAE27215AEB395008F1916 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WebViewController.xib; path = WebView/WebViewController.xib; sourceTree = "<group>"; };
 		81CACBE4159F5AAD000320DD /* SimpleTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SimpleTriangle.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		81CACBE5159F5AAD000320DD /* SimpleTriangle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SimpleTriangle.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		81CACBE6159F5AAD000320DD /* TriangleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleManager.h; sourceTree = "<group>"; };
@@ -441,7 +441,6 @@
 				8108F06C159E391200E1439B /* LearnViewController.m */,
 				810176F7159F17240065C088 /* ExistingObjectsViewController.h */,
 				810176F8159F17240065C088 /* ExistingObjectsViewController.m */,
-				810176F9159F17240065C088 /* ExistingObjectsViewController.xib */,
 				5EEF159615B80F79002BE744 /* EditObjectViewController.h */,
 				5EEF159715B80F79002BE744 /* EditObjectViewController.mm */,
 				5EEF159C15B841C9002BE744 /* EvaluatingViewController.h */,
@@ -455,7 +454,6 @@
 			children = (
 				81AAE27015AEB395008F1916 /* WebViewController.h */,
 				81AAE27115AEB395008F1916 /* WebViewController.m */,
-				81AAE27215AEB395008F1916 /* WebViewController.xib */,
 			);
 			name = WebView;
 			sourceTree = "<group>";
@@ -565,16 +563,18 @@
 		B2B6810812B5448600CF2FE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				815388EB15BB202900A71C6C /* EditObjectViewController.xib */,
+				815388EC15BB202900A71C6C /* EvaluatingViewController.xib */,
+				815388E915BB200C00A71C6C /* WebViewController.xib */,
+				815388E715BB1FDB00A71C6C /* ExistingObjectsViewController.xib */,
 				5EBB1F7515B9A98F00F17834 /* GillSans.ttc */,
-				8108F06F159E392200E1439B /* LearnViewPad.xib */,
 				8108F070159E392200E1439B /* LearnViewPhone.xib */,
 				B2E6BD9F12C0F1420071368A /* TuioPad.xib */,
 				B2B680A712B46EED00CF2FE3 /* TuioPhone.xib */,
 				B29E40BA12B45866003FA434 /* Entitlements.plist */,
 				B227C41612B44E7A0016E747 /* Info.plist */,
 				8108F066159E273F00E1439B /* AdvancedSettingsViewController.xib */,
-				5EEF159415B80D83002BE744 /* EditObjectViewController.xib */,
-				5EEF159F15B84367002BE744 /* EvaluatingViewController.xib */,
+				815388E515BB1E8500A71C6C /* AdvancedSettingsViewController~ipad.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -945,13 +945,13 @@
 				B22A5F8612C78154003BA9E5 /* Icon72.png in Resources */,
 				B22A5F8712C78154003BA9E5 /* Icon@2x.png in Resources */,
 				8108F067159E273F00E1439B /* AdvancedSettingsViewController.xib in Resources */,
-				8108F071159E392200E1439B /* LearnViewPad.xib in Resources */,
 				8108F072159E392200E1439B /* LearnViewPhone.xib in Resources */,
-				810176FB159F17240065C088 /* ExistingObjectsViewController.xib in Resources */,
-				81AAE27415AEB395008F1916 /* WebViewController.xib in Resources */,
-				5EEF159515B80D83002BE744 /* EditObjectViewController.xib in Resources */,
-				5EEF15A015B84367002BE744 /* EvaluatingViewController.xib in Resources */,
 				5EBB1F7615B9A98F00F17834 /* GillSans.ttc in Resources */,
+				815388E615BB1E8500A71C6C /* AdvancedSettingsViewController~ipad.xib in Resources */,
+				815388E815BB1FDB00A71C6C /* ExistingObjectsViewController.xib in Resources */,
+				815388EA15BB200C00A71C6C /* WebViewController.xib in Resources */,
+				815388ED15BB202900A71C6C /* EditObjectViewController.xib in Resources */,
+				815388EE15BB202900A71C6C /* EvaluatingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

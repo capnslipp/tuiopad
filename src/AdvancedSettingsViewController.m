@@ -40,6 +40,7 @@
 @synthesize settings;
 @synthesize webViewlabel;
 @synthesize autoButton;
+@synthesize webSettingsBGLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -105,6 +106,7 @@
     
     [self setPortLabel:nil];
     [self setPortTextfield:nil];
+    [self setWebSettingsBGLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -140,6 +142,7 @@
     [autoButton release];
     [portLabel release];
     [portTextfield release];
+    [webSettingsBGLabel release];
     [super dealloc];
 }
 
@@ -210,6 +213,7 @@
     self.autoButton.hidden = enabled;
     self.portLabel.hidden = enabled;
     self.portTextfield.hidden = enabled;
+    self.webSettingsBGLabel.hidden = enabled;
     
     if ((!enabled)) {
         VNCIPTextfield.text					= [settings getString:kSetting_VNC_IP];	

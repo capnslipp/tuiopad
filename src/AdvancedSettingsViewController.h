@@ -37,6 +37,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *openWebViewButton;
 @property (retain, nonatomic) IBOutlet UILabel *webViewlabel;
 @property (retain, nonatomic) IBOutlet UIButton *autoButton;
+@property (retain, nonatomic) IBOutlet UIView *webSettingsBGLabel;
 
 - (IBAction)autoButtonPressed:(id)sender;
 - (IBAction)openWebViewPressed:(id)sender;

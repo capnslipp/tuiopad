@@ -8,6 +8,7 @@
 
 #include "TriangleManager.h"
 #import "FileManagerHelper.h"
+#import "UserDefaultsHelper.h"
 
 long matchCounter = 0;
 
@@ -71,15 +72,16 @@ void TriangleManager::compareTriangles()
             SimpleTriangle *A = newTriangleList.at(i);
             float aspectRatio;
             if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-                aspectRatio = 1.333333f;
+                aspectRatio = (float) ofGetHeight() / ofGetWidth();
             else 
-                aspectRatio = 0.75f;
+                aspectRatio = (float) ofGetWidth() / ofGetHeight();
             for ( int idef = 0; idef < definedTriangleList.size(); idef++)
             {
                 SimpleTriangle *B = definedTriangleList.at(idef);                
                 if (A->compareWith(B, aspectRatio))
                 {
                     A->setSymbolID(B->getSymbolID());
+                    A->setRecognitionTolerance(B->getRecognitionTolerance());
                     // if recognized, put the current triangle to the working list
                     workingTriangleList.push_back(A);
                     // remove used points from freepoints
@@ -93,6 +95,7 @@ void TriangleManager::compareTriangles()
                     // remove this triangle from the new triangle list
                     vector<SimpleTriangle*>::iterator pos = find(newTriangleList.begin(),newTriangleList.end(),A);
                     if ( pos != newTriangleList.end() ) newTriangleList.erase(pos);
+                    break;
 				}
             }
 		}
@@ -119,18 +122,16 @@ void TriangleManager::handleNewTriObjects()
 }
 
 void TriangleManager::updateExistingTriObject()
-{
-    // NEW TRY TO CHECK EVERY FRAME
-    
+{    
     for (int i = 0; i < MAX_OBJECT_NUMBER; i++) 
     {
         if(!triangleObject[i]->isAlive || !triangleObject[i]->wasAlive) continue;
         SimpleTriangle *A = triangleObject[i]->triangle;
         float aspectRatio;
         if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-            aspectRatio = 1.333333f;
+            aspectRatio = (float) ofGetHeight() / ofGetWidth();
         else 
-            aspectRatio = 0.75f;
+            aspectRatio = (float) ofGetWidth() / ofGetHeight();
         for ( int idef = 0; idef < definedTriangleList.size(); idef++)
         {
             if (definedTriangleList.at(idef)->getSymbolID() != triangleObject[i]->getSymbolID())
@@ -196,12 +197,17 @@ void TriangleManager::setDefinedTriangleList()
         MyCursorInfo *c1 = new MyCursorInfo((float)[[singleValues objectAtIndex:0] floatValue], (float)[[singleValues objectAtIndex:1] floatValue]);
         MyCursorInfo *c2 = new MyCursorInfo((float)[[singleValues objectAtIndex:2] floatValue], (float)[[singleValues objectAtIndex:3] floatValue]);
         MyCursorInfo *c3 = new MyCursorInfo((float)[[singleValues objectAtIndex:4] floatValue], (float)[[singleValues objectAtIndex:5] floatValue]);
+        
+        float tolerance = [UserDefaultsHelper defaultTolerance];
+        
+        NSString *toleranceAsString = [singleValues objectAtIndex:6];
+        if (![toleranceAsString isEqualToString:@"default"])
+            tolerance = [toleranceAsString floatValue];
+            
 
-        SimpleTriangle* T = new SimpleTriangle(c1, c2, c3,(int) [s intValue]);
+        SimpleTriangle* T = new SimpleTriangle(c1, c2, c3,(int) [s intValue], tolerance);
         definedTriangleList.push_back(T);
-//        cout << T->testOutput();
     }
-    cout << "\ndefinedtrianglesize = " << definedTriangleList.size();
 }
 
 TriangleObject* TriangleManager::getObject(int index) {

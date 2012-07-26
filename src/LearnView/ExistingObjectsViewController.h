@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExistingObjectsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+@interface ExistingObjectsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (retain, nonatomic) NSDictionary *objectsDict;
-
-- (IBAction)clearButtonPressed:(id)sender;
-
 @end

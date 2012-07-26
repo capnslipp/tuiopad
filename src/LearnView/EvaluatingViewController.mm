@@ -10,9 +10,9 @@
 #import "MyCursorInfo.h"
 #import "SimpleTriangle.h"
 
-static int eventCounter = 0;
+#define NUMBER_OF_BINS 10
 
-#define NUMBER_OF_BINS 30
+#pragma mark - plotterview interface
 
 @interface PlotterView() {
     CGPoint axesOrigin;
@@ -47,6 +47,8 @@ static int eventCounter = 0;
 }
 
 - (void) drawRect:(CGRect)rect {
+    
+    CGFloat maxBinHeight = yAxisWidth;
 
     CGContextRef c = UIGraphicsGetCurrentContext();
     
@@ -63,8 +65,20 @@ static int eventCounter = 0;
     CGMutablePathRef path = CGPathCreateMutable();
     for (int i = 0; i < self.values.count; i ++) {
         int currentBinHeight = [[self.values objectAtIndex:i] intValue];
+        if (currentBinHeight > maxBinHeight) maxBinHeight = currentBinHeight;
         CGRect r = CGRectMake(axesOrigin.x + i * binWidth, axesOrigin.y - currentBinHeight, binWidth, currentBinHeight);
         CGPathAddRect(path, NULL, r);
+    }
+    
+    // transform (scale) path if bins are too high
+    if (maxBinHeight > yAxisWidth) {
+        CGAffineTransform translateMatrix = CGAffineTransformMakeTranslation(1.0f, - axesOrigin.y);
+        CGAffineTransform scaleMatrix = CGAffineTransformMakeScale(1.0f, yAxisWidth / maxBinHeight);
+        CGAffineTransform translateInvertMatrix = CGAffineTransformInvert(translateMatrix);
+        
+        path = CGPathCreateMutableCopyByTransformingPath(path, &translateMatrix);
+        path = CGPathCreateMutableCopyByTransformingPath(path, &scaleMatrix);
+        path = CGPathCreateMutableCopyByTransformingPath(path, &translateInvertMatrix);
     }
     
     CGContextBeginPath(c);
@@ -74,10 +88,23 @@ static int eventCounter = 0;
     CGContextAddPath(c, path);
     CGContextFillPath(c);
     CFRelease(path);
+    
+    
+    // draw text 
+    CGContextSetFillColorWithColor(c, [[UIColor blackColor] CGColor]);
+
+    for (int i = 0; i < self.values.count; i ++) {
+        int numberOfHits = [[self.values objectAtIndex:i] intValue];
+        CGRect r = CGRectMake(axesOrigin.x + i * binWidth, axesOrigin.y - yAxisWidth, binWidth, yAxisWidth);
+        NSString *text = [NSString stringWithFormat:@"%d %%\n%d", i+1, numberOfHits];
+        [text drawInRect:r withFont:[UIFont systemFontOfSize:10] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+    }
 }
 
 @end
 
+
+#pragma mark - EvaluatingViewController Interface
 
 
 @interface EvaluatingViewController () {
@@ -86,13 +113,12 @@ static int eventCounter = 0;
     std::vector<MyCursorInfo*> originalCursors;
     std::vector<MyCursorInfo*> testingCursors;
     float maxComputedTolerance;
+    float averageTolerance;
+    float sum;
+    int counter;
 }
-
-- (void) logTouchesStatesFromEvent: (UIEvent*) event;
+- (void) handleTouches: (UIEvent*) event;
 - (void) createTriangleFromDots: (UIEvent*) event;
-
-- (void) preparePlotterView;
-
 @end
 
 @implementation EvaluatingViewController
@@ -127,7 +153,10 @@ static int eventCounter = 0;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    maxComputedTolerance = 0.0f;
+    maxComputedTolerance        = 0.0f;
+    averageTolerance            = 0.0f;
+    sum                         = 0.0f;
+    counter                     = 0;
     
     MyCursorInfo *p0 = new MyCursorInfo([[self.objectDots objectAtIndex:0] CGPointValue].x, [[self.objectDots objectAtIndex:0] CGPointValue].y);
     MyCursorInfo *p1 = new MyCursorInfo([[self.objectDots objectAtIndex:1] CGPointValue].x, [[self.objectDots objectAtIndex:1] CGPointValue].y); 
@@ -172,32 +201,17 @@ static int eventCounter = 0;
 #pragma mark - touch handling
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self logTouchesStatesFromEvent:event];
+    [self handleTouches:event];
     
 }
 
-- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-//    [self logTouchesStatesFromEvent:event];    
-    NSLog(@"\n\nTOUCHES CANCELED!");
-}
-
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//    [self logTouchesStatesFromEvent:event];
-}
-
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self logTouchesStatesFromEvent:event];
+    [self handleTouches:event];
 }
 
-- (void) logTouchesStatesFromEvent:(UIEvent *)event {
-//    NSLog(@"\nneventNr: %d", eventCounter++);
-//    for (UITouch * touch in event.allTouches) {
-//        CGPoint touchPoint = [touch locationInView:self.view];
-//        NSLog(@"\n%@", NSStringFromCGPoint(touchPoint));
-//    }
+- (void) handleTouches:(UIEvent *)event {
     if (event.allTouches.count == 3)
         [self createTriangleFromDots: event];
-        
 }
 
 #pragma mark - actions
@@ -228,7 +242,7 @@ static int eventCounter = 0;
         testingCursors.push_back(p);
     }
     testingTriangle = new SimpleTriangle(testingCursors[0], testingCursors[1], testingCursors[2]);
-    float aspectRatio = 1.333333f;
+    float aspectRatio = self.view.frame.size.height / self.view.frame.size.width;
     
     float currentDiff = testingTriangle->getMaxSideDifference(originalTriangle, aspectRatio);
     NSLog(@"\ncurrent dif = %f", currentDiff);
@@ -245,14 +259,11 @@ static int eventCounter = 0;
     }
     
     if (currentDiff > maxComputedTolerance) maxComputedTolerance = currentDiff;
+    sum += currentDiff;
+    counter ++;
+    averageTolerance = sum / counter;
     
-    self.toleranceLabel.text = [NSString stringWithFormat:@"Max. tolerance = %.2f", maxComputedTolerance * 100];
-}
-
-#pragma mark - plotter View
-
-- (void) preparePlotterView {
-//    self.plotterView.values = [[NSMutableArray arrayWithCapacity:10] retain];
+    self.toleranceLabel.text = [NSString stringWithFormat:@"Max. tolerance = %.2f%%\nAvg. tolerance = %.2f%%", maxComputedTolerance * 100, averageTolerance * 100];
 }
 
 @end

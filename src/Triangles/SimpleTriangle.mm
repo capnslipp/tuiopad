@@ -12,20 +12,6 @@
 #include "MyCursorInfo.h"
 #include "TriangleManager.h"
 
-//extern float initial_tolerance;
-//extern float evaluated_tolerance;
-
-NSMutableDictionary *current_settings = [[[NSUserDefaults standardUserDefaults] objectForKey:kSettings_Key] mutableCopy];
-//static float initial_tolerance = [[current_settings objectForKey:kSetting_OBJECT_TOLERANCE] floatValue];
-static float initial_tolerance = 1.0f;
-static float evaluated_tolerance = 0.0f;
-
-
-#define SIZE_OF_ABSDIFFS 100
-
-float absDiffs[SIZE_OF_ABSDIFFS];
-int absDiffCounter = 0;
-long double absDiffsSum = 0;
 
 SimpleTriangle::SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3) {
     cursors.push_back(c1);
@@ -37,7 +23,7 @@ SimpleTriangle::SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo*
     computeParameters();
 }
 
-SimpleTriangle::SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3, int ID) {
+SimpleTriangle::SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3, int ID, float tolerance) {
     cursors.push_back(c1);
     cursors.push_back(c2);
     cursors.push_back(c3);
@@ -45,6 +31,8 @@ SimpleTriangle::SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo*
     symbolID = ID;
     
     lastAspectRatio = 1.0f;
+    
+    recognitionTolerance = tolerance;
     
     computeParameters();
 }
@@ -61,11 +49,6 @@ void SimpleTriangle::computeParameters()
     sideList.push_back(r2);
     sideList.push_back(r3);
     this->sortSides();
-    
-    if (sideList.at(1) < sideList.at(2))
-        orientation = ORIENTATION_CLOCKWISE;
-    else 
-        orientation = ORIENTATION_COUNTER_CLOCKWISE;
 }
 
 void SimpleTriangle::adjustPointsClockwise()
@@ -106,15 +89,12 @@ float SimpleTriangle::distanceBetweenCursors(MyCursorInfo* c1, MyCursorInfo* c2)
 }
 
 bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
-{
-    // check the orientation
-//    if (B->orientation != orientation)
-//    {
-//        printf("\nMatching failed because of wrong orientation\n");
-//        return false;
-//    }
-    
+{    
     // TRANSFORM POINTS AND SIDES TO THE ASPECT RATIO
+    
+//    printf("\n\n%s\nTriangle before transformation:\n\n", __PRETTY_FUNCTION__);
+//    cout << this->testOutput();
+    
     
     MyCursorInfo c1Transformed = *cursors.at(0);
     MyCursorInfo c2Transformed = *cursors.at(1);
@@ -146,29 +126,15 @@ bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
         float diff = hisSides.at(i) - sideList.at(i);
         absDiff = fabs(diff);
         absDiffsTemp[i] = absDiff;
-        printf("\nabsdiff %d = %.6f", i, absDiff);
-        if(absDiff > initial_tolerance) 
+//        printf("\nabsdiff %d = %.6f", i, absDiff);
+        if(absDiff > B->getRecognitionTolerance()) 
             return false;
-    }
-
-//    for (int i = 0; i < 3; i++) {
-//        absDiffs[absDiffCounter] = absDiffsTemp[i];
-//        absDiffCounter++;
-//        absDiffsSum += absDiffsTemp[i];
-//        if (absDiffCounter == SIZE_OF_ABSDIFFS) break;
-//    }
-//
-//        
-//    if (absDiffCounter == SIZE_OF_ABSDIFFS) {
-//        float max = *max_element(absDiffs,absDiffs + SIZE_OF_ABSDIFFS);
-//        cout << endl << "Absdiffs:" << endl;
-//        cout << "max element = " << fixed << max << endl;
-//        if (max > evaluated_tolerance) evaluated_tolerance = max;
-//        cout << "evaluated tolerance = " << fixed << evaluated_tolerance << endl;
-//
-//        absDiffCounter = 0;
-//    }
-
+    }    
+//    printf("\n\nTriangle after transformation:\n\n");
+//    cout << this->testOutput();
+//    
+//    printf("\n\nDefined Triangle:\n\n");
+//    cout << B->testOutput();
 	return true;
 }
 
@@ -200,6 +166,7 @@ float SimpleTriangle::getMaxSideDifference(SimpleTriangle *t, float aspectRatio)
     vector<float> hisSides = t->getSides();
     for (int i = 0; i<3; i++) {
         float absDiff = fabs(hisSides.at(i) - sideList.at(i));
+        cout << endl << "absdiff = " << fixed << absDiff;
         if (absDiff > maxDiff) maxDiff = absDiff;
     }    
     return maxDiff;
@@ -239,6 +206,14 @@ MyCursorInfo* SimpleTriangle::getOrientationPoint() {
     return cursors.at(orientationPointID);
 }
 
+float SimpleTriangle::getRecognitionTolerance() {
+    return  recognitionTolerance;
+}
+
+void SimpleTriangle::setRecognitionTolerance(float tolerance) {
+    recognitionTolerance = tolerance;
+}
+
 string SimpleTriangle::testOutput()
 {
     string result;
@@ -250,8 +225,6 @@ string SimpleTriangle::testOutput()
     }
     floatStringHelper << "\nr1 = " << r1 << " r2 = " << r2 << " r3 = " << r3;
     floatStringHelper << "\nsorted list:\n side 1 = " << sideList.at(0) << " side 2 = " << sideList.at(1) << " side 3 = " << sideList.at(2);
-    //    floatStringHelper << "\nsymbolID = " << symbolID;
-    //    floatStringHelper << "\norientation = " << orientation << endl;
     
 	result = floatStringHelper.str();
 	return result;						

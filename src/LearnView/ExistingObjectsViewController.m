@@ -12,6 +12,8 @@
 
 @interface ExistingObjectsViewController ()
 
+- (IBAction)rightButtonPressed:(id)sender;
+
 @end
 
 @implementation ExistingObjectsViewController
@@ -32,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStyleBordered target:self action:@selector(clearButtonPressed:)];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(rightButtonPressed:)];
     self.navigationItem.rightBarButtonItem = rightButton;
     [rightButton release];
 }
@@ -88,31 +90,31 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark - actions
-
-- (IBAction)clearButtonPressed:(id)sender {
-    UIActionSheet *myMenu = [[UIActionSheet alloc]
-                             initWithTitle: @"Clear the complete pattern list?"
-                             delegate:self
-                             cancelButtonTitle:@"Cancel"
-                             destructiveButtonTitle:@"Clear"
-                             otherButtonTitles:nil];
-    [myMenu showInView:self.view];  
+- (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        // delete Object
+        [FileManagerHelper deleteObjectWithId:[[self.objectsDict allKeys] objectAtIndex:indexPath.row]];
+        self.objectsDict = [FileManagerHelper getObjects];
+        [self.tableView reloadData];
+    } 
 }
 
-#pragma mark action sheet delegate methods
+#pragma mark - actions
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
-{
-    if (buttonIdx!=0) {
-        [actionSheet release];
-        return;
+- (IBAction)rightButtonPressed:(id)sender {
+    if (self.tableView.editing == YES) {
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(rightButtonPressed:)];
+        self.navigationItem.rightBarButtonItem = rightButton;
+        [rightButton release];
+        [self.tableView setEditing:NO animated:YES];
+    } else {
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(rightButtonPressed:)];
+        self.navigationItem.rightBarButtonItem = rightButton;
+        [rightButton release];
+        [self.tableView setEditing:YES animated:YES];
     }
-
-    [FileManagerHelper deleteAllObjects];
-    self.objectsDict = [FileManagerHelper getObjects];
-    [self.tableView reloadData];
-    [actionSheet release];
 }
 
 #pragma mark DEALLOC!!!!!

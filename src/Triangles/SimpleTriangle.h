@@ -28,7 +28,7 @@ public:
     ~SimpleTriangle(){};
 
     SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3);
-    SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3, int symbolID);
+    SimpleTriangle(MyCursorInfo* c1, MyCursorInfo* c2, MyCursorInfo* c3, int symbolID, float tolerance);
     
     void computeParameters();
     void adjustPointsClockwise();
@@ -50,6 +50,8 @@ public:
     MyCursorInfo* getOrientationPoint();
 
     float getMaxSideDifference(SimpleTriangle*, float aspectRatio);
+    float getRecognitionTolerance();
+    void setRecognitionTolerance(float tolerance);
     
 // debugging utilities    
     string testOutput();
@@ -60,11 +62,12 @@ protected:
     float lastAspectRatio;
  
     float r1,r2,r3;     // distances between points (wont be used later, need them for logging now)
-    bool orientation;
     int orientationPointID;
     int symbolID;
                    
     vector <float> sideList;
+    
+    float recognitionTolerance;
 };
 
 #endif

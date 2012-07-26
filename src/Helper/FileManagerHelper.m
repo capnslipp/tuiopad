@@ -24,6 +24,9 @@
     {
         dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
     }
+    
+    dots = [dots stringByAppendingString:@"default"];
+    
     [dict setObject:dots forKey:objectID];
     
     [dict writeToFile:dataFile atomically:YES];

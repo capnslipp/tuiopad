@@ -22,7 +22,7 @@
     
     if ([filemgr fileExistsAtPath: dataFile])
     {
-        dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
+        dict = [NSMutableDictionary dictionaryWithContentsOfFile:dataFile];
     }
     
     dots = [dots stringByAppendingString:@"default"];

@@ -10,7 +10,11 @@
 
 @implementation FileManagerHelper
 
-// new functions
+//The objects are saved as a string with 8 substrings separated by a whitespace according to the following scheme:
+//x0 y0 x1 y1 x2 y2 id tolerance
+//The tolerance can be a number or "default" string
+
+#pragma mark - saving/deleting objects
 
 + (void) saveObject:(NSString *)dots withID:(NSString *)objectID {
     NSFileManager *filemgr = [NSFileManager defaultManager];    
@@ -43,20 +47,17 @@
 + (NSMutableArray *) getExistingIDs {
     NSMutableArray *existingIDs = [[[NSMutableArray alloc] init] autorelease];
     
-    // file handling
     NSFileManager *filemgr = [NSFileManager defaultManager];
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     NSString *dataFile = [docsDir stringByAppendingPathComponent: @"datafile.dat"];
     
-    // Check if the file already exists
     if ([filemgr fileExistsAtPath:dataFile])
     {
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:dataFile];
         existingIDs = [NSMutableArray arrayWithArray:[dict allKeys]];
     }
 
-//    return [existingIDs copy];
     return existingIDs;
 }
 
@@ -100,6 +101,8 @@
     }
 }
 
+#pragma mark - save/get object recognition tolerance
+
 + (void) setCustomRecognitionTolerance:(NSString *)tolerance forObjectWithID:(NSString *)objectID {
     NSFileManager *filemgr = [NSFileManager defaultManager];    
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -117,7 +120,6 @@
     
     NSMutableArray * singleValues = [[[NSMutableArray alloc] initWithArray:[objValues componentsSeparatedByString:@" "] copyItems: YES] autorelease];
     if (singleValues.count == 7) [singleValues removeObjectAtIndex:6];
-//    objValues = [objValues stringByAppendingString:tolerance];
     objValues = @"";
     for (int i = 0; i < singleValues.count; i++) {
         objValues = [objValues stringByAppendingFormat:@"%@ ", [singleValues objectAtIndex:i]];

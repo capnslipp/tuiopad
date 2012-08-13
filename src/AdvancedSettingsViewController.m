@@ -55,18 +55,6 @@
 {
     [super viewDidLoad];
     
-    
-    // for tableview
-//	NSArray *arr = [NSArray arrayWithObjects:@"Cursor Profile", @"Object Profile", @"VNC Settings", nil];
-//    sections = arr;
-//    
-//    NSArray *cursorRows = [NSArray arrayWithObjects:@"Enabled", nil];
-//    NSArray *objectRows = [NSArray arrayWithObjects:@"Enabled", @"Learning Mode", nil];
-//    NSArray *vncRows = [NSArray arrayWithObjects:@"Enabled", @"IP: ", nil];
-//    NSArray *allRows = [NSArray arrayWithObjects:cursorRows, objectRows, vncRows, nil];
-//    NSDictionary *dict = [NSDictionary dictionaryWithObjects:allRows forKeys:sections];
-//    rows = dict;
-    
     NSString *HostIP = [settings getString:kSetting_HostIP];
 	cursorProfileSwitch.on		= [settings getInt:kSetting_EnableCursorProfile];
     objectProfileSwitch.on		= [settings getInt:kSetting_EnableObjectProfile];
@@ -108,7 +96,6 @@
     [self setPortTextfield:nil];
     [self setWebSettingsBGLabel:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -150,11 +137,6 @@
 
 - (IBAction)learnButtonPressed:(id)sender {
     LearnViewController *learnVC;
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-//        learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPhone" bundle:nil];
-//    }
-//    else learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPad" bundle:nil];
-    
     learnVC = [[LearnViewController alloc] initWithNibName:@"LearnViewPhone" bundle:nil];
     [self.navigationItem.backBarButtonItem setTitle:@"Back"];
     [self.navigationController pushViewController:learnVC animated:YES];
@@ -193,9 +175,7 @@
         [bottomView removeFromSuperview];
         bottomView = nil;
     }
-    
-//    [self.navigationController pushViewController:msaVC.webViewController animated:YES];
-    
+        
     accelerometerTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(checkAccelerometer:) userInfo:nil repeats:YES]; 
     [self presentModalViewController:msaVC.webViewController animated:YES];
     [delegate configureWebView];

@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ObjectDrawingView : UIView 
-
 @property (nonatomic, assign) NSArray *objectDots;
-
 @end
+
 
 @interface EditObjectViewController : UIViewController
 @property (retain, nonatomic) IBOutlet ObjectDrawingView *drawingView;

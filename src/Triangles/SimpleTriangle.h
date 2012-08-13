@@ -9,10 +9,6 @@
 #ifndef TuioPad_SimpleTriangle_h
 #define TuioPad_SimpleTriangle_h
 
-//#define DISTANCE_TOLERANCE 0.01f
-#define ORIENTATION_CLOCKWISE true
-#define ORIENTATION_COUNTER_CLOCKWISE false
-
 #include <vector>
 #include <string>
 #import "MSASettings.h"
@@ -38,8 +34,6 @@ public:
     
     bool compareWith(SimpleTriangle*, float aspectRatio);
 
-//getter/setter
-
     vector<float> getSides();
     vector<MyCursorInfo*> getCursors();
 
@@ -55,13 +49,11 @@ public:
     
 // debugging utilities    
     string testOutput();
-    
-    
 protected:
     vector<MyCursorInfo*> cursors;    
     float lastAspectRatio;
  
-    float r1,r2,r3;     // distances between points (wont be used later, need them for logging now)
+    float r1,r2,r3;     // used only in testOutput()
     int orientationPointID;
     int symbolID;
                    

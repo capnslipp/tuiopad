@@ -14,6 +14,8 @@
 @synthesize theTextField;
 @synthesize IDsArray = _IDsArray;
 
+
+#pragma mark - view lifecycle 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -39,9 +41,7 @@
     [theView release];
     
     self.theTextField.delegate = self;
-    
-    saveButtonState = YES;
-    
+        
     self.IDsArray = [FileManagerHelper getExistingIDs];
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonClicked:)];
@@ -58,6 +58,22 @@
 }
 
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
+
+
+- (void)dealloc {
+    [self.IDsArray release];
+    [super dealloc];
+}
+
+#pragma - saving objects handling
+
 -(IBAction)saveButtonClicked:(id)sender {
     if (theTextField.text.length==0) {
         theLabel.text = @"No ID specified";
@@ -72,7 +88,6 @@
     
     else if([self IDExists]) 
     {        
-        NSLog(@"\nID already exists");
         UIAlertView *alert =
         [[UIAlertView alloc] initWithTitle: @"ID already exists!"
                                    message: @"Overwrite?"
@@ -85,6 +100,18 @@
     }
     
     else [self performSaving];
+}
+
+-(BOOL)IDExists
+{
+    int temp = [theTextField.text intValue];
+    for(int i = 0; i < [self.IDsArray count]; i ++)
+    {
+        if([[self.IDsArray objectAtIndex:i] intValue] == temp) {
+            return true;
+        }
+    }
+    return false;
 }
 
 - (void) performSaving {
@@ -121,25 +148,7 @@
     theLabel.text = [NSString stringWithFormat:@"Saved triangle (overwritten)"];
 }
 
--(IBAction)closeButtonClicked:(id)sender {
-    [UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.5f];
-	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:[[UIApplication sharedApplication] keyWindow] cache:YES];
-	[UIView setAnimationCurve: UIViewAnimationCurveEaseIn];
-	[self viewWillDisappear:YES];
-	[self.view removeFromSuperview];
-	[self viewDidDisappear:YES];
-	[UIView commitAnimations];
-}
-
-
-- (void) changeButtonState:(id)sender {
-    if (saveButtonState) 
-        [(UIButton*)sender setTitle:@"New" forState:UIControlStateNormal];
-    else 
-        [(UIButton*)sender setTitle:@"Save" forState:UIControlStateNormal];
-    saveButtonState = !saveButtonState;
-}
+#pragma mark - textfield delegate methods
 
 - (IBAction)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -163,21 +172,20 @@
     }
 }
 
--(BOOL)IDExists
-{
-    int temp = [theTextField.text intValue];
-    for(int i = 0; i < [self.IDsArray count]; i ++)
-    {
-        if([[self.IDsArray objectAtIndex:i] intValue] == temp) {
-            return true;
-        }
-    }
-    return false;
+#pragma mark - close the view
+
+-(IBAction)closeButtonClicked:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.5f];
+	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:[[UIApplication sharedApplication] keyWindow] cache:YES];
+	[UIView setAnimationCurve: UIViewAnimationCurveEaseIn];
+	[self viewWillDisappear:YES];
+	[self.view removeFromSuperview];
+	[self viewDidDisappear:YES];
+	[UIView commitAnimations];
 }
 
-
-
-#pragma mark - alert view
+#pragma mark - alert view delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
@@ -188,21 +196,5 @@
         [self performOverwrite];
     }
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
-
-- (void)dealloc {
-    [self.IDsArray release];
-    [super dealloc];
-}
-
 
 @end

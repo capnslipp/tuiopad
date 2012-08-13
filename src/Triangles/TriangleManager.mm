@@ -10,8 +10,6 @@
 #import "FileManagerHelper.h"
 #import "UserDefaultsHelper.h"
 
-long matchCounter = 0;
-
 TriangleManager::TriangleManager()
 {
     for( int i = 0; i < MAX_OBJECT_NUMBER; i++) triangleObject[i] = new TriangleObject();

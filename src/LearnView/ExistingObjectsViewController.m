@@ -24,7 +24,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
         self.objectsDict = [FileManagerHelper getObjects];
         [self setTitle:@"Existing Objects"];
     }
@@ -43,13 +42,17 @@
 {
     [self setTableView:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)dealloc {
+    [tableView release];
+    [self.objectsDict release];
+    [super dealloc];
 }
 
 #pragma mark - UITableView Datasource
@@ -117,11 +120,4 @@
     }
 }
 
-#pragma mark DEALLOC!!!!!
-
-- (void)dealloc {
-    [tableView release];
-    [self.objectsDict release];
-    [super dealloc];
-}
 @end

@@ -56,10 +56,6 @@ string TriangleObject::testOutput()
     floatStringHelper << "\nangle = " << angle;
     floatStringHelper << "\ncentroidX = " << x;
     floatStringHelper << "\ncentroidY = " << y;
-//    floatStringHelper << "\nOrientationPointX = " << triangle->getOrientationPoint().getX();
-//    floatStringHelper << "\nOrientationPointY = " << triangle->getOrientationPoint().getY();
-//    floatStringHelper << "\norientationPointID = " << triangle->getOrientationPointID();
-    
 	result = floatStringHelper.str();
     return result;
 }

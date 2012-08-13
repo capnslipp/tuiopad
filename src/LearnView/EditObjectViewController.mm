@@ -14,6 +14,7 @@
 #import "UserDefaultsHelper.h"
 #import "EvaluatingViewController.h"
 
+#pragma mark ObjectDrawingView implementation
 
 @implementation ObjectDrawingView : UIView
 
@@ -52,6 +53,8 @@
 
 @end
 
+#pragma mark EditObjectViewController implementation
+
 @interface EditObjectViewController () {
     NSString* currentObjectID;
     NSString* objectValues;
@@ -70,23 +73,26 @@
 @synthesize slider;
 @synthesize toleranceValue;
 
+#pragma mark - initializers
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
 
 - (id) initWithObjectID:(NSString*) ID andValues:(NSString*) values{
-    [self initWithNibName:@"EditObjectViewController" bundle:nil];      // ipad version?
+    [self initWithNibName:@"EditObjectViewController" bundle:nil]; 
     if (self) {
         currentObjectID = ID;
         objectValues = values;
     }
     return self;
 }
+
+#pragma mark - view lifecycle
 
 - (void)viewDidLoad
 {
@@ -145,7 +151,6 @@
     [self setToleranceValue:nil];
     dots = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -162,6 +167,9 @@
     [dots release];
     [super dealloc];
 }
+
+#pragma mark - IBActions
+
 - (IBAction)evaluateButtonPressed:(id)sender {
     EvaluatingViewController *evaluatingVC = [[EvaluatingViewController alloc] init];
     evaluatingVC.objectDots = dots;
@@ -176,6 +184,8 @@
     currentTolerance = self.slider.value;
     self.toleranceValue.text = [NSString stringWithFormat:@"%.2f %%", self.slider.value * 100];
 }
+
+#pragma mark - toggle the appearance of controls
 
 - (void) toggleControlState:(BOOL)On {
     [self.evaluateButton setHidden:On];

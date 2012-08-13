@@ -66,7 +66,6 @@ void SimpleTriangle::adjustPointsClockwise()
     }
 }
 
-
 void SimpleTriangle::sortSides()
 {
 	vector<float>::iterator it = min_element(sideList.begin(), sideList.end());
@@ -76,11 +75,8 @@ void SimpleTriangle::sortSides()
     test--;
     if(test == -1) test = 2;
     
-    // orientation point is the point between the longest sides
     orientationPointID = test;
 }
-
-
 
 float SimpleTriangle::distanceBetweenCursors(MyCursorInfo* c1, MyCursorInfo* c2) {
 	float dx = c1->x - c2->x;
@@ -90,12 +86,6 @@ float SimpleTriangle::distanceBetweenCursors(MyCursorInfo* c1, MyCursorInfo* c2)
 
 bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
 {    
-    // TRANSFORM POINTS AND SIDES TO THE ASPECT RATIO
-    
-//    printf("\n\n%s\nTriangle before transformation:\n\n", __PRETTY_FUNCTION__);
-//    cout << this->testOutput();
-    
-    
     MyCursorInfo c1Transformed = *cursors.at(0);
     MyCursorInfo c2Transformed = *cursors.at(1);
     MyCursorInfo c3Transformed = *cursors.at(2);
@@ -126,15 +116,9 @@ bool SimpleTriangle::compareWith(SimpleTriangle *B, float aspectRatio)
         float diff = hisSides.at(i) - sideList.at(i);
         absDiff = fabs(diff);
         absDiffsTemp[i] = absDiff;
-//        printf("\nabsdiff %d = %.6f", i, absDiff);
         if(absDiff > B->getRecognitionTolerance()) 
             return false;
     }    
-//    printf("\n\nTriangle after transformation:\n\n");
-//    cout << this->testOutput();
-//    
-//    printf("\n\nDefined Triangle:\n\n");
-//    cout << B->testOutput();
 	return true;
 }
 
@@ -213,6 +197,8 @@ float SimpleTriangle::getRecognitionTolerance() {
 void SimpleTriangle::setRecognitionTolerance(float tolerance) {
     recognitionTolerance = tolerance;
 }
+
+#pragma mark - debug utility function
 
 string SimpleTriangle::testOutput()
 {

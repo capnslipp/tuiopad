@@ -12,13 +12,12 @@
 
 #define NUMBER_OF_BINS 10
 
-#pragma mark - plotterview interface
+#pragma mark PlotterView implementation
 
 @interface PlotterView() {
     CGPoint axesOrigin;
     CGFloat xAxisWidth;
     CGFloat yAxisWidth;
-    
     CGFloat binWidth;
     CGFloat binHeight;
 }
@@ -104,7 +103,7 @@
 @end
 
 
-#pragma mark - EvaluatingViewController Interface
+#pragma mark EvaluatingViewController implementation
 
 
 @interface EvaluatingViewController () {
@@ -127,11 +126,12 @@
 @synthesize closeButton;
 @synthesize objectDots = _objectDots;
 
+#pragma mark - view lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -139,8 +139,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidUnload
@@ -149,7 +147,6 @@
     [self setCloseButton:nil];
     [self setPlotterView:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -164,8 +161,6 @@
     
     originalTriangle =  new SimpleTriangle(p0, p1, p2);
     testingTriangle = NULL;
-    
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -247,7 +242,7 @@
     float currentDiff = testingTriangle->getMaxSideDifference(originalTriangle, aspectRatio);
     NSLog(@"\ncurrent dif = %f", currentDiff);
     
-    // draw current diff into 
+    // draw current diff into plotter view
     NSInteger roundedDiff = currentDiff*1000;
     if (roundedDiff < 100) {    // values >= 100 are not considered (accuracy is too low)
         // increment the number in appropriate bin and call drawrect

@@ -16,8 +16,6 @@
     IBOutlet UILabel *exIDsLabel;
     IBOutlet UITextField *theTextField;
     DrawView *theView;
-    
-    BOOL saveButtonState;
 }
 
 @property (readonly, nonatomic) IBOutlet UITextField *theTextField;
@@ -26,7 +24,6 @@
 -(IBAction) saveButtonClicked:(id)sender;
 -(IBAction) closeButtonClicked:(id)sender;
 
-- (void) changeButtonState: (id) sender;  
 - (void) performSaving;
 - (void) performOverwrite;
 

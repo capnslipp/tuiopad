@@ -76,7 +76,6 @@ void TuioPad::update() {
 	[viewController tuioSender]->update();
 }
 
-
 void TuioPad::draw() {
 	
 	if ([viewController isOn]) return;

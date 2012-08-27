@@ -288,12 +288,9 @@
 	orientControl.selectedSegmentIndex		= [settings getInt:kSetting_Orientation];
 	periodicUpdatesSwitch.on				= [settings getInt:kSetting_PeriodicUpdates];
 	fullUpdatesSwitch.on					= [settings getInt:kSetting_FullUpdates];
-//    
+   
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self];
     [[[UIApplication sharedApplication] keyWindow] addSubview:navController.view];
-	
-//	[self.navigationController pushViewController:self animated:YES];
-    
 	
 	[self orientControlChanged:nil];
 	
@@ -358,6 +355,18 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    NSLog(@"%s didreceivememorywarning", __PRETTY_FUNCTION__);
+    // the only way is to release webview
+    UIView *bottomView = [[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0];
+    [bottomView removeFromSuperview];
+    [self setEnableWebView:NO];
+    
+    ofBackground(255, 255, 255);
+    ofxiPhoneSetGLViewTransparent(false);
+    isUsingWebView = false;
+    float *bgptr = ofBgColorPtr();
+    bgptr[3] = 1.0f; 
+    
 	[super didReceiveMemoryWarning];
 }
 
